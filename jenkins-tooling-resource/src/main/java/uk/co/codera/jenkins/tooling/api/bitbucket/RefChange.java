@@ -2,6 +2,8 @@ package uk.co.codera.jenkins.tooling.api.bitbucket;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import uk.co.codera.jenkins.tooling.git.PushType;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RefChange {
 

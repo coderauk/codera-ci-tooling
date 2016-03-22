@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import uk.co.codera.jenkins.tooling.git.PushType;
+
 public class PushEventTest {
 
 	private static final String PATH_JSON_BRANCH_CREATED = "/git/branch-created.json";
@@ -33,6 +35,11 @@ public class PushEventTest {
 	@Test
 	public void pushEventShouldRefChange() {
 		assertThat(readPushEvent().getRefChanges(), hasSize(1));
+	}
+	
+	@Test
+	public void refChangeShouldHaveRefId() {
+		assertThat(refChangeFor(readPushEvent()).getRefId(), is(notNullValue()));
 	}
 	
 	@Test

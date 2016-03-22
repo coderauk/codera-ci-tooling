@@ -1,0 +1,98 @@
+{
+  "repository": {
+    "slug": "maven",
+    "id": 1,
+    "name": "maven",
+    "scmId": "git",
+    "state": "AVAILABLE",
+    "statusMessage": "Available",
+    "forkable": true,
+    "project": {
+      "key": "TOOL",
+      "id": 2,
+      "name": "Tooling",
+      "description": "Location for all repositories relating to tooling.",
+      "public": false,
+      "type": "NORMAL"
+    },
+    "public": false
+  },
+  "refChanges": [
+    {
+      "refId": "refs/heads/master",
+      "fromHash": "53e308320b86ba6d19a24bdcd806ed70da856a6c",
+      "toHash": "0af72a77e11595631d20f6ce98ff303098c514b2",
+      "type": "UPDATE"
+    }
+  ],
+  "changesets": {
+    "size": 1,
+    "limit": 100,
+    "isLastPage": true,
+    "values": [
+      {
+        "fromCommit": {
+          "id": "53e308320b86ba6d19a24bdcd806ed70da856a6c",
+          "displayId": "53e308320b8"
+        },
+        "toCommit": {
+          "id": "0af72a77e11595631d20f6ce98ff303098c514b2",
+          "displayId": "0af72a77e11",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1456830053000,
+          "message": "Updated the gitignore so I can force a push and check the post-receive webhooks",
+          "parents": [
+            {
+              "id": "53e308320b86ba6d19a24bdcd806ed70da856a6c",
+              "displayId": "53e308320b8"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "d3f45c68632a006491c73daf539a101835c89581",
+              "fromContentId": "32229c9e12a209e943f99229c39c946f7cd0c459",
+              "path": {
+                "components": [
+                  ".gitignore"
+                ],
+                "parent": "",
+                "name": ".gitignore",
+                "extension": "gitignore",
+                "toString": ".gitignore"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/0af72a77e11595631d20f6ce98ff303098c514b2#.gitignore"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/0af72a77e11595631d20f6ce98ff303098c514b2#.gitignore"
+            }
+          ]
+        }
+      }
+    ],
+    "start": 0
+  }
+}

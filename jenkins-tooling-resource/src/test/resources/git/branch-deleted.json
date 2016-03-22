@@ -1,0 +1,37 @@
+{
+  "repository": {
+    "slug": "maven",
+    "id": 1,
+    "name": "maven",
+    "scmId": "git",
+    "state": "AVAILABLE",
+    "statusMessage": "Available",
+    "forkable": true,
+    "project": {
+      "key": "TOOL",
+      "id": 2,
+      "name": "Tooling",
+      "description": "Location for all repositories relating to tooling.",
+      "public": false,
+      "type": "NORMAL"
+    },
+    "public": false
+  },
+  "refChanges": [
+    {
+      "refId": "refs/heads/feature/TOOL-4-investigate-the-post-receive-web-hook",
+      "fromHash": "08758f4c0720a8e12e9b12d81a4e2145b3f19878",
+      "toHash": "0000000000000000000000000000000000000000",
+      "type": "DELETE"
+    }
+  ],
+  "changesets": {
+    "size": 0,
+    "limit": 500,
+    "isLastPage": true,
+    "values": [
+      
+    ],
+    "start": 0
+  }
+}

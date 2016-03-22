@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-parent</artifactId>
-		<version>0.0.7</version>
+		<version>0.0.8</version>
 	</parent>	
 
 	<description>Parent pom file for Codera Jenkins Tooling</description>
@@ -30,6 +30,7 @@
   	</scm>
 
   	<modules>
+      	<module>jenkins-tooling-service-api</module>
   		<module>jenkins-tooling-resource</module>
   		<module>jenkins-tooling-application</module>
   	</modules>
@@ -42,6 +43,16 @@
   		<dependencies>
   			<dependency>
   				<groupId>uk.co.codera</groupId>
+  				<artifactId>codera-jenkins-tooling-service-api</artifactId>
+  				<version>${project.version}</version>
+  			</dependency>			
+  			<dependency>
+  				<groupId>uk.co.codera</groupId>
+  				<artifactId>codera-jenkins-tooling-resource</artifactId>
+  				<version>${project.version}</version>
+  			</dependency>			
+  			<dependency>
+  				<groupId>uk.co.codera</groupId>
   				<artifactId>codera-templating-api</artifactId>
   				<version>${version.codera.templating}</version>
   			</dependency>
@@ -49,7 +60,7 @@
   				<groupId>uk.co.codera</groupId>
   				<artifactId>codera-templating-impl-velocity</artifactId>
   				<version>${version.codera.templating}</version>
-  			</dependency> 			
+  			</dependency> 
   		</dependencies>
   	</dependencyManagement>
 

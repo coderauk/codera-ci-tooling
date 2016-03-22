@@ -1,0 +1,696 @@
+{
+  "repository": {
+    "slug": "maven",
+    "id": 1,
+    "name": "maven",
+    "scmId": "git",
+    "state": "AVAILABLE",
+    "statusMessage": "Available",
+    "forkable": true,
+    "project": {
+      "key": "TOOL",
+      "id": 2,
+      "name": "Tooling",
+      "description": "Location for all repositories relating to tooling.",
+      "public": false,
+      "type": "NORMAL"
+    },
+    "public": false
+  },
+  "refChanges": [
+    {
+      "refId": "refs/heads/feature/TOOL-4-investigate-the-post-receive-web-hook",
+      "fromHash": "0000000000000000000000000000000000000000",
+      "toHash": "0af72a77e11595631d20f6ce98ff303098c514b2",
+      "type": "ADD"
+    }
+  ],
+  "changesets": {
+    "size": 10,
+    "limit": 100,
+    "isLastPage": true,
+    "values": [
+      {
+        "fromCommit": {
+          "id": "53e308320b86ba6d19a24bdcd806ed70da856a6c",
+          "displayId": "53e308320b8"
+        },
+        "toCommit": {
+          "id": "0af72a77e11595631d20f6ce98ff303098c514b2",
+          "displayId": "0af72a77e11",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1456830053000,
+          "message": "Updated the gitignore so I can force a push and check the post-receive webhooks",
+          "parents": [
+            {
+              "id": "53e308320b86ba6d19a24bdcd806ed70da856a6c",
+              "displayId": "53e308320b8"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "d3f45c68632a006491c73daf539a101835c89581",
+              "fromContentId": "32229c9e12a209e943f99229c39c946f7cd0c459",
+              "path": {
+                "components": [
+                  ".gitignore"
+                ],
+                "parent": "",
+                "name": ".gitignore",
+                "extension": "gitignore",
+                "toString": ".gitignore"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/0af72a77e11595631d20f6ce98ff303098c514b2#.gitignore"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/0af72a77e11595631d20f6ce98ff303098c514b2#.gitignore"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "f09a46f15f4fb96925eff081886ebac6b934fd79",
+          "displayId": "f09a46f15f4"
+        },
+        "toCommit": {
+          "id": "53e308320b86ba6d19a24bdcd806ed70da856a6c",
+          "displayId": "53e308320b8",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455914257000,
+          "message": "Updated git ignore",
+          "parents": [
+            {
+              "id": "f09a46f15f4fb96925eff081886ebac6b934fd79",
+              "displayId": "f09a46f15f4"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "32229c9e12a209e943f99229c39c946f7cd0c459",
+              "fromContentId": "e43b0f988953ae3a84b00331d0ccf5f7d51cb3cf",
+              "path": {
+                "components": [
+                  ".gitignore"
+                ],
+                "parent": "",
+                "name": ".gitignore",
+                "extension": "gitignore",
+                "toString": ".gitignore"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/53e308320b86ba6d19a24bdcd806ed70da856a6c#.gitignore"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/53e308320b86ba6d19a24bdcd806ed70da856a6c#.gitignore"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "26ce38317ce598f2c747e777add8f8aac4f5028e",
+          "displayId": "26ce38317ce"
+        },
+        "toCommit": {
+          "id": "f09a46f15f4fb96925eff081886ebac6b934fd79",
+          "displayId": "f09a46f15f4",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455914154000,
+          "message": "[maven-release-plugin] prepare for next development iteration",
+          "parents": [
+            {
+              "id": "26ce38317ce598f2c747e777add8f8aac4f5028e",
+              "displayId": "26ce38317ce"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "871bec5d9b98c8f6f7702588c7b354fa5ef24d11",
+              "fromContentId": "ff668f8c35768a97d4e182f96024b88fd32dacac",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/f09a46f15f4fb96925eff081886ebac6b934fd79#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/f09a46f15f4fb96925eff081886ebac6b934fd79#pom.xml"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "6148e0b2ad9f979641224a88606b04164b5f12fc",
+          "displayId": "6148e0b2ad9"
+        },
+        "toCommit": {
+          "id": "26ce38317ce598f2c747e777add8f8aac4f5028e",
+          "displayId": "26ce38317ce",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455914153000,
+          "message": "[maven-release-plugin] prepare release codera-internal-parent-0.0.1",
+          "parents": [
+            {
+              "id": "6148e0b2ad9f979641224a88606b04164b5f12fc",
+              "displayId": "6148e0b2ad9"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "ff668f8c35768a97d4e182f96024b88fd32dacac",
+              "fromContentId": "7b9047caa8d8549e4d7de9484232a34d4eb670dc",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/26ce38317ce598f2c747e777add8f8aac4f5028e#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/26ce38317ce598f2c747e777add8f8aac4f5028e#pom.xml"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "c1254b818a1a9c013e44e3cb358cc02668dc2636",
+          "displayId": "c1254b818a1"
+        },
+        "toCommit": {
+          "id": "6148e0b2ad9f979641224a88606b04164b5f12fc",
+          "displayId": "6148e0b2ad9",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455914128000,
+          "message": "Changing SCM connection to use SSH",
+          "parents": [
+            {
+              "id": "c1254b818a1a9c013e44e3cb358cc02668dc2636",
+              "displayId": "c1254b818a1"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "7b9047caa8d8549e4d7de9484232a34d4eb670dc",
+              "fromContentId": "07d0614091d5d7cddf32801f9663f22898335456",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/6148e0b2ad9f979641224a88606b04164b5f12fc#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/6148e0b2ad9f979641224a88606b04164b5f12fc#pom.xml"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "30adb93195353c0e0ada6473ca68ff6a6cca6732",
+          "displayId": "30adb931953"
+        },
+        "toCommit": {
+          "id": "c1254b818a1a9c013e44e3cb358cc02668dc2636",
+          "displayId": "c1254b818a1",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455913578000,
+          "message": "Update gitignore",
+          "parents": [
+            {
+              "id": "30adb93195353c0e0ada6473ca68ff6a6cca6732",
+              "displayId": "30adb931953"
+            }
+          ]
+        },
+        "changes": {
+          "size": 2,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "c803d0ee65e091d3bf24b9dddf645ce1ae4e5b73",
+              "fromContentId": "c803d0ee65e091d3bf24b9dddf645ce1ae4e5b73",
+              "path": {
+                "components": [
+                  ".DS_Store"
+                ],
+                "parent": "",
+                "name": ".DS_Store",
+                "extension": "DS_Store",
+                "toString": ".DS_Store"
+              },
+              "percentUnchanged": -1,
+              "type": "DELETE",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/c1254b818a1a9c013e44e3cb358cc02668dc2636#.DS_Store"
+                  }
+                ]
+              }
+            },
+            {
+              "contentId": "e43b0f988953ae3a84b00331d0ccf5f7d51cb3cf",
+              "fromContentId": "0000000000000000000000000000000000000000",
+              "path": {
+                "components": [
+                  ".gitignore"
+                ],
+                "parent": "",
+                "name": ".gitignore",
+                "extension": "gitignore",
+                "toString": ".gitignore"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "ADD",
+              "nodeType": "FILE",
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/c1254b818a1a9c013e44e3cb358cc02668dc2636#.gitignore"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/c1254b818a1a9c013e44e3cb358cc02668dc2636#.gitignore"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "77be60668fd1cd07a011b4cab89105c42465f79b",
+          "displayId": "77be60668fd"
+        },
+        "toCommit": {
+          "id": "30adb93195353c0e0ada6473ca68ff6a6cca6732",
+          "displayId": "30adb931953",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455913514000,
+          "message": "Back to snapshot",
+          "parents": [
+            {
+              "id": "77be60668fd1cd07a011b4cab89105c42465f79b",
+              "displayId": "77be60668fd"
+            }
+          ]
+        },
+        "changes": {
+          "size": 2,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "c803d0ee65e091d3bf24b9dddf645ce1ae4e5b73",
+              "fromContentId": "0000000000000000000000000000000000000000",
+              "path": {
+                "components": [
+                  ".DS_Store"
+                ],
+                "parent": "",
+                "name": ".DS_Store",
+                "extension": "DS_Store",
+                "toString": ".DS_Store"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "ADD",
+              "nodeType": "FILE",
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/30adb93195353c0e0ada6473ca68ff6a6cca6732#.DS_Store"
+                  }
+                ]
+              }
+            },
+            {
+              "contentId": "07d0614091d5d7cddf32801f9663f22898335456",
+              "fromContentId": "d054d8ff02a99936bbbb920016b091d8f998992e",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/30adb93195353c0e0ada6473ca68ff6a6cca6732#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/30adb93195353c0e0ada6473ca68ff6a6cca6732#pom.xml"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "2bf8f117e477bf03b906df742ee065b83fa735a7",
+          "displayId": "2bf8f117e47"
+        },
+        "toCommit": {
+          "id": "77be60668fd1cd07a011b4cab89105c42465f79b",
+          "displayId": "77be60668fd",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455913035000,
+          "message": "[maven-release-plugin] prepare release codera-internal-parent-0.0.1",
+          "parents": [
+            {
+              "id": "2bf8f117e477bf03b906df742ee065b83fa735a7",
+              "displayId": "2bf8f117e47"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "d054d8ff02a99936bbbb920016b091d8f998992e",
+              "fromContentId": "ddf47002398f83c45d3266d126b3489f4d83cfbd",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/77be60668fd1cd07a011b4cab89105c42465f79b#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/77be60668fd1cd07a011b4cab89105c42465f79b#pom.xml"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": {
+          "id": "e28487ab998c6b86c2b176cea8e1a10e5442b58c",
+          "displayId": "e28487ab998"
+        },
+        "toCommit": {
+          "id": "2bf8f117e477bf03b906df742ee065b83fa735a7",
+          "displayId": "2bf8f117e47",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455912392000,
+          "message": "Inherit from the external parent pom that lives on maven central",
+          "parents": [
+            {
+              "id": "e28487ab998c6b86c2b176cea8e1a10e5442b58c",
+              "displayId": "e28487ab998"
+            }
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "ddf47002398f83c45d3266d126b3489f4d83cfbd",
+              "fromContentId": "478ea0f80357c8a2acea8103ff3b33bd5739095b",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "MODIFY",
+              "nodeType": "FILE",
+              "srcExecutable": false,
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/2bf8f117e477bf03b906df742ee065b83fa735a7#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/2bf8f117e477bf03b906df742ee065b83fa735a7#pom.xml"
+            }
+          ]
+        }
+      },
+      {
+        "fromCommit": null,
+        "toCommit": {
+          "id": "e28487ab998c6b86c2b176cea8e1a10e5442b58c",
+          "displayId": "e28487ab998",
+          "author": {
+            "name": "Andy Stewart",
+            "emailAddress": "andy.stewart@codera.co.uk"
+          },
+          "authorTimestamp": 1455912166000,
+          "message": "Initial commit",
+          "parents": [
+            
+          ]
+        },
+        "changes": {
+          "size": 1,
+          "limit": 100,
+          "isLastPage": true,
+          "values": [
+            {
+              "contentId": "478ea0f80357c8a2acea8103ff3b33bd5739095b",
+              "fromContentId": "0000000000000000000000000000000000000000",
+              "path": {
+                "components": [
+                  "pom.xml"
+                ],
+                "parent": "",
+                "name": "pom.xml",
+                "extension": "xml",
+                "toString": "pom.xml"
+              },
+              "executable": false,
+              "percentUnchanged": -1,
+              "type": "ADD",
+              "nodeType": "FILE",
+              "links": {
+                "self": [
+                  {
+                    "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/e28487ab998c6b86c2b176cea8e1a10e5442b58c#pom.xml"
+                  }
+                ]
+              }
+            }
+          ],
+          "start": 0
+        },
+        "links": {
+          "self": [
+            {
+              "href": "https://dev.codera.co.uk/bitbucket/projects/TOOL/repos/maven/commits/e28487ab998c6b86c2b176cea8e1a10e5442b58c#pom.xml"
+            }
+          ]
+        }
+      }
+    ],
+    "start": 0
+  }
+}

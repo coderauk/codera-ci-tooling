@@ -11,4 +11,20 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>	
 
+	<dependencies>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-jenkins-tooling-service-api</artifactId>
+		</dependency> 
+		<dependency>
+		    <groupId>io.dropwizard</groupId>
+		    <artifactId>dropwizard-jersey</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 </project>

@@ -1,6 +1,7 @@
 package uk.co.codera.jenkins.tooling.api.bitbucket;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -17,28 +18,31 @@ import uk.co.codera.jenkins.tooling.git.GitPushEvent;
 public class BitBucketResourceTest {
 
 	@Mock
-	private Logger logger;
-	
-	@Mock
 	private GitEventListener gitEventListener;
 	
 	private BitBucketResource resource;
 	
 	@Before
 	public void before() {
-		this.resource = new BitBucketResource(logger, gitEventListener);
+		this.resource = new BitBucketResource(gitEventListener);
 	}
 	
 	@Test
 	public void shouldLogPushEvent() {
+	    Logger logger = mock(Logger.class);
+	    this.resource = new BitBucketResource(logger, this.gitEventListener);
 		PushEvent push = new PushEvent();
-		this.resource.push(push);
-		verify(this.logger).debug("Received push event [{}]", push);
+		onPush(push);
+		verify(logger).debug("Received push event [{}]", push);
 	}
 	
 	@Test
 	public void shouldNotifyGitEventListenerOfPushEvent() {
-		this.resource.push(new PushEvent());
+		onPush(new PushEvent());
 		verify(this.gitEventListener).onPush(any(GitPushEvent.class));
+	}
+	
+	private void onPush(PushEvent event) {
+	    this.resource.push(event);
 	}
 }

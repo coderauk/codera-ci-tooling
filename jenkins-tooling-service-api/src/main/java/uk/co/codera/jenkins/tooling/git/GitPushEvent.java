@@ -2,14 +2,14 @@ package uk.co.codera.jenkins.tooling.git;
 
 public class GitPushEvent {
 
-	private final PushType type;
+	private final GitPushType pushType;
 	
 	private GitPushEvent(Builder builder) {
-		this.type = builder.type;
+		this.pushType = builder.pushType;
 	}
 	
-	public PushType getType() {
-		return type;
+	public GitPushType getPushType() {
+		return pushType;
 	}
 	
 	public static Builder aGitPushEvent() {
@@ -18,14 +18,14 @@ public class GitPushEvent {
 	
 	public static class Builder {
 		
-		private PushType type;
+		private GitPushType pushType;
 		
 		private Builder() {
 			super();
 		}
 		
-		public Builder type(PushType type) {
-			this.type = type;
+		public Builder pushType(GitPushType type) {
+			this.pushType = type;
 			return this;
 		}
 		

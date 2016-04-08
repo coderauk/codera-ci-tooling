@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import uk.co.codera.jenkins.tooling.git.PushType;
+import uk.co.codera.jenkins.tooling.git.GitPushType;
 
 public class PushEventTest {
 
@@ -49,20 +49,20 @@ public class PushEventTest {
 	
 	@Test
 	public void branchCreatedPushEventShouldHaveCorrectPushType() {
-		assertThat(pushTypeFor(branchCreatedEvent()), is(PushType.ADD));
+		assertThat(pushTypeFor(branchCreatedEvent()), is(GitPushType.ADD));
 	}
 	
 	@Test
 	public void branchUpdatedPushEventShouldHaveCorrectPushType() {
-		assertThat(pushTypeFor(branchUpdatedEvent()), is(PushType.UPDATE));
+		assertThat(pushTypeFor(branchUpdatedEvent()), is(GitPushType.UPDATE));
 	}
 	
 	@Test
 	public void branchDeletedPushEventShouldHaveCorrectPushType() {
-		assertThat(pushTypeFor(branchDeletedEvent()), is(PushType.DELETE));
+		assertThat(pushTypeFor(branchDeletedEvent()), is(GitPushType.DELETE));
 	}
 	
-	private PushType pushTypeFor(PushEvent push) {
+	private GitPushType pushTypeFor(PushEvent push) {
 		return refChangeFor(push).getType();
 	}
 	

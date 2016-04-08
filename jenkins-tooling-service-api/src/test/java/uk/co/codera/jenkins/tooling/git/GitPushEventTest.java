@@ -9,11 +9,11 @@ import org.junit.Test;
 public class GitPushEventTest {
 
 	@Test
-	public void shouldHaveType() {
-		Assert.assertThat(aGitPushEvent().getType(), is(notNullValue()));
+	public void shouldHavePushType() {
+		Assert.assertThat(aGitPushEvent().getPushType(), is(notNullValue()));
 	}
 	
 	private GitPushEvent aGitPushEvent() {
-		return GitPushEvent.aGitPushEvent().type(PushType.ADD).build();
+		return GitPushEvent.aGitPushEvent().pushType(GitPushType.ADD).build();
 	}
 }

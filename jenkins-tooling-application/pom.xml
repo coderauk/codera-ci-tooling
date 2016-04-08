@@ -18,6 +18,10 @@
 			<artifactId>codera-jenkins-tooling-resource</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-jenkins-tooling-service-core</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>io.dropwizard</groupId>
 			<artifactId>dropwizard-core</artifactId>
 		</dependency>

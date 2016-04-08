@@ -7,25 +7,25 @@ import uk.co.codera.lang.Announcer;
 
 public class GitEventBroadcaster implements GitEventListener {
 
-	private final Collection<GitEventListener> listeners;
-	private final Announcer<GitEventListener> announcer;
-	
-	public GitEventBroadcaster() {
-		this.listeners = new ArrayList<>();
-		this.announcer = Announcer.to(GitEventListener.class);
-	}
-	
-	public void registerListener(GitEventListener listener) {
-		this.listeners.add(listener);
-		this.announcer.addListener(listener);
-	}
-	
-	@Override
-	public void onPush(GitPushEvent event) {
-		this.announcer.announce().onPush(event);
-	}
+    private final Collection<GitEventListener> listeners;
+    private final Announcer<GitEventListener> announcer;
 
-	public int numberSubscribers() {
-		return this.listeners.size();
-	}
+    public GitEventBroadcaster() {
+        this.listeners = new ArrayList<>();
+        this.announcer = Announcer.to(GitEventListener.class);
+    }
+
+    public void registerListener(GitEventListener listener) {
+        this.listeners.add(listener);
+        this.announcer.addListener(listener);
+    }
+
+    @Override
+    public void onPush(GitPushEvent event) {
+        this.announcer.announce().onPush(event);
+    }
+
+    public int numberSubscribers() {
+        return this.listeners.size();
+    }
 }

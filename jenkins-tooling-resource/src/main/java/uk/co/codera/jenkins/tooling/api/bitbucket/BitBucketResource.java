@@ -15,21 +15,21 @@ import uk.co.codera.jenkins.tooling.git.GitPushEvent;
 @Consumes(MediaType.APPLICATION_JSON)
 public class BitBucketResource {
 
-	private final Logger logger;
-	private final GitEventListener gitEventListener;
+    private final Logger logger;
+    private final GitEventListener gitEventListener;
 
-	public BitBucketResource(Logger logger, GitEventListener gitEventListener) {
-		this.logger = logger;
-		this.gitEventListener = gitEventListener;
-	}
+    public BitBucketResource(Logger logger, GitEventListener gitEventListener) {
+        this.logger = logger;
+        this.gitEventListener = gitEventListener;
+    }
 
-	public BitBucketResource(GitEventListener gitEventListener) {
-		this(LoggerFactory.getLogger(BitBucketResource.class), gitEventListener);
-	}
+    public BitBucketResource(GitEventListener gitEventListener) {
+        this(LoggerFactory.getLogger(BitBucketResource.class), gitEventListener);
+    }
 
-	@POST
-	public void push(PushEvent push) {
-		this.logger.debug("Received push event [{}]", push);
-		this.gitEventListener.onPush(GitPushEvent.aGitPushEvent().build());
-	}
+    @POST
+    public void push(PushEvent push) {
+        this.logger.debug("Received push event [{}]", push);
+        this.gitEventListener.onPush(GitPushEvent.aGitPushEvent().build());
+    }
 }

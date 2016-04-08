@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PushEvent {
 
-	private List<RefChange> refChanges;
-	
-	public List<RefChange> getRefChanges() {
-		return this.refChanges;
-	}
-	
-	public void setRefChanges(List<RefChange> refChanges) {
-		this.refChanges = refChanges;
-	}
+    private List<RefChange> refChanges;
+
+    public List<RefChange> getRefChanges() {
+        return this.refChanges;
+    }
+
+    public void setRefChanges(List<RefChange> refChanges) {
+        this.refChanges = refChanges;
+    }
 }

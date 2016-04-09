@@ -31,15 +31,19 @@ public class BitBucketResourceTest {
 	public void shouldLogPushEvent() {
 	    Logger logger = mock(Logger.class);
 	    this.resource = new BitBucketResource(logger, this.gitEventListener);
-		PushEvent push = new PushEvent();
+		PushEvent push = aPushEvent();
 		onPush(push);
 		verify(logger).debug("Received push event [{}]", push);
 	}
 	
 	@Test
 	public void shouldNotifyGitEventListenerOfPushEvent() {
-		onPush(new PushEvent());
+		onPush(aPushEvent());
 		verify(this.gitEventListener).onPush(any(GitPushEvent.class));
+	}
+	
+	private PushEvent aPushEvent() {
+	    return PushEvents.aValidPushEvent().build();
 	}
 	
 	private void onPush(PushEvent event) {

@@ -14,7 +14,7 @@ public class PushEvents {
         return PushEvent.aPushEvent().with(aValidAddRefChange().build());
     }
     
-    private static RefChange.Builder aValidAddRefChange() {
+    public static RefChange.Builder aValidAddRefChange() {
         return RefChange.aRefChange().refId(REFERENCE_ID).type(GitPushType.ADD);
     }
 }

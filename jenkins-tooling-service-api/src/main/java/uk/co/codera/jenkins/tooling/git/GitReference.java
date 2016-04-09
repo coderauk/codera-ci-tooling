@@ -28,7 +28,27 @@ public class GitReference {
     public String toString() {
         return this.fullReference;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof GitReference)) {
+            return false;
+        }
+        GitReference other = (GitReference) obj;
+        return this.fullReference.equals(other.fullReference);
+    }
     
+    @Override
+    public int hashCode() {
+        return this.fullReference.hashCode();
+    }
+
     private Matcher validate(String reference) {
         Matcher matcher = matcher(reference);
         if (!matcher.matches()) {

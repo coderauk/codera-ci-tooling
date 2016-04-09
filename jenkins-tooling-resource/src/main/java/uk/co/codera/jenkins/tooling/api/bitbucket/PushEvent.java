@@ -37,6 +37,7 @@ public class PushEvent {
         
         public PushEvent build() {
             PushEvent event = new PushEvent();
+            event.setRefChanges(new ArrayList<>(this.refChanges));
             return event;
         }
     }

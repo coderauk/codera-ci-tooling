@@ -2,6 +2,7 @@ package uk.co.codera.jenkins.tooling.api.bitbucket;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
@@ -60,6 +61,11 @@ public class PushEventTest {
 	@Test
 	public void branchDeletedPushEventShouldHaveCorrectPushType() {
 		assertThat(pushTypeFor(branchDeletedEvent()), is(GitPushType.DELETE));
+	}
+	
+	@Test
+	public void toStringShouldNotBeObjectReference() {
+	    assertThat(readPushEvent().toString(), containsString("refId="));
 	}
 	
 	private GitPushType pushTypeFor(PushEvent push) {

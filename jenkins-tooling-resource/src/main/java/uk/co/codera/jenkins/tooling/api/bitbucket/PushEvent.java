@@ -3,6 +3,9 @@ package uk.co.codera.jenkins.tooling.api.bitbucket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -20,6 +23,11 @@ public class PushEvent {
 
     public void setRefChanges(List<RefChange> refChanges) {
         this.refChanges = refChanges;
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
     public static class Builder {

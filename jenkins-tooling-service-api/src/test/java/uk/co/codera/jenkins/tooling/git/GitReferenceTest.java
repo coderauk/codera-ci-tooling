@@ -15,7 +15,7 @@ public class GitReferenceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private static final String VALID_REFERENCE = "/refs/heads/feature/JT-001-first-branch";
+    private static final String VALID_REFERENCE = "refs/heads/feature/JT-001-first-branch";
     private static final String INVALID_REFERENCE = "invalid-reference";
 
     @Test
@@ -42,45 +42,45 @@ public class GitReferenceTest {
 
     @Test
     public void sameInstanceShouldBeEqual() {
-        GitReference reference = GitReference.from("/refs/heads/master");
+        GitReference reference = GitReference.from("refs/heads/master");
         assertThat(reference, is(equalTo(reference)));
     }
 
     @Test
     public void differentInstanceButSameReferenceShouldBeEqual() {
-        assertThat(GitReference.from("/refs/heads/master"), is(equalTo(GitReference.from("/refs/heads/master"))));
+        assertThat(GitReference.from("refs/heads/master"), is(equalTo(GitReference.from("refs/heads/master"))));
     }
 
     @Test
     public void differentReferenceShouldNotBeEqual() {
-        assertThat(GitReference.from("/refs/heads/feature/AB-123"),
-                is(not(equalTo(GitReference.from("/refs/heads/master")))));
+        assertThat(GitReference.from("refs/heads/feature/AB-123"),
+                is(not(equalTo(GitReference.from("refs/heads/master")))));
     }
 
     @Test
     public void shouldNotBeEqualToNull() {
-        assertThat(GitReference.from("/refs/heads/master"), is(not(equalTo(null))));
+        assertThat(GitReference.from("refs/heads/master"), is(not(equalTo(null))));
     }
 
     @Test
     public void shouldNotBeEqualToDifferentType() {
-        assertThat(GitReference.from("/refs/heads/master"), is(not(equalTo(new Object()))));
+        assertThat(GitReference.from("refs/heads/master"), is(not(equalTo(new Object()))));
     }
     
     @Test
     public void sameInstanceShouldHaveSameHashCode() {
-        GitReference reference = GitReference.from("/refs/heads/master");
+        GitReference reference = GitReference.from("refs/heads/master");
         assertThat(reference.hashCode(), is(equalTo(reference.hashCode())));
     }
     
     @Test
     public void differentInstanceButSameReferenceShouldHaveSameHashCode() {
-        assertThat(GitReference.from("/refs/heads/master").hashCode(), is(equalTo(GitReference.from("/refs/heads/master").hashCode())));
+        assertThat(GitReference.from("refs/heads/master").hashCode(), is(equalTo(GitReference.from("refs/heads/master").hashCode())));
     }
     
     @Test
     public void differentReferenceShouldNotHaveSameHashCode() {
-        assertThat(GitReference.from("/refs/heads/feature/AB-123").hashCode(),
-                is(not(equalTo(GitReference.from("/refs/heads/master").hashCode()))));
+        assertThat(GitReference.from("refs/heads/feature/AB-123").hashCode(),
+                is(not(equalTo(GitReference.from("refs/heads/master").hashCode()))));
     }
 }

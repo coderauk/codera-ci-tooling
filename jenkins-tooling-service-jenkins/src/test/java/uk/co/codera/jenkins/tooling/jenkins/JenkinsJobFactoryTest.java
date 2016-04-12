@@ -44,7 +44,7 @@ public class JenkinsJobFactoryTest {
 
     @Test
     public void shouldPassBranchNameToTemplateEngine() {
-        create(aGitPushEvent().reference(GitReference.from("/refs/heads/feature/AG-123-some-feature-branch")));
+        create(aGitPushEvent().reference(GitReference.from("refs/heads/feature/AG-123-some-feature-branch")));
         assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_BRANCH_NAME),
                 is("feature/AG-123-some-feature-branch"));
     }
@@ -70,7 +70,7 @@ public class JenkinsJobFactoryTest {
     }
 
     private GitPushEvent.Builder aGitPushEvent() {
-        return GitPushEvent.aGitPushEvent().reference(GitReference.from("/refs/heads/master"));
+        return GitPushEvent.aGitPushEvent().reference(GitReference.from("refs/heads/master"));
     }
 
     private String create(GitPushEvent.Builder pushEvent) {

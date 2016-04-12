@@ -38,8 +38,8 @@ public class GitPushEventAdapterTest {
 
     @Test
     public void shouldConstructGitReferenceFromPushEvent() {
-        assertThat(from(aValidAddRefChange().refId("/refs/heads/master")).getReference(),
-                is(equalTo(GitReference.from("/refs/heads/master"))));
+        assertThat(from(aValidAddRefChange().refId("refs/heads/master")).getReference(),
+                is(equalTo(GitReference.from("refs/heads/master"))));
     }
 
     @Test

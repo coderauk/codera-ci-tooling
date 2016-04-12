@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class GitReference {
 
-    private static final Pattern PATTERN_VALID_GIT_REFERENCE = Pattern.compile("/refs/\\w*/(.*)");
+    private static final Pattern PATTERN_VALID_GIT_REFERENCE = Pattern.compile("refs/\\w*/(.*)");
     
     private final String fullReference;
     private final String shortReference;

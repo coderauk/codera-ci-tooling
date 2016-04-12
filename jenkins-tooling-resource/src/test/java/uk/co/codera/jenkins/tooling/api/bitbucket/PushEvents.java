@@ -4,7 +4,7 @@ import uk.co.codera.jenkins.tooling.git.GitPushType;
 
 public class PushEvents {
 
-    public static final String GIT_REFERENCE_ID = "/refs/head/master";
+    public static final String GIT_REFERENCE_ID = "refs/head/master";
     public static final String REPOSITORY_SLUG = "tooling";
     public static final String PROJECT_KEY = "tooly";
     

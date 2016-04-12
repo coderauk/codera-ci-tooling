@@ -9,6 +9,7 @@ import uk.co.codera.jenkins.tooling.git.GitEventListener;
 import uk.co.codera.jenkins.tooling.git.GitEventLogger;
 import uk.co.codera.jenkins.tooling.jenkins.JenkinsJobCreator;
 import uk.co.codera.jenkins.tooling.jenkins.JenkinsJobFactory;
+import uk.co.codera.jenkins.tooling.jenkins.JenkinsService;
 import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
 public class JenkinsToolingApplication extends Application<JenkinsToolingConfiguration> {
@@ -26,8 +27,8 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
     }
 
     private GitEventListener jenkinsJobCreator() {
-        JenkinsJobFactory jobFactory = new JenkinsJobFactory(new VelocityTemplateEngine(), "template");
-        return new JenkinsJobCreator(jobFactory);
+        JenkinsJobFactory jobFactory = new JenkinsJobFactory(new VelocityTemplateEngine(), "branchName: $branchName, repositoryUrl: $repositoryUrl");
+        return new JenkinsJobCreator(jobFactory, new JenkinsService());
     }
 
     private BitBucketResource bitBucketResource(JenkinsToolingConfiguration configuration,

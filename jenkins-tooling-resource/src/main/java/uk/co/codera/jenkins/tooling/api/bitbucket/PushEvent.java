@@ -58,6 +58,11 @@ public class PushEvent {
             return this;
         }
         
+        public Builder noRefChanges() {
+            this.refChanges.clear();
+            return this;
+        }
+        
         public PushEvent build() {
             PushEvent event = new PushEvent();
             event.setRepository(this.repository);

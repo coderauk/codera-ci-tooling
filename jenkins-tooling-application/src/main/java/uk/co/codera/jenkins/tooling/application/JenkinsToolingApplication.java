@@ -17,6 +17,9 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
     public void run(JenkinsToolingConfiguration configuration, Environment environment) throws Exception {
         GitEventBroadcaster gitEventBroadcaster = new GitEventBroadcaster();
         gitEventBroadcaster.registerListener(new GitEventLogger());
-        environment.jersey().register(new BitBucketResource(new GitPushEventAdapter(), gitEventBroadcaster));
+        GitPushEventAdapter gitPushEventAdapter = new GitPushEventAdapter(configuration.getBitBucketServerName(),
+                configuration.getBitBucketServerPort());
+        BitBucketResource bitBucketResource = new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
+        environment.jersey().register(bitBucketResource);
     }
 }

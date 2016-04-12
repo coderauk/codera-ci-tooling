@@ -11,7 +11,6 @@ public class JenkinsToolingConfiguration extends Configuration {
     @NotEmpty
     private String bitBucketServerName;
 
-    @NotEmpty
     private int bitBucketServerPort;
 
     @JsonProperty

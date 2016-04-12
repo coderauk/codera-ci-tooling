@@ -34,7 +34,7 @@ public class PushEventTest {
 	}
 	
 	@Test
-	public void pushEventShouldRefChange() {
+	public void pushEventShouldHaveRefChange() {
 		assertThat(readPushEvent().getRefChanges(), hasSize(1));
 	}
 	
@@ -66,6 +66,34 @@ public class PushEventTest {
 	@Test
 	public void toStringShouldNotBeObjectReference() {
 	    assertThat(readPushEvent().toString(), containsString("refId="));
+	}
+	
+	@Test
+	public void pushEventShouldHaveRepositoryInformation() {
+	    assertThat(readPushEvent().getRepository(), is(notNullValue()));
+	}
+	
+	@Test
+	public void repositoryShouldHaveSlug() {
+	    assertThat(repository().getSlug(), is(notNullValue()));
+	}
+	
+	@Test
+	public void repositoryShouldHaveProject() {
+	    assertThat(repository().getProject(), is(notNullValue()));
+	}
+	
+	@Test
+	public void projectShouldHaveKey() {
+	    assertThat(project().getKey(), is(notNullValue()));
+	}
+	
+	private Repository repository() {
+	    return readPushEvent().getRepository();
+	}
+	
+	private Project project() {
+	    return repository().getProject();
 	}
 	
 	private GitPushType pushTypeFor(PushEvent push) {

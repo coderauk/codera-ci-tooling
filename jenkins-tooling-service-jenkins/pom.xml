@@ -15,7 +15,11 @@
 		<dependency>
 			<groupId>uk.co.codera</groupId>
 			<artifactId>codera-jenkins-tooling-service-api</artifactId>
-		</dependency> 			
+		</dependency> 
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-templating-api</artifactId>
+		</dependency>					
 	</dependencies>
 
 </project>

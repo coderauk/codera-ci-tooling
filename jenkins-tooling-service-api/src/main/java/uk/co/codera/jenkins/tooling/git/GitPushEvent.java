@@ -1,5 +1,8 @@
 package uk.co.codera.jenkins.tooling.git;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class GitPushEvent {
 
     private final GitPushType pushType;
@@ -10,6 +13,10 @@ public class GitPushEvent {
         this.pushType = builder.pushType;
         this.reference = builder.reference;
         this.repositoryUrl = builder.repositoryUrl;
+    }
+    
+    public static Builder aGitPushEvent() {
+        return new Builder();
     }
 
     public GitPushType getPushType() {
@@ -23,9 +30,10 @@ public class GitPushEvent {
     public String getRepositoryUrl() {
         return this.repositoryUrl;
     }
-
-    public static Builder aGitPushEvent() {
-        return new Builder();
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     public static class Builder {

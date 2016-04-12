@@ -18,8 +18,13 @@ public class GitPushEventTest {
         assertThat(aGitPushEvent().getReference(), is(notNullValue()));
     }
 
+    @Test
+    public void shouldHaveRepositoryUrl() {
+        assertThat(aGitPushEvent().getRepositoryUrl(), is(notNullValue()));
+    }
+
     private GitPushEvent aGitPushEvent() {
         return GitPushEvent.aGitPushEvent().pushType(GitPushType.ADD).reference(GitReference.from("/refs/heads/master"))
-                .build();
+                .repositoryUrl("ssh://git@server.co.uk:7999/tooly/mctooly.git").build();
     }
 }

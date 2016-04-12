@@ -4,10 +4,12 @@ public class GitPushEvent {
 
     private final GitPushType pushType;
     private final GitReference reference;
+    private final String repositoryUrl;
 
     private GitPushEvent(Builder builder) {
         this.pushType = builder.pushType;
         this.reference = builder.reference;
+        this.repositoryUrl = builder.repositoryUrl;
     }
 
     public GitPushType getPushType() {
@@ -16,6 +18,10 @@ public class GitPushEvent {
     
     public GitReference getReference() {
         return this.reference;
+    }
+    
+    public String getRepositoryUrl() {
+        return this.repositoryUrl;
     }
 
     public static Builder aGitPushEvent() {
@@ -26,6 +32,7 @@ public class GitPushEvent {
 
         private GitPushType pushType;
         private GitReference reference;
+        private String repositoryUrl;
 
         private Builder() {
             super();
@@ -38,6 +45,11 @@ public class GitPushEvent {
         
         public Builder reference(GitReference reference) {
             this.reference = reference;
+            return this;
+        }
+        
+        public Builder repositoryUrl(String url) {
+            this.repositoryUrl = url;
             return this;
         }
 

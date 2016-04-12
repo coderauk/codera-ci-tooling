@@ -6,6 +6,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Map;
 
@@ -46,6 +47,13 @@ public class JenkinsJobFactoryTest {
         create(aGitPushEvent().reference(GitReference.from("/refs/heads/feature/AG-123-some-feature-branch")));
         assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_BRANCH_NAME),
                 is("feature/AG-123-some-feature-branch"));
+    }
+    
+    @Test
+    public void shouldReturnResultFromTemplateEngine() {
+        String result = "The merged result";
+        when(this.mockTemplateEngine.merge(any(String.class), anyMapOf(String.class, Object.class))).thenReturn(result);
+        assertThat(create(aGitPushEvent()), is(result));
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })

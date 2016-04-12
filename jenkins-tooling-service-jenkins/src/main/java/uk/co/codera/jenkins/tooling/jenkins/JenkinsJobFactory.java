@@ -21,7 +21,6 @@ public class JenkinsJobFactory {
     public String create(GitPushEvent event) {
         Map<String, Object> params = new HashMap<>();
         params.put(PARAMETER_BRANCH_NAME, event.getReference().branchName());
-        this.templateEngine.merge(this.jobTemplate, params);
-        return null;
+        return this.templateEngine.merge(this.jobTemplate, params);
     }
 }

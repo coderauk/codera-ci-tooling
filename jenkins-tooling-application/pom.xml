@@ -26,6 +26,10 @@
 			<artifactId>codera-jenkins-tooling-service-jenkins</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-templating-impl-velocity</artifactId>
+		</dependency>		
+		<dependency>
 			<groupId>io.dropwizard</groupId>
 			<artifactId>dropwizard-core</artifactId>
 		</dependency>

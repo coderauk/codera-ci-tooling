@@ -48,7 +48,13 @@ public class JenkinsJobFactoryTest {
         assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_BRANCH_NAME),
                 is("feature/AG-123-some-feature-branch"));
     }
-    
+
+    @Test
+    public void shouldPassRepositoryUrlToTemplateEngine() {
+        create(aGitPushEvent().repositoryUrl("ssh://repo"));
+        assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_REPOSITORY_URL), is("ssh://repo"));
+    }
+
     @Test
     public void shouldReturnResultFromTemplateEngine() {
         String result = "The merged result";

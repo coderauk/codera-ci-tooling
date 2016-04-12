@@ -5,7 +5,11 @@ import io.dropwizard.setup.Environment;
 import uk.co.codera.jenkins.tooling.api.bitbucket.BitBucketResource;
 import uk.co.codera.jenkins.tooling.api.bitbucket.GitPushEventAdapter;
 import uk.co.codera.jenkins.tooling.git.GitEventBroadcaster;
+import uk.co.codera.jenkins.tooling.git.GitEventListener;
 import uk.co.codera.jenkins.tooling.git.GitEventLogger;
+import uk.co.codera.jenkins.tooling.jenkins.JenkinsJobCreator;
+import uk.co.codera.jenkins.tooling.jenkins.JenkinsJobFactory;
+import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
 public class JenkinsToolingApplication extends Application<JenkinsToolingConfiguration> {
 
@@ -17,9 +21,19 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
     public void run(JenkinsToolingConfiguration configuration, Environment environment) throws Exception {
         GitEventBroadcaster gitEventBroadcaster = new GitEventBroadcaster();
         gitEventBroadcaster.registerListener(new GitEventLogger());
+        gitEventBroadcaster.registerListener(jenkinsJobCreator());
+        environment.jersey().register(bitBucketResource(configuration, gitEventBroadcaster));
+    }
+
+    private GitEventListener jenkinsJobCreator() {
+        JenkinsJobFactory jobFactory = new JenkinsJobFactory(new VelocityTemplateEngine(), "template");
+        return new JenkinsJobCreator(jobFactory);
+    }
+
+    private BitBucketResource bitBucketResource(JenkinsToolingConfiguration configuration,
+            GitEventBroadcaster gitEventBroadcaster) {
         GitPushEventAdapter gitPushEventAdapter = new GitPushEventAdapter(configuration.getBitBucketServerName(),
                 configuration.getBitBucketServerPort());
-        BitBucketResource bitBucketResource = new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
-        environment.jersey().register(bitBucketResource);
+        return new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
     }
 }

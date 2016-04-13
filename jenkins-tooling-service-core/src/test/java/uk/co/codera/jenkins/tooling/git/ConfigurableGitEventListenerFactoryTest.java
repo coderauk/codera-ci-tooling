@@ -5,6 +5,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static uk.co.codera.jenkins.tooling.git.ConfigurableGitEventListenerFactory.aConfigurableGitEventListenerFactory;
 
 import org.junit.Test;
@@ -33,6 +35,15 @@ public class ConfigurableGitEventListenerFactoryTest {
         GitEventListener newListener = newListener();
         ConfigurableGitEventListenerFactory factory = newFactoryBuilder().register(GitPushType.ADD, newListener).build();
         assertThat(factory.listenerFor(GitPushType.ADD), is(sameInstance(newListener)));
+    }
+    
+    @Test
+    public void shouldFindAppropriateListenerAndInvokeOnPush() {
+        GitEventListener mockListener = mock(GitEventListener.class);
+        ConfigurableGitEventListenerFactory factory = newFactoryBuilder().register(GitPushType.ADD, mockListener).build();
+        GitPushEvent event = GitPushEvent.aGitPushEvent().pushType(GitPushType.ADD).build();
+        factory.onPush(event);
+        verify(mockListener).onPush(event);
     }
     
     private ConfigurableGitEventListenerFactory newFactory() {

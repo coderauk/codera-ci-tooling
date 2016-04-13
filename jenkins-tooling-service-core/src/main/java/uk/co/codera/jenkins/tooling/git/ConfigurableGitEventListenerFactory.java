@@ -3,7 +3,7 @@ package uk.co.codera.jenkins.tooling.git;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class ConfigurableGitEventListenerFactory {
+public class ConfigurableGitEventListenerFactory implements GitEventListener {
 
     public static final GitEventListener LOGGING_GIT_EVENT_LISTENER = new GitEventLogger();
 
@@ -13,6 +13,11 @@ public class ConfigurableGitEventListenerFactory {
     private ConfigurableGitEventListenerFactory(Builder builder) {
         this.listeners = new EnumMap<>(builder.listeners);
         this.defaultListener = builder.defaultListener;
+    }
+    
+    @Override
+    public void onPush(GitPushEvent event) {
+        listenerFor(event.getPushType()).onPush(event);
     }
 
     public GitEventListener listenerFor(GitPushType pushType) {

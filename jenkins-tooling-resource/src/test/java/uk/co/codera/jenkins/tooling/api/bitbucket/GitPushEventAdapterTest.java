@@ -3,9 +3,12 @@ package uk.co.codera.jenkins.tooling.api.bitbucket;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static uk.co.codera.jenkins.tooling.api.bitbucket.PushEvents.aValidAddRefChange;
+import static uk.co.codera.jenkins.tooling.api.bitbucket.PushEvents.aValidProject;
 import static uk.co.codera.jenkins.tooling.api.bitbucket.PushEvents.aValidPushEvent;
+import static uk.co.codera.jenkins.tooling.api.bitbucket.PushEvents.aValidRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,10 +47,14 @@ public class GitPushEventAdapterTest {
 
     @Test
     public void shouldConstructRepositoryUrlFromBitBucketServerAndPushEventInformation() {
-        assertThat(
-                from(PushEvents.aValidRepository().slug("myRepository")
-                        .with(PushEvents.aValidProject().key("myProject").build())).getRepositoryUrl(),
-                is("ssh://git@myServer:7888/myProject/myRepository.git"));
+        assertThat(from(aValidRepository().slug("repo").with(aValidProject().key("proj").build())).getRepositoryUrl(),
+                is("ssh://git@myServer:7888/proj/repo.git"));
+    }
+
+    @Test
+    public void shouldMakeProjectKeyLowercaseInRepositoryUrl() {
+        assertThat(from(aValidRepository().with(aValidProject().key("PROJ").build())).getRepositoryUrl(),
+                containsString("/proj/"));
     }
 
     private GitPushEvent from(Repository.Builder repository) {

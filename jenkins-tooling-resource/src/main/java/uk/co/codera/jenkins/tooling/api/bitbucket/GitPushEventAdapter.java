@@ -24,6 +24,6 @@ public class GitPushEventAdapter {
     private String repositoryUrl(PushEvent event) {
         Repository repository = event.getRepository();
         return String.format(TEMPLATE_REPOSITORY_URL, this.bitBucketServerName, this.bitBucketServerPort,
-                repository.getProject().getKey(), repository.getSlug());
+                repository.getProject().getKey().toLowerCase(), repository.getSlug());
     }
 }

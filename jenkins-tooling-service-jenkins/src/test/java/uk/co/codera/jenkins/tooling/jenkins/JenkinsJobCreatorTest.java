@@ -20,31 +20,49 @@ import uk.co.codera.jenkins.tooling.git.GitReference;
 public class JenkinsJobCreatorTest {
 
     @Mock
-    private JenkinsJobFactory mockJobFactory;
-    
+    private JenkinsTemplateService mockJobNameFactory;
+
+    @Mock
+    private JenkinsTemplateService mockJobFactory;
+
     @Mock
     private JenkinsService mockJenkinsService;
-    
+
     private GitEventListener jobCreator;
-    
+
     @Before
     public void before() {
-        this.jobCreator = new JenkinsJobCreator(this.mockJobFactory, this.mockJenkinsService);
+        this.jobCreator = new JenkinsJobCreator(this.mockJobNameFactory, this.mockJobFactory, this.mockJenkinsService);
     }
-    
+
     @Test
-    public void shouldUseJenkinsJobFactoryToCreateJobDefinition() {
+    public void shouldUseJobFactoryToCreateJobDefinition() {
         GitPushEvent event = aGitPushEvent();
         this.jobCreator.onPush(event);
         verify(this.mockJobFactory).create(event);
     }
     
     @Test
-    public void shouldPassJobDefinitionFromJobFactoryToJenkinsServiceToCreateJob() {
+    public void shouldUseJobNameFactoryToCreateJobName() {
+        GitPushEvent event = aGitPushEvent();
+        this.jobCreator.onPush(event);
+        verify(this.mockJobNameFactory).create(event);
+    }
+
+    @Test
+    public void shouldPassJobDefinitionFromFactoryToJenkinsServiceToCreateJob() {
         String jobDefinition = "this is a jenkins job definition";
         when(this.mockJobFactory.create(any(GitPushEvent.class))).thenReturn(jobDefinition);
         this.jobCreator.onPush(aGitPushEvent());
         verify(this.mockJenkinsService).createJob(anyString(), eq(jobDefinition));
+    }
+    
+    @Test
+    public void shouldPassJobNameFromFactoryToJenkinsServiceToCreateJob() {
+        String jobName = "this is a job name";
+        when(this.mockJobNameFactory.create(any(GitPushEvent.class))).thenReturn(jobName);
+        this.jobCreator.onPush(aGitPushEvent());
+        verify(this.mockJenkinsService).createJob(eq(jobName), anyString());
     }
 
     private GitPushEvent aGitPushEvent() {

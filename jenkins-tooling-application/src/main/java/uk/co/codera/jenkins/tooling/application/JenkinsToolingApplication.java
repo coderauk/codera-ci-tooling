@@ -16,8 +16,9 @@ import uk.co.codera.jenkins.tooling.git.GitEventLogger;
 import uk.co.codera.jenkins.tooling.git.GitPushType;
 import uk.co.codera.jenkins.tooling.jenkins.JenkinsConfiguration;
 import uk.co.codera.jenkins.tooling.jenkins.JenkinsJobCreator;
-import uk.co.codera.jenkins.tooling.jenkins.JenkinsJobFactory;
 import uk.co.codera.jenkins.tooling.jenkins.JenkinsService;
+import uk.co.codera.jenkins.tooling.jenkins.JenkinsTemplateService;
+import uk.co.codera.templating.TemplateEngine;
 import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
 public class JenkinsToolingApplication extends Application<JenkinsToolingConfiguration> {
@@ -41,11 +42,14 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
 
     private GitEventListener jenkinsJobCreator(JenkinsToolingConfiguration configuration) {
         try {
+            TemplateEngine templateEngine = new VelocityTemplateEngine();
+            JenkinsTemplateService jobNameFactory = new JenkinsTemplateService(templateEngine,
+                    "$repositoryName - $shortBranchName - build");
             String jobTemplate = FileUtils.readFileToString(new File(configuration.getJenkinsJobTemplateFile()));
-            JenkinsJobFactory jobFactory = new JenkinsJobFactory(new VelocityTemplateEngine(), jobTemplate);
+            JenkinsTemplateService jobFactory = new JenkinsTemplateService(templateEngine, jobTemplate);
             JenkinsConfiguration jenkinsConfiguration = JenkinsConfiguration.aJenkinsConfiguration()
                     .serverUrl(configuration.getJenkinsServerName()).build();
-            return new JenkinsJobCreator(jobFactory, new JenkinsService(jenkinsConfiguration));
+            return new JenkinsJobCreator(jobNameFactory, jobFactory, new JenkinsService(jenkinsConfiguration));
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }

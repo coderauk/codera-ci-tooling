@@ -6,7 +6,7 @@ import java.util.Map;
 import uk.co.codera.jenkins.tooling.git.GitPushEvent;
 import uk.co.codera.templating.TemplateEngine;
 
-public class JenkinsJobFactory {
+public class JenkinsTemplateService {
 
     public static final String PARAMETER_BRANCH_NAME = "branchName";
     public static final String PARAMETER_SHORT_BRANCH_NAME = "shortBranchName";
@@ -14,11 +14,11 @@ public class JenkinsJobFactory {
     public static final String PARAMETER_REPOSITORY_NAME = "repositoryName";
     
     private final TemplateEngine templateEngine;
-    private final String jobTemplate;
+    private final String template;
     
-    public JenkinsJobFactory(TemplateEngine templateEngine, String jobTemplate) {
+    public JenkinsTemplateService(TemplateEngine templateEngine, String template) {
         this.templateEngine = templateEngine;
-        this.jobTemplate = jobTemplate;
+        this.template = template;
     }
 
     public String create(GitPushEvent event) {
@@ -27,6 +27,6 @@ public class JenkinsJobFactory {
         params.put(PARAMETER_SHORT_BRANCH_NAME, event.getReference().shortBranchName());
         params.put(PARAMETER_REPOSITORY_URL, event.getRepositoryUrl());
         params.put(PARAMETER_REPOSITORY_NAME, event.getRepositoryName());
-        return this.templateEngine.merge(this.jobTemplate, params);
+        return this.templateEngine.merge(this.template, params);
     }
 }

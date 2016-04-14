@@ -27,7 +27,7 @@ public class JenkinsService {
 
     public void deleteJob(String jobName) {
         logger.info("Delete job with name [{}]", jobName);
-        execute(DeleteJobCommand.aDeleteJobCommand().jobName(jobName));
+        execute(DeleteJobCommand.aDeleteJobCommand().jobName(jobName).with(this.jenkinsConfiguration));
     }
 
     private void execute(JenkinsCommand.Builder<?, ?> command) {

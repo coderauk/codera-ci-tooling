@@ -73,7 +73,7 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
     }
 
     private JenkinsTemplateService jenkinsJobNameFactory(TemplateEngine templateEngine) {
-        return new JenkinsTemplateService(templateEngine, "$repositoryName - $shortBranchName - build");
+        return new JenkinsTemplateService(templateEngine, "${repositoryName} - ${shortBranchName} - build");
     }
 
     private BitBucketResource bitBucketResource(JenkinsToolingConfiguration configuration,

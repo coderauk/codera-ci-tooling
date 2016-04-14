@@ -16,7 +16,6 @@ public abstract class JenkinsCommand {
     
     public void execute(JenkinsCommandLineInterfaceInvoker cliInvoker) {
         cliInvoker.invoke(getArguments());
-        
     }
 
     @SuppressWarnings("unchecked")

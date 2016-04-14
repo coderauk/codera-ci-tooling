@@ -22,10 +22,15 @@ public class JenkinsService {
     public void createJob(String jobName, String jobDefinition) {
         logger.info("Create job with definition [{}]", jobDefinition);
         execute(CreateJobCommand.aCreateJobCommand().jobName(jobName).jobDefinition(jobDefinition)
-                .with(this.jenkinsConfiguration).build());
+                .with(this.jenkinsConfiguration));
     }
 
-    private void execute(JenkinsCommand command) {
-        command.execute(this.cliInvoker);
+    public void deleteJob(String jobName) {
+        logger.info("Delete job with name [{}]", jobName);
+        execute(DeleteJobCommand.aDeleteJobCommand().jobName(jobName));
+    }
+
+    private void execute(JenkinsCommand.Builder<?, ?> command) {
+        command.build().execute(this.cliInvoker);
     }
 }

@@ -18,7 +18,8 @@ public class GitPushEventAdapter {
     public GitPushEvent from(PushEvent event) {
         RefChange refChange = event.getRefChanges().get(0);
         return GitPushEvent.aGitPushEvent().pushType(refChange.getType())
-                .reference(GitReference.from(refChange.getRefId())).repositoryUrl(repositoryUrl(event)).build();
+                .reference(GitReference.from(refChange.getRefId())).repositoryName(event.getRepository().getSlug())
+                .repositoryUrl(repositoryUrl(event)).build();
     }
 
     private String repositoryUrl(PushEvent event) {

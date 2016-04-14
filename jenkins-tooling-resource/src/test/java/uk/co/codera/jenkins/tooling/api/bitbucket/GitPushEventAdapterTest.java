@@ -38,6 +38,11 @@ public class GitPushEventAdapterTest {
     public void shouldMapGitPushTypeFromPushEvent() {
         assertThat(from(aValidAddRefChange()).getPushType(), is(GitPushType.ADD));
     }
+    
+    @Test
+    public void shouldMapRepositoryNameFromPushEvent() {
+        assertThat(from(aValidRepository().slug("jeff")).getRepositoryName(), is("jeff"));
+    }
 
     @Test
     public void shouldConstructGitReferenceFromPushEvent() {

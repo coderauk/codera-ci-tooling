@@ -48,11 +48,23 @@ public class JenkinsJobFactoryTest {
         assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_BRANCH_NAME),
                 is("feature/AG-123-some-feature-branch"));
     }
+    
+    @Test
+    public void shouldPassShortBranchNameToTemplateEngine() {
+        create(aGitPushEvent().reference(GitReference.from("refs/heads/feature/some-feature-branch")));
+        assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_SHORT_BRANCH_NAME), is("some-feature-branch"));
+    }
 
     @Test
     public void shouldPassRepositoryUrlToTemplateEngine() {
         create(aGitPushEvent().repositoryUrl("ssh://repo"));
         assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_REPOSITORY_URL), is("ssh://repo"));
+    }
+    
+    @Test
+    public void shouldPassRepositoryNameToTemlpateEngine() {
+        create(aGitPushEvent().repositoryName("boatymcboatface"));
+        assertThat(passedParameters().get(JenkinsJobFactory.PARAMETER_REPOSITORY_NAME), is("boatymcboatface"));
     }
 
     @Test

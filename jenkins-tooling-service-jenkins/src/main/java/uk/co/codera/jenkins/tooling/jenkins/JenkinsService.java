@@ -6,8 +6,26 @@ import org.slf4j.LoggerFactory;
 public class JenkinsService {
 
     private static final Logger logger = LoggerFactory.getLogger(JenkinsService.class);
-    
-    public void createJob(String jobDefinition) {
+
+    private final JenkinsConfiguration jenkinsConfiguration;
+    private final JenkinsCommandLineInterfaceInvoker cliInvoker;
+
+    public JenkinsService(JenkinsConfiguration jenkinsConfiguration) {
+        this(jenkinsConfiguration, new JenkinsCommandLineInterfaceInvoker());
+    }
+
+    public JenkinsService(JenkinsConfiguration jenkinsConfiguration, JenkinsCommandLineInterfaceInvoker cliInvoker) {
+        this.jenkinsConfiguration = jenkinsConfiguration;
+        this.cliInvoker = cliInvoker;
+    }
+
+    public void createJob(String jobName, String jobDefinition) {
         logger.info("Create job with definition [{}]", jobDefinition);
+        execute(CreateJobCommand.aCreateJobCommand().jobName(jobName).jobDefinition(jobDefinition)
+                .with(this.jenkinsConfiguration).build());
+    }
+
+    private void execute(JenkinsCommand command) {
+        command.execute(this.cliInvoker);
     }
 }

@@ -6,14 +6,14 @@ import java.util.regex.Pattern;
 public class GitReference {
 
     private static final Pattern PATTERN_VALID_GIT_REFERENCE = Pattern.compile("refs/\\w*/(.*)");
-    
+    private static final String BRANCH_DELIMITER = "/";
     private final String fullReference;
-    private final String shortReference;
+    private final String branchName;
     
     private GitReference(String reference) {
         Matcher matcher = validate(reference);
         this.fullReference = reference;
-        this.shortReference = matcher.group(1);
+        this.branchName = matcher.group(1);
     }
     
     public static GitReference from(String reference) {
@@ -21,7 +21,15 @@ public class GitReference {
     }
     
     public String branchName() {
-        return this.shortReference;
+        return this.branchName;
+    }
+    
+    public String shortBranchName() {
+        String longBranchName = branchName();
+        if (longBranchName.contains(BRANCH_DELIMITER)) {
+            return longBranchName.substring(longBranchName.indexOf(BRANCH_DELIMITER) + 1);
+        }
+        return longBranchName;
     }
     
     @Override

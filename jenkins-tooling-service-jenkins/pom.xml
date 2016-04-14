@@ -19,7 +19,11 @@
 		<dependency>
 			<groupId>uk.co.codera</groupId>
 			<artifactId>codera-templating-api</artifactId>
-		</dependency>					
+		</dependency>	
+		<dependency>
+			<groupId>org.jenkins</groupId>
+			<artifactId>jenkins-cli</artifactId>
+		</dependency>	
 	</dependencies>
 
 </project>

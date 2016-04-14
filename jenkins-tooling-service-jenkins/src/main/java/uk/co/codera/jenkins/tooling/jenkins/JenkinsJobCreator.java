@@ -16,6 +16,8 @@ public class JenkinsJobCreator implements GitEventListener {
     @Override
     public void onPush(GitPushEvent event) {
         String jobDefinition = this.jobFactory.create(event);
-        this.jenkinsService.createJob(jobDefinition);
+        this.jenkinsService.createJob(
+                String.format("%s - %s - build", event.getRepositoryName(), event.getReference().shortBranchName()),
+                jobDefinition);
     }
 }

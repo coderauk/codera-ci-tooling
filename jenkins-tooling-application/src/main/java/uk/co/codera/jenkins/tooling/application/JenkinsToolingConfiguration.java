@@ -12,6 +12,12 @@ public class JenkinsToolingConfiguration extends Configuration {
     private String bitBucketServerName;
 
     private int bitBucketServerPort;
+    
+    @NotEmpty
+    private String jenkinsServerName;
+    
+    @NotEmpty
+    private String jenkinsJobTemplateFile;
 
     @JsonProperty
     public void setBitBucketServerName(String bitBucketServerName) {
@@ -31,5 +37,25 @@ public class JenkinsToolingConfiguration extends Configuration {
     @JsonProperty
     public int getBitBucketServerPort() {
         return this.bitBucketServerPort;
+    }
+    
+    @JsonProperty
+    public void setJenkinsServerName(String jenkinsServerName) {
+        this.jenkinsServerName = jenkinsServerName;
+    }
+    
+    @JsonProperty
+    public String getJenkinsServerName() {
+        return this.jenkinsServerName;
+    }
+    
+    @JsonProperty
+    public void setJenkinsJobTemplateFile(String jenkinsJobTemplateFile) {
+        this.jenkinsJobTemplateFile = jenkinsJobTemplateFile;
+    }
+    
+    @JsonProperty
+    public String getJenkinsJobTemplateFile() {
+        return this.jenkinsJobTemplateFile;
     }
 }

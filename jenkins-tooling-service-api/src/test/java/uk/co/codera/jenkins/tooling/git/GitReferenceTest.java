@@ -29,8 +29,23 @@ public class GitReferenceTest {
     }
 
     @Test
-    public void shortReportBranchNameCorrectly() {
+    public void shouldReportBranchNameCorrectly() {
         assertThat(GitReference.from(VALID_REFERENCE).branchName(), is("feature/JT-001-first-branch"));
+    }
+    
+    @Test
+    public void shouldNotShortenBranchNameForMaster() {
+        assertThat(GitReference.from("refs/heads/master").shortBranchName(), is("master"));
+    }
+    
+    @Test
+    public void shouldNotShortenBranchNameForCustomBranchName() {
+        assertThat(GitReference.from("refs/heads/custom-branch-name").shortBranchName(), is("custom-branch-name"));
+    }
+    
+    @Test
+    public void shouldShortenBranchNameForFeatureBranchName() {
+        assertThat(GitReference.from("refs/heads/feature/some-feature").shortBranchName(), is("some-feature"));
     }
 
     @Test

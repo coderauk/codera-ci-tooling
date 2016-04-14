@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.co.codera.jenkins.tooling.git.GitPushType;
+import uk.co.codera.lang.io.ClasspathResource;
 
 public class PushEventTest {
 

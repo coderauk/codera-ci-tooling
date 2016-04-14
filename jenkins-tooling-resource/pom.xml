@@ -21,8 +21,8 @@
 		    <artifactId>dropwizard-jersey</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-lang</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

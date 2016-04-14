@@ -39,7 +39,7 @@
   	
   	<properties>
   		<version.codera.templating>0.0.1</version.codera.templating>
-  		<version.codera.lang>0.0.1</version.codera.lang>
+  		<version.codera.lang>0.0.2</version.codera.lang>
   	</properties>
 
   	<dependencyManagement>
@@ -78,7 +78,13 @@
 			    <groupId>uk.co.codera</groupId>
 			    <artifactId>codera-lang</artifactId>
 			    <version>${version.codera.lang}</version>
-			</dependency>  		
+			</dependency>  
+			<dependency>
+				<groupId>org.jenkins</groupId>
+				<artifactId>jenkins-cli</artifactId>
+				<version>1.648</version>
+				<scope>provided</scope>
+			</dependency>		
 			
 			<!-- All these logging versions need moving to the parent pom -->
       		<dependency>

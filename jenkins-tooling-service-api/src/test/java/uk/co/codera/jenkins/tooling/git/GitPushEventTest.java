@@ -20,10 +20,15 @@ public class GitPushEventTest {
     }
 
     @Test
+    public void shouldHaveRepositoryName() {
+        assertThat(aGitPushEvent().getRepositoryName(), is(notNullValue()));
+    }
+
+    @Test
     public void shouldHaveRepositoryUrl() {
         assertThat(aGitPushEvent().getRepositoryUrl(), is(notNullValue()));
     }
-    
+
     @Test
     public void toStringShouldNotBeObjectReference() {
         assertThat(aGitPushEvent().toString(), containsString("pushType="));
@@ -31,6 +36,6 @@ public class GitPushEventTest {
 
     private GitPushEvent aGitPushEvent() {
         return GitPushEvent.aGitPushEvent().pushType(GitPushType.ADD).reference(GitReference.from("refs/heads/master"))
-                .repositoryUrl("ssh://git@server.co.uk:7999/tooly/mctooly.git").build();
+                .repositoryName("mctooly").repositoryUrl("ssh://git@server.co.uk:7999/tooly/mctooly.git").build();
     }
 }

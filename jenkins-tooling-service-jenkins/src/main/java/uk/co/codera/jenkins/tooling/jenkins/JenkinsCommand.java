@@ -19,7 +19,7 @@ public abstract class JenkinsCommand {
     }
 
     @SuppressWarnings("unchecked")
-    public static abstract class Builder<T, C extends JenkinsCommand> {
+    public abstract static class Builder<T, C extends JenkinsCommand> {
         private JenkinsConfiguration jenkinsConfiguration;
 
         public T with(JenkinsConfiguration jenkinsConfiguration) {

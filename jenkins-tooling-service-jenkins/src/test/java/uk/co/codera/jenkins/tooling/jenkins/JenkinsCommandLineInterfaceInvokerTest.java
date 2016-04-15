@@ -1,0 +1,46 @@
+package uk.co.codera.jenkins.tooling.jenkins;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertThat;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class JenkinsCommandLineInterfaceInvokerTest {
+
+    private JenkinsCommandLineInterfaceInvoker invoker;
+    
+    private PrintStream standardErrorStream;
+    private ByteArrayOutputStream bos;
+    
+    @Before
+    public void before() {
+        this.standardErrorStream = System.err;
+        
+        this.bos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(bos);
+        System.setErr(printStream);
+        
+        this.invoker = new JenkinsCommandLineInterfaceInvoker();
+    }
+    
+    @After
+    public void after() {
+        System.setErr(this.standardErrorStream);
+    }
+    
+    @Test
+    public void shouldPrintUsageWhenInvokedWithNoArguments() {
+        this.invoker.invoke(new String[] {});
+        assertThat(capturedErrorOutput(), containsString("Jenkins CLI"));
+    }
+    
+    private String capturedErrorOutput() {
+        return new String(bos.toByteArray());
+    }
+    
+}

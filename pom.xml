@@ -12,7 +12,7 @@
 		<version>0.0.8</version>
 	</parent>	
 
-	<description>Parent pom file for Codera Jenkins Tooling</description>
+	<description>Parent pom file for Codera CI Tooling</description>
 	<url>https://github.com/coderauk/jenkins-tooling</url>
 
 	<licenses>
@@ -34,6 +34,7 @@
       	<module>jenkins-tooling-service-core</module>
       	<module>jenkins-tooling-service-jenkins</module>
   		<module>jenkins-tooling-resource</module>
+  		<module>jenkins-tooling-resource-github</module>
   		<module>jenkins-tooling-application</module>
   	</modules>
   	

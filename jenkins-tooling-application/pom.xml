@@ -15,7 +15,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-jenkins-tooling-resource</artifactId>
+			<artifactId>codera-jenkins-tooling-resource-bitbucket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-jenkins-tooling-resource-github</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>uk.co.codera</groupId>

@@ -38,7 +38,7 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
         gitEventBroadcaster.registerListener(jenkinsEventListener(configuration));
         JerseyEnvironment jersey = environment.jersey();
         jersey.register(bitBucketResource(configuration, gitEventBroadcaster));
-        jersey.register(new GitHubResource());
+        jersey.register(new GitHubResource(new uk.co.codera.jenkins.tooling.api.github.GitPushEventAdapter(), gitEventBroadcaster));
     }
 
     private GitEventListener jenkinsEventListener(JenkinsToolingConfiguration configuration) {

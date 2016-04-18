@@ -9,14 +9,29 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.co.codera.jenkins.tooling.git.GitEventListener;
+
 @Path("/github")
 @Consumes(MediaType.APPLICATION_JSON)
 public class GitHubResource {
 
-    private static final Logger logger = LoggerFactory.getLogger(GitHubResource.class);
+    private final Logger logger;
+    private final GitPushEventAdapter gitPushEventAdapter;
+    private final GitEventListener gitEventListener;
 
+    public GitHubResource(GitPushEventAdapter gitPushEventAdapter, GitEventListener gitEventListener) {
+        this(LoggerFactory.getLogger(GitHubResource.class), gitPushEventAdapter, gitEventListener);
+    }
+    
+    public GitHubResource(Logger logger, GitPushEventAdapter gitPushEventAdapter, GitEventListener gitEventListener) {
+        this.logger = logger;
+        this.gitPushEventAdapter = gitPushEventAdapter;
+        this.gitEventListener = gitEventListener;
+    }
+    
     @POST
-    public void onEvent(@HeaderParam("X-GitHub-Event") String eventType, String event) {
-        logger.info("Received event type [{}] with content [{}]", eventType, event);
+    public void push(@HeaderParam("X-GitHub-Event") String eventType, GitHubPushEvent event) {
+        logger.debug("Received eventType [{}] for event [{}]", eventType, event);
+        this.gitEventListener.onPush(this.gitPushEventAdapter.from(eventType, event));
     }
 }

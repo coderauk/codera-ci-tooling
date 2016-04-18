@@ -8,9 +8,11 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
 import io.dropwizard.Application;
+import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Environment;
 import uk.co.codera.jenkins.tooling.api.bitbucket.BitBucketResource;
 import uk.co.codera.jenkins.tooling.api.bitbucket.GitPushEventAdapter;
+import uk.co.codera.jenkins.tooling.api.github.GitHubResource;
 import uk.co.codera.jenkins.tooling.git.GitEventBroadcaster;
 import uk.co.codera.jenkins.tooling.git.GitEventListener;
 import uk.co.codera.jenkins.tooling.git.GitEventLogger;
@@ -34,7 +36,9 @@ public class JenkinsToolingApplication extends Application<JenkinsToolingConfigu
         GitEventBroadcaster gitEventBroadcaster = new GitEventBroadcaster();
         gitEventBroadcaster.registerListener(new GitEventLogger());
         gitEventBroadcaster.registerListener(jenkinsEventListener(configuration));
-        environment.jersey().register(bitBucketResource(configuration, gitEventBroadcaster));
+        JerseyEnvironment jersey = environment.jersey();
+        jersey.register(bitBucketResource(configuration, gitEventBroadcaster));
+        jersey.register(new GitHubResource());
     }
 
     private GitEventListener jenkinsEventListener(JenkinsToolingConfiguration configuration) {

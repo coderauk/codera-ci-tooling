@@ -2,28 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>codera-jenkins-tooling-service-jenkins</artifactId>
+	<artifactId>codera-ci-tooling-resource-github</artifactId>
 	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>uk.co.codera</groupId>
-		<artifactId>codera-jenkins-tooling</artifactId>
+		<artifactId>codera-ci-tooling</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>	
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-jenkins-tooling-service-api</artifactId>
+			<artifactId>codera-ci-tooling-service-api</artifactId>
 		</dependency> 
 		<dependency>
-			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-templating-api</artifactId>
-		</dependency>	
+		    <groupId>io.dropwizard</groupId>
+		    <artifactId>dropwizard-jersey</artifactId>
+		</dependency>
 		<dependency>
-			<groupId>org.jenkins</groupId>
-			<artifactId>jenkins-cli</artifactId>
-		</dependency>	
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-lang</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 </project>

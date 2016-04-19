@@ -3,31 +3,31 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>codera-jenkins-tooling-application</artifactId>
+	<artifactId>codera-ci-tooling-application</artifactId>
 	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>uk.co.codera</groupId>
-		<artifactId>codera-jenkins-tooling</artifactId>
+		<artifactId>codera-ci-tooling</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-jenkins-tooling-resource-bitbucket</artifactId>
+			<artifactId>codera-ci-tooling-resource-bitbucket</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-jenkins-tooling-resource-github</artifactId>
+			<artifactId>codera-ci-tooling-resource-github</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-jenkins-tooling-service-core</artifactId>
+			<artifactId>codera-ci-tooling-service-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
-			<artifactId>codera-jenkins-tooling-service-jenkins</artifactId>
+			<artifactId>codera-ci-tooling-service-jenkins</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
@@ -67,7 +67,7 @@
 			                <transformers>
 			                    <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
 			                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-			                        <mainClass>uk.co.codera.jenkins.tooling.application.JenkinsToolingApplication</mainClass>
+			                        <mainClass>uk.co.codera.ci.tooling.application.CiToolingApplication</mainClass>
 			                    </transformer>
 			                </transformers>
 			            </configuration>

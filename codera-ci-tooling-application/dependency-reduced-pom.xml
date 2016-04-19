@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <artifactId>codera-jenkins-tooling</artifactId>
+    <artifactId>codera-ci-tooling</artifactId>
     <groupId>uk.co.codera</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>codera-jenkins-tooling-application</artifactId>
+  <artifactId>codera-ci-tooling-application</artifactId>
   <build>
     <plugins>
       <plugin>
@@ -21,7 +21,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>uk.co.codera.jenkins.tooling.application.JenkinsToolingApplication</mainClass>
+                  <mainClass>uk.co.codera.ci.tooling.application.CiToolingApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

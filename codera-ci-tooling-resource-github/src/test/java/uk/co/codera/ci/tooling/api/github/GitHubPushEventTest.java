@@ -34,12 +34,17 @@ public class GitHubPushEventTest {
 
     @Test
     public void toStringShouldNotBeObjectReference() {
-        assertThat(readPushEvent().toString(), containsString("repository="));
+        assertThat(readPushEvent().toString(), containsString("sshUrl="));
     }
 
     @Test
     public void pushEventShouldHaveRef() {
         assertThat(readPushEvent().getRef(), is(notNullValue()));
+    }
+
+    @Test
+    public void pushEventShouldHaveRefType() {
+        assertThat(readPushEvent().getRefType(), is(notNullValue()));
     }
 
     @Test

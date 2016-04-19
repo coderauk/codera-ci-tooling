@@ -4,11 +4,18 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GitHubPushEvent {
 
+    public static final String REF_TYPE_BRANCH = "branch";
+
     private String ref;
+
+    @JsonProperty("ref_type")
+    private String refType;
+
     private Repository repository;
 
     public static Builder aPushEvent() {
@@ -21,6 +28,14 @@ public class GitHubPushEvent {
 
     public String getRef() {
         return this.ref;
+    }
+
+    public void setRefType(String refType) {
+        this.refType = refType;
+    }
+
+    public String getRefType() {
+        return this.refType;
     }
 
     public void setRepository(Repository repository) {
@@ -39,6 +54,7 @@ public class GitHubPushEvent {
     public static class Builder {
 
         private String ref;
+        private String refType;
         private Repository repository;
 
         private Builder() {
@@ -50,6 +66,11 @@ public class GitHubPushEvent {
             return this;
         }
 
+        public Builder refType(String refType) {
+            this.refType = refType;
+            return this;
+        }
+
         public Builder with(Repository repository) {
             this.repository = repository;
             return this;
@@ -58,6 +79,7 @@ public class GitHubPushEvent {
         public GitHubPushEvent build() {
             GitHubPushEvent event = new GitHubPushEvent();
             event.setRef(this.ref);
+            event.setRefType(this.refType);
             event.setRepository(this.repository);
             return event;
         }

@@ -15,26 +15,29 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 @Consumes(MediaType.APPLICATION_JSON)
 public class BitBucketResource {
 
-    @SuppressWarnings("squid:S1312")
-    private final Logger logger;
-    private final GitPushEventAdapter gitPushEventAdapter;
-    private final GitEventListener gitEventListener;
+	@SuppressWarnings("squid:S1312")
+	private final Logger logger;
+	private final GitPushEventAdapter gitPushEventAdapter;
+	private final GitEventListener gitEventListener;
 
-    public BitBucketResource(Logger logger, GitPushEventAdapter gitPushEventAdapter,
-            GitEventListener gitEventListener) {
-        this.logger = logger;
-        this.gitPushEventAdapter = gitPushEventAdapter;
-        this.gitEventListener = gitEventListener;
-    }
+	public BitBucketResource(Logger logger,
+			GitPushEventAdapter gitPushEventAdapter,
+			GitEventListener gitEventListener) {
+		this.logger = logger;
+		this.gitPushEventAdapter = gitPushEventAdapter;
+		this.gitEventListener = gitEventListener;
+	}
 
-    public BitBucketResource(GitPushEventAdapter gitPushEventAdapter, GitEventListener gitEventListener) {
-        this(LoggerFactory.getLogger(BitBucketResource.class), gitPushEventAdapter, gitEventListener);
-    }
+	public BitBucketResource(GitPushEventAdapter gitPushEventAdapter,
+			GitEventListener gitEventListener) {
+		this(LoggerFactory.getLogger(BitBucketResource.class),
+				gitPushEventAdapter, gitEventListener);
+	}
 
-    @POST
-    public void push(PushEvent pushEvent) {
-        this.logger.debug("Received push event [{}]", pushEvent);
-        GitPushEvent gitPushEvent = this.gitPushEventAdapter.from(pushEvent);
-        this.gitEventListener.onPush(gitPushEvent);
-    }
+	@POST
+	public void push(PushEvent pushEvent) {
+		this.logger.debug("Received push event [{}]", pushEvent);
+		GitPushEvent gitPushEvent = this.gitPushEventAdapter.from(pushEvent);
+		this.gitEventListener.onPush(gitPushEvent);
+	}
 }

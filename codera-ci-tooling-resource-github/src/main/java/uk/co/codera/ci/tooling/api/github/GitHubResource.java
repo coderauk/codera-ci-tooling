@@ -15,24 +15,30 @@ import uk.co.codera.ci.tooling.git.GitEventListener;
 @Consumes(MediaType.APPLICATION_JSON)
 public class GitHubResource {
 
-    @SuppressWarnings("squid:S1312")
-    private final Logger logger;
-    private final GitPushEventAdapter gitPushEventAdapter;
-    private final GitEventListener gitEventListener;
+	@SuppressWarnings("squid:S1312")
+	private final Logger logger;
+	private final GitPushEventAdapter gitPushEventAdapter;
+	private final GitEventListener gitEventListener;
 
-    public GitHubResource(GitPushEventAdapter gitPushEventAdapter, GitEventListener gitEventListener) {
-        this(LoggerFactory.getLogger(GitHubResource.class), gitPushEventAdapter, gitEventListener);
-    }
-    
-    public GitHubResource(Logger logger, GitPushEventAdapter gitPushEventAdapter, GitEventListener gitEventListener) {
-        this.logger = logger;
-        this.gitPushEventAdapter = gitPushEventAdapter;
-        this.gitEventListener = gitEventListener;
-    }
-    
-    @POST
-    public void push(@HeaderParam("X-GitHub-Event") String eventType, GitHubPushEvent event) {
-        logger.debug("Received eventType [{}] for event [{}]", eventType, event);
-        this.gitEventListener.onPush(this.gitPushEventAdapter.from(eventType, event));
-    }
+	public GitHubResource(GitPushEventAdapter gitPushEventAdapter,
+			GitEventListener gitEventListener) {
+		this(LoggerFactory.getLogger(GitHubResource.class),
+				gitPushEventAdapter, gitEventListener);
+	}
+
+	public GitHubResource(Logger logger,
+			GitPushEventAdapter gitPushEventAdapter,
+			GitEventListener gitEventListener) {
+		this.logger = logger;
+		this.gitPushEventAdapter = gitPushEventAdapter;
+		this.gitEventListener = gitEventListener;
+	}
+
+	@POST
+	public void push(@HeaderParam("X-GitHub-Event") String eventType,
+			GitHubPushEvent event) {
+		logger.debug("Received eventType [{}] for event [{}]", eventType, event);
+		this.gitEventListener.onPush(this.gitPushEventAdapter.from(eventType,
+				event));
+	}
 }

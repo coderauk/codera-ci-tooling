@@ -8,58 +8,59 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GitHubPushEvent {
 
-    private String ref;
-    private Repository repository;
+	private String ref;
+	private Repository repository;
 
-    public static Builder aPushEvent() {
-        return new Builder();
-    }
-    
-    public void setRef(String ref) {
-        this.ref = ref;
-    }
-    
-    public String getRef() {
-        return this.ref;
-    }
-    
-    public void setRepository(Repository repository) {
-        this.repository = repository;
-    }
+	public static Builder aPushEvent() {
+		return new Builder();
+	}
 
-    public Repository getRepository() {
-        return repository;
-    }
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+	public String getRef() {
+		return this.ref;
+	}
 
-    public static class Builder {
+	public void setRepository(Repository repository) {
+		this.repository = repository;
+	}
 
-        private String ref;
-        private Repository repository;
+	public Repository getRepository() {
+		return repository;
+	}
 
-        private Builder() {
-            super();
-        }
-        
-        public Builder ref(String ref) {
-            this.ref = ref;
-            return this;
-        }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
-        public Builder with(Repository repository) {
-            this.repository = repository;
-            return this;
-        }
+	public static class Builder {
 
-        public GitHubPushEvent build() {
-            GitHubPushEvent event = new GitHubPushEvent();
-            event.setRef(this.ref);
-            event.setRepository(this.repository);
-            return event;
-        }
-    }
+		private String ref;
+		private Repository repository;
+
+		private Builder() {
+			super();
+		}
+
+		public Builder ref(String ref) {
+			this.ref = ref;
+			return this;
+		}
+
+		public Builder with(Repository repository) {
+			this.repository = repository;
+			return this;
+		}
+
+		public GitHubPushEvent build() {
+			GitHubPushEvent event = new GitHubPushEvent();
+			event.setRef(this.ref);
+			event.setRepository(this.repository);
+			return event;
+		}
+	}
 }

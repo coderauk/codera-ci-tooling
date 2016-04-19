@@ -17,51 +17,52 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 
 public class GitEventBroadcasterTest {
 
-    private GitEventBroadcaster broadcaster;
+	private GitEventBroadcaster broadcaster;
 
-    @Before
-    public void before() {
-        this.broadcaster = new GitEventBroadcaster();
-    }
+	@Before
+	public void before() {
+		this.broadcaster = new GitEventBroadcaster();
+	}
 
-    @Test
-    public void shouldHaveNoSubscribersByDefault() {
-        assertThat(this.broadcaster.numberSubscribers(), is(0));
-    }
+	@Test
+	public void shouldHaveNoSubscribersByDefault() {
+		assertThat(this.broadcaster.numberSubscribers(), is(0));
+	}
 
-    @Test
-    public void registeringListenerShouldIncreaseSubscriberCount() {
-        registerNewListener();
-        assertThat(broadcaster.numberSubscribers(), is(1));
-    }
+	@Test
+	public void registeringListenerShouldIncreaseSubscriberCount() {
+		registerNewListener();
+		assertThat(broadcaster.numberSubscribers(), is(1));
+	}
 
-    @Test
-    public void shouldNotifySubscriberOfPushEvent() {
-        GitEventListener listener = registerNewListener();
-        GitPushEvent event = aPushEvent();
-        broadcaster.onPush(event);
-        verify(listener).onPush(event);
-    }
+	@Test
+	public void shouldNotifySubscriberOfPushEvent() {
+		GitEventListener listener = registerNewListener();
+		GitPushEvent event = aPushEvent();
+		broadcaster.onPush(event);
+		verify(listener).onPush(event);
+	}
 
-    @Test
-    public void anExceptionInFirstListenerShouldNotStopSubsequentListenersFromBeingCalled() {
-        GitEventListener firstListener = registerNewListener();
-        GitEventListener secondListener = registerNewListener();
+	@Test
+	public void anExceptionInFirstListenerShouldNotStopSubsequentListenersFromBeingCalled() {
+		GitEventListener firstListener = registerNewListener();
+		GitEventListener secondListener = registerNewListener();
 
-        doThrow(new IllegalStateException()).when(firstListener).onPush(any(GitPushEvent.class));
-        
-        broadcaster.onPush(aPushEvent());
-        
-        verify(secondListener).onPush(any(GitPushEvent.class));
-    }
+		doThrow(new IllegalStateException()).when(firstListener).onPush(
+				any(GitPushEvent.class));
 
-    private GitPushEvent aPushEvent() {
-        return aGitPushEvent().build();
-    }
+		broadcaster.onPush(aPushEvent());
 
-    private GitEventListener registerNewListener() {
-        GitEventListener listener = mock(GitEventListener.class);
-        this.broadcaster.registerListener(listener);
-        return listener;
-    }
+		verify(secondListener).onPush(any(GitPushEvent.class));
+	}
+
+	private GitPushEvent aPushEvent() {
+		return aGitPushEvent().build();
+	}
+
+	private GitEventListener registerNewListener() {
+		GitEventListener listener = mock(GitEventListener.class);
+		this.broadcaster.registerListener(listener);
+		return listener;
+	}
 }

@@ -10,59 +10,60 @@ import uk.co.codera.ci.tooling.git.GitPushType;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RefChange {
 
-    private String refId;
+	private String refId;
 
-    private GitPushType type;
+	private GitPushType type;
 
-    public static Builder aRefChange() {
-        return new Builder();
-    }
-    
-    public String getRefId() {
-        return this.refId;
-    }
+	public static Builder aRefChange() {
+		return new Builder();
+	}
 
-    public void setRefId(String refId) {
-        this.refId = refId;
-    }
+	public String getRefId() {
+		return this.refId;
+	}
 
-    public GitPushType getType() {
-        return this.type;
-    }
+	public void setRefId(String refId) {
+		this.refId = refId;
+	}
 
-    public void setType(GitPushType type) {
-        this.type = type;
-    }
-    
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-    
-    public static class Builder {
-        
-        private String refId;
-        private GitPushType type;
-        
-        private Builder() {
-            super();
-        }
-        
-        public Builder refId(String refId) {
-            this.refId = refId;
-            return this;
-        }
-        
-        public Builder type(GitPushType type) {
-            this.type = type;
-            return this;
-        }
-        
-        public RefChange build() {
-            RefChange refChange = new RefChange();
-            refChange.setRefId(this.refId);
-            refChange.setType(this.type);
-            return refChange;
-        }
-    }
+	public GitPushType getType() {
+		return this.type;
+	}
+
+	public void setType(GitPushType type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
+	public static class Builder {
+
+		private String refId;
+		private GitPushType type;
+
+		private Builder() {
+			super();
+		}
+
+		public Builder refId(String refId) {
+			this.refId = refId;
+			return this;
+		}
+
+		public Builder type(GitPushType type) {
+			this.type = type;
+			return this;
+		}
+
+		public RefChange build() {
+			RefChange refChange = new RefChange();
+			refChange.setRefId(this.refId);
+			refChange.setType(this.type);
+			return refChange;
+		}
+	}
 }

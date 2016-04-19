@@ -23,48 +23,50 @@ public class BitBucketResourceTest {
 
 	@Mock
 	private GitEventListener gitEventListener;
-	
+
 	@Mock
 	private GitPushEventAdapter gitPushEventAdapter;
-	
+
 	private BitBucketResource resource;
-	
+
 	@Before
 	public void before() {
-		this.resource = new BitBucketResource(gitPushEventAdapter, gitEventListener);
+		this.resource = new BitBucketResource(gitPushEventAdapter,
+				gitEventListener);
 	}
-	
+
 	@Test
 	public void shouldLogPushEvent() {
-	    Logger logger = mock(Logger.class);
-	    this.resource = new BitBucketResource(logger, this.gitPushEventAdapter, this.gitEventListener);
+		Logger logger = mock(Logger.class);
+		this.resource = new BitBucketResource(logger, this.gitPushEventAdapter,
+				this.gitEventListener);
 		PushEvent push = aPushEvent();
 		onPush(push);
 		verify(logger).debug("Received push event [{}]", push);
 	}
-	
+
 	@Test
 	public void shouldNotifyGitEventListenerOfPushEvent() {
 		onPush(aPushEvent());
 		verify(this.gitEventListener).onPush(any(GitPushEvent.class));
 	}
-	
+
 	@Test
 	public void shouldUseAdapterToAdaptFromBitBucketToGit() {
-	    PushEvent pushEvent = aPushEvent();
-	    GitPushEvent gitPushEvent = GitPushEvent.aGitPushEvent().build();
-	    when(this.gitPushEventAdapter.from(pushEvent)).thenReturn(gitPushEvent);
-	    
-	    onPush(pushEvent);
-	    
-	    verify(this.gitEventListener).onPush(gitPushEvent);
+		PushEvent pushEvent = aPushEvent();
+		GitPushEvent gitPushEvent = GitPushEvent.aGitPushEvent().build();
+		when(this.gitPushEventAdapter.from(pushEvent)).thenReturn(gitPushEvent);
+
+		onPush(pushEvent);
+
+		verify(this.gitEventListener).onPush(gitPushEvent);
 	}
-	
+
 	private PushEvent aPushEvent() {
-	    return PushEvents.aValidPushEvent().build();
+		return PushEvents.aValidPushEvent().build();
 	}
-	
+
 	private void onPush(PushEvent event) {
-	    this.resource.push(event);
+		this.resource.push(event);
 	}
 }

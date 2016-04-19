@@ -22,53 +22,58 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
 @RunWith(MockitoJUnitRunner.class)
 public class JenkinsJobCreatorTest {
 
-    @Mock
-    private JenkinsTemplateService mockJobNameFactory;
+	@Mock
+	private JenkinsTemplateService mockJobNameFactory;
 
-    @Mock
-    private JenkinsTemplateService mockJobFactory;
+	@Mock
+	private JenkinsTemplateService mockJobFactory;
 
-    @Mock
-    private JenkinsService mockJenkinsService;
+	@Mock
+	private JenkinsService mockJenkinsService;
 
-    private GitEventListener jobCreator;
+	private GitEventListener jobCreator;
 
-    @Before
-    public void before() {
-        this.jobCreator = new JenkinsJobCreator(this.mockJobNameFactory, this.mockJobFactory, this.mockJenkinsService);
-    }
+	@Before
+	public void before() {
+		this.jobCreator = new JenkinsJobCreator(this.mockJobNameFactory,
+				this.mockJobFactory, this.mockJenkinsService);
+	}
 
-    @Test
-    public void shouldUseJobFactoryToCreateJobDefinition() {
-        GitPushEvent event = aGitPushEvent();
-        this.jobCreator.onPush(event);
-        verify(this.mockJobFactory).create(event);
-    }
-    
-    @Test
-    public void shouldUseJobNameFactoryToCreateJobName() {
-        GitPushEvent event = aGitPushEvent();
-        this.jobCreator.onPush(event);
-        verify(this.mockJobNameFactory).create(event);
-    }
+	@Test
+	public void shouldUseJobFactoryToCreateJobDefinition() {
+		GitPushEvent event = aGitPushEvent();
+		this.jobCreator.onPush(event);
+		verify(this.mockJobFactory).create(event);
+	}
 
-    @Test
-    public void shouldPassJobDefinitionFromFactoryToJenkinsServiceToCreateJob() {
-        String jobDefinition = "this is a jenkins job definition";
-        when(this.mockJobFactory.create(any(GitPushEvent.class))).thenReturn(jobDefinition);
-        this.jobCreator.onPush(aGitPushEvent());
-        verify(this.mockJenkinsService).createJob(anyString(), eq(jobDefinition));
-    }
-    
-    @Test
-    public void shouldPassJobNameFromFactoryToJenkinsServiceToCreateJob() {
-        String jobName = "this is a job name";
-        when(this.mockJobNameFactory.create(any(GitPushEvent.class))).thenReturn(jobName);
-        this.jobCreator.onPush(aGitPushEvent());
-        verify(this.mockJenkinsService).createJob(eq(jobName), anyString());
-    }
+	@Test
+	public void shouldUseJobNameFactoryToCreateJobName() {
+		GitPushEvent event = aGitPushEvent();
+		this.jobCreator.onPush(event);
+		verify(this.mockJobNameFactory).create(event);
+	}
 
-    private GitPushEvent aGitPushEvent() {
-        return GitPushEvent.aGitPushEvent().reference(GitReference.from("refs/heads/master")).build();
-    }
+	@Test
+	public void shouldPassJobDefinitionFromFactoryToJenkinsServiceToCreateJob() {
+		String jobDefinition = "this is a jenkins job definition";
+		when(this.mockJobFactory.create(any(GitPushEvent.class))).thenReturn(
+				jobDefinition);
+		this.jobCreator.onPush(aGitPushEvent());
+		verify(this.mockJenkinsService).createJob(anyString(),
+				eq(jobDefinition));
+	}
+
+	@Test
+	public void shouldPassJobNameFromFactoryToJenkinsServiceToCreateJob() {
+		String jobName = "this is a job name";
+		when(this.mockJobNameFactory.create(any(GitPushEvent.class)))
+				.thenReturn(jobName);
+		this.jobCreator.onPush(aGitPushEvent());
+		verify(this.mockJenkinsService).createJob(eq(jobName), anyString());
+	}
+
+	private GitPushEvent aGitPushEvent() {
+		return GitPushEvent.aGitPushEvent()
+				.reference(GitReference.from("refs/heads/master")).build();
+	}
 }

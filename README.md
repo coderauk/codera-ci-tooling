@@ -1,2 +1,2 @@
-# jenkins-tooling
-Tooling for jenkins, allows automated creation, deletion of jobs, etc
+# codera-ci-tooling
+Tooling for Continuous Integration (CI), allows automated creation, deletion of jobs, etc

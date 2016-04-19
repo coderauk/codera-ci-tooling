@@ -62,7 +62,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     private JenkinsService jenkinsService(CiToolingConfiguration configuration) {
         JenkinsConfiguration jenkinsConfiguration = JenkinsConfiguration.aJenkinsConfiguration()
-                .serverUrl(configuration.getJenkinsServerName()).build();
+                .serverUrl(configuration.getJenkinsServerUrl()).build();
         return new JenkinsService(jenkinsConfiguration);
     }
 

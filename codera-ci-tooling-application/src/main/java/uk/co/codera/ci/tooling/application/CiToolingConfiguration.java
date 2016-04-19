@@ -14,7 +14,7 @@ public class CiToolingConfiguration extends Configuration {
     private int bitBucketServerPort;
     
     @NotEmpty
-    private String jenkinsServerName;
+    private String jenkinsServerUrl;
     
     @NotEmpty
     private String jenkinsJobTemplateFile;
@@ -40,13 +40,13 @@ public class CiToolingConfiguration extends Configuration {
     }
     
     @JsonProperty
-    public void setJenkinsServerName(String jenkinsServerName) {
-        this.jenkinsServerName = jenkinsServerName;
+    public void setJenkinsServerUrl(String jenkinsServerUrl) {
+        this.jenkinsServerUrl = jenkinsServerUrl;
     }
     
     @JsonProperty
-    public String getJenkinsServerName() {
-        return this.jenkinsServerName;
+    public String getJenkinsServerUrl() {
+        return this.jenkinsServerUrl;
     }
     
     @JsonProperty

@@ -40,7 +40,7 @@
   	
   	<properties>
   		<version.codera.templating>0.0.1</version.codera.templating>
-  		<version.codera.lang>0.0.2</version.codera.lang>
+  		<version.codera.lang>0.0.3</version.codera.lang>
   	</properties>
 
   	<dependencyManagement>

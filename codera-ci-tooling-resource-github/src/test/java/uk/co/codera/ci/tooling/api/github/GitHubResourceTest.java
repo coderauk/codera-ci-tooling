@@ -1,6 +1,8 @@
 package uk.co.codera.ci.tooling.api.github;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static uk.co.codera.ci.tooling.api.github.GitHubPushEvents.aValidPushEvent;
@@ -12,9 +14,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 
-import uk.co.codera.ci.tooling.api.github.GitHubPushEvent;
-import uk.co.codera.ci.tooling.api.github.GitHubResource;
-import uk.co.codera.ci.tooling.api.github.GitPushEventAdapter;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 
@@ -36,12 +35,31 @@ public class GitHubResourceTest {
 
     @Test
     public void shouldLogPushEvent() {
-        Logger logger = mock(Logger.class);
-        this.resource = new GitHubResource(logger, this.gitPushEventAdapter, this.gitEventListener);
+        Logger logger = initResourceWithMockLogger();
         String eventType = GitPushEventAdapter.EVENT_TYPE_CREATE;
         GitHubPushEvent event = aValidPushEvent().build();
         onPush(eventType, event);
-        verify(logger).debug("Received eventType [{}] for event [{}]", eventType, event);
+        verify(logger).info("Received eventType [{}] for event [{}]", eventType, event);
+    }
+
+    @Test
+    public void shouldInvokeListenerForBranchEvent() {
+        onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_BRANCH)
+                .build());
+        verify(this.gitEventListener).onPush(any(GitPushEvent.class));
+    }
+
+    @Test
+    public void shouldNotInvokeListenerForBranchEvent() {
+        onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build());
+        verify(this.gitEventListener, never()).onPush(any(GitPushEvent.class));
+    }
+
+    @Test
+    public void shouldLogWhenIgnoringEvent() {
+        Logger logger = initResourceWithMockLogger();
+        onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build());
+        verify(logger).info("Ignoring event because it is not related to a branch");
     }
 
     @Test
@@ -58,5 +76,11 @@ public class GitHubResourceTest {
 
     private void onPush(String eventType, GitHubPushEvent event) {
         this.resource.push(eventType, event);
+    }
+
+    private Logger initResourceWithMockLogger() {
+        Logger logger = mock(Logger.class);
+        this.resource = new GitHubResource(logger, this.gitPushEventAdapter, this.gitEventListener);
+        return logger;
     }
 }

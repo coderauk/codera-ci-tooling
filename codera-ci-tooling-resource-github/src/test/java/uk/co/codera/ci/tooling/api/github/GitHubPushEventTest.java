@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
+import static uk.co.codera.ci.tooling.api.github.GitHubPushEvents.aValidPushEvent;
 
 import java.io.IOException;
 
@@ -60,6 +61,16 @@ public class GitHubPushEventTest {
     @Test
     public void repositoryShouldHaveSshUrl() {
         assertThat(repository().getSshUrl(), is(notNullValue()));
+    }
+
+    @Test
+    public void shouldReportRefTypeBranchIsBranch() {
+        assertThat(aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_BRANCH).build().isBranch(), is(true));
+    }
+
+    @Test
+    public void shouldReportRefTypeOtherThanBranchIsNotBranch() {
+        assertThat(aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build().isBranch(), is(false));
     }
 
     private Repository repository() {

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GitHubPushEvent {
 
     public static final String REF_TYPE_BRANCH = "branch";
+    public static final String REF_TYPE_TAG = "tag";
 
     private String ref;
 
@@ -44,6 +45,10 @@ public class GitHubPushEvent {
 
     public Repository getRepository() {
         return repository;
+    }
+
+    public boolean isBranch() {
+        return REF_TYPE_BRANCH.equals(getRefType());
     }
 
     @Override

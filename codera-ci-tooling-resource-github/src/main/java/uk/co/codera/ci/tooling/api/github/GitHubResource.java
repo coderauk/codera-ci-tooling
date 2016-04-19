@@ -32,7 +32,11 @@ public class GitHubResource {
 
     @POST
     public void push(@HeaderParam("X-GitHub-Event") String eventType, GitHubPushEvent event) {
-        logger.debug("Received eventType [{}] for event [{}]", eventType, event);
-        this.gitEventListener.onPush(this.gitPushEventAdapter.from(eventType, event));
+        this.logger.info("Received eventType [{}] for event [{}]", eventType, event);
+        if (event.isBranch()) {
+            this.gitEventListener.onPush(this.gitPushEventAdapter.from(eventType, event));
+        } else {
+            this.logger.info("Ignoring event because it is not related to a branch");
+        }
     }
 }

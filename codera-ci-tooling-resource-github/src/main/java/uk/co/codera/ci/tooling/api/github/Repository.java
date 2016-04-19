@@ -6,55 +6,55 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Repository {
 
-	private String name;
+    private String name;
 
-	@JsonProperty(value = "ssh_url")
-	private String sshUrl;
+    @JsonProperty(value = "ssh_url")
+    private String sshUrl;
 
-	public static Builder aRepository() {
-		return new Builder();
-	}
+    public static Builder aRepository() {
+        return new Builder();
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setSshUrl(String sshUrl) {
-		this.sshUrl = sshUrl;
-	}
+    public void setSshUrl(String sshUrl) {
+        this.sshUrl = sshUrl;
+    }
 
-	public String getSshUrl() {
-		return this.sshUrl;
-	}
+    public String getSshUrl() {
+        return this.sshUrl;
+    }
 
-	public static class Builder {
+    public static class Builder {
 
-		private String name;
-		private String sshUrl;
+        private String name;
+        private String sshUrl;
 
-		private Builder() {
-			super();
-		}
+        private Builder() {
+            super();
+        }
 
-		public Builder name(String name) {
-			this.name = name;
-			return this;
-		}
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
 
-		public Builder sshUrl(String sshUrl) {
-			this.sshUrl = sshUrl;
-			return this;
-		}
+        public Builder sshUrl(String sshUrl) {
+            this.sshUrl = sshUrl;
+            return this;
+        }
 
-		public Repository build() {
-			Repository repository = new Repository();
-			repository.setName(this.name);
-			repository.setSshUrl(this.sshUrl);
-			return repository;
-		}
-	}
+        public Repository build() {
+            Repository repository = new Repository();
+            repository.setName(this.name);
+            repository.setSshUrl(this.sshUrl);
+            return repository;
+        }
+    }
 }

@@ -19,53 +19,50 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration;
 
 public class CreateJobCommandTest {
 
-	private JenkinsConfiguration configuration;
-	private String jenkinsServerUrl;
+    private JenkinsConfiguration configuration;
+    private String jenkinsServerUrl;
 
-	@Before
-	public void before() {
-		this.jenkinsServerUrl = randomString();
-		this.configuration = aJenkinsConfiguration().serverUrl(
-				this.jenkinsServerUrl).build();
-	}
+    @Before
+    public void before() {
+        this.jenkinsServerUrl = randomString();
+        this.configuration = aJenkinsConfiguration().serverUrl(this.jenkinsServerUrl).build();
+    }
 
-	@Test
-	public void shouldHaveJenkinsServerUrlInArguments() {
-		String[] arguments = arguments(aValidCreateJobCommand());
-		assertThat(arguments[0], is("-s"));
-		assertThat(arguments[1], is(this.jenkinsServerUrl));
-	}
+    @Test
+    public void shouldHaveJenkinsServerUrlInArguments() {
+        String[] arguments = arguments(aValidCreateJobCommand());
+        assertThat(arguments[0], is("-s"));
+        assertThat(arguments[1], is(this.jenkinsServerUrl));
+    }
 
-	@Test
-	public void shouldHaveCorrectCommandNameInArguments() {
-		String[] arguments = arguments(aValidCreateJobCommand());
-		assertThat(arguments[2], is("create-job"));
-	}
+    @Test
+    public void shouldHaveCorrectCommandNameInArguments() {
+        String[] arguments = arguments(aValidCreateJobCommand());
+        assertThat(arguments[2], is("create-job"));
+    }
 
-	@Test
-	public void shouldHaveJobNameInArguments() {
-		String[] arguments = arguments(aValidCreateJobCommand().jobName(
-				"job-name"));
-		assertThat(arguments[3], is("job-name"));
-	}
+    @Test
+    public void shouldHaveJobNameInArguments() {
+        String[] arguments = arguments(aValidCreateJobCommand().jobName("job-name"));
+        assertThat(arguments[3], is("job-name"));
+    }
 
-	@Test
-	public void shouldInvokeCliInvokerWhenExecuted() {
-		JenkinsCommandLineInterfaceInvoker cliInvoker = mock(JenkinsCommandLineInterfaceInvoker.class);
-		aValidCreateJobCommand().build().execute(cliInvoker);
-		verify(cliInvoker).invoke(anyVararg());
-	}
+    @Test
+    public void shouldInvokeCliInvokerWhenExecuted() {
+        JenkinsCommandLineInterfaceInvoker cliInvoker = mock(JenkinsCommandLineInterfaceInvoker.class);
+        aValidCreateJobCommand().build().execute(cliInvoker);
+        verify(cliInvoker).invoke(anyVararg());
+    }
 
-	private CreateJobCommand.Builder aValidCreateJobCommand() {
-		return aCreateJobCommand().with(this.configuration)
-				.jobName(randomString()).jobDefinition(randomString());
-	}
+    private CreateJobCommand.Builder aValidCreateJobCommand() {
+        return aCreateJobCommand().with(this.configuration).jobName(randomString()).jobDefinition(randomString());
+    }
 
-	private String randomString() {
-		return UUID.randomUUID().toString();
-	}
+    private String randomString() {
+        return UUID.randomUUID().toString();
+    }
 
-	private String[] arguments(CreateJobCommand.Builder command) {
-		return command.build().getArguments();
-	}
+    private String[] arguments(CreateJobCommand.Builder command) {
+        return command.build().getArguments();
+    }
 }

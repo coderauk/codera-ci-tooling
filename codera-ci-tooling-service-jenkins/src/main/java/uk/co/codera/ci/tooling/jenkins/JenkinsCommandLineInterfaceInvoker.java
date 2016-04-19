@@ -9,20 +9,18 @@ import hudson.cli.CLI;
 
 public class JenkinsCommandLineInterfaceInvoker {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(JenkinsCommandLineInterfaceInvoker.class);
+    private static final Logger logger = LoggerFactory.getLogger(JenkinsCommandLineInterfaceInvoker.class);
 
-	public JenkinsCommandLineInterfaceInvoker() {
-		super();
-	}
+    public JenkinsCommandLineInterfaceInvoker() {
+        super();
+    }
 
-	public void invoke(String[] arguments) {
-		logger.info("Invoking jenkins cli with arguments {}",
-				Arrays.toString(arguments));
-		try {
-			CLI._main(arguments);
-		} catch (Exception e) {
-			throw new IllegalStateException(e);
-		}
-	}
+    public void invoke(String[] arguments) {
+        logger.info("Invoking jenkins cli with arguments {}", Arrays.toString(arguments));
+        try {
+            CLI._main(arguments);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }

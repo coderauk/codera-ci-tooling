@@ -17,28 +17,27 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
 @RunWith(MockitoJUnitRunner.class)
 public class JenkinsJobDeleterTest {
 
-	@Mock
-	private JenkinsTemplateService mockJobNameFactory;
+    @Mock
+    private JenkinsTemplateService mockJobNameFactory;
 
-	@Mock
-	private JenkinsService mockJenkinsService;
+    @Mock
+    private JenkinsService mockJenkinsService;
 
-	private JenkinsJobDeleter jobDeleter;
+    private JenkinsJobDeleter jobDeleter;
 
-	@Before
-	public void before() {
-		this.jobDeleter = new JenkinsJobDeleter(this.mockJobNameFactory,
-				this.mockJenkinsService);
-	}
+    @Before
+    public void before() {
+        this.jobDeleter = new JenkinsJobDeleter(this.mockJobNameFactory, this.mockJenkinsService);
+    }
 
-	@Test
-	public void shouldUseJobNameFactoryToCreateJobNameToDelete() {
-		GitPushEvent event = GitPushEvent.aGitPushEvent().build();
-		String jobName = "job-to-delete";
-		when(this.mockJobNameFactory.create(event)).thenReturn(jobName);
+    @Test
+    public void shouldUseJobNameFactoryToCreateJobNameToDelete() {
+        GitPushEvent event = GitPushEvent.aGitPushEvent().build();
+        String jobName = "job-to-delete";
+        when(this.mockJobNameFactory.create(event)).thenReturn(jobName);
 
-		this.jobDeleter.onPush(event);
+        this.jobDeleter.onPush(event);
 
-		verify(this.mockJenkinsService).deleteJob(jobName);
-	}
+        verify(this.mockJenkinsService).deleteJob(jobName);
+    }
 }

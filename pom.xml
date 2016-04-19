@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-parent</artifactId>
-		<version>0.0.8</version>
+		<version>0.0.9</version>
 	</parent>	
 
 	<description>Parent pom file for Codera CI Tooling</description>
@@ -28,26 +28,6 @@
 		<url>git@github.com:coderauk/codera-ci-tooling.git</url>
 	  <tag>HEAD</tag>
   	</scm>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>net.revelc.code</groupId>
-				<artifactId>formatter-maven-plugin</artifactId>
-				<version>0.5.2</version>
-		        <executions>
-		          <execution>
-		            <goals>
-		              <goal>format</goal>
-		            </goals>
-		          </execution>
-		        </executions>				
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
   	<modules>
       	<module>codera-ci-tooling-service-api</module>

@@ -15,37 +15,36 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsCommandLineInterfaceInvoker;
 
 public class JenkinsCommandLineInterfaceInvokerTest {
 
-	private JenkinsCommandLineInterfaceInvoker invoker;
+    private JenkinsCommandLineInterfaceInvoker invoker;
 
-	private PrintStream standardErrorStream;
-	private ByteArrayOutputStream bos;
+    private PrintStream standardErrorStream;
+    private ByteArrayOutputStream bos;
 
-	@Before
-	public void before() {
-		this.standardErrorStream = System.err;
+    @Before
+    public void before() {
+        this.standardErrorStream = System.err;
 
-		this.bos = new ByteArrayOutputStream();
-		PrintStream printStream = new PrintStream(bos);
-		System.setErr(printStream);
+        this.bos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(bos);
+        System.setErr(printStream);
 
-		this.invoker = new JenkinsCommandLineInterfaceInvoker();
-	}
+        this.invoker = new JenkinsCommandLineInterfaceInvoker();
+    }
 
-	@After
-	public void after() {
-		System.setErr(this.standardErrorStream);
-	}
+    @After
+    public void after() {
+        System.setErr(this.standardErrorStream);
+    }
 
-	@Test
-	public void shouldPrintUsageWhenInvokedWithNoArguments() {
-		this.invoker.invoke(new String[]{});
-		assertThat(capturedErrorOutput(), CoreMatchers.anyOf(
-				containsString("Jenkins CLI"),
-				containsString("Failed to authenticate with your SSH keys")));
-	}
+    @Test
+    public void shouldPrintUsageWhenInvokedWithNoArguments() {
+        this.invoker.invoke(new String[] {});
+        assertThat(capturedErrorOutput(), CoreMatchers.anyOf(containsString("Jenkins CLI"),
+                containsString("Failed to authenticate with your SSH keys")));
+    }
 
-	private String capturedErrorOutput() {
-		return new String(bos.toByteArray());
-	}
+    private String capturedErrorOutput() {
+        return new String(bos.toByteArray());
+    }
 
 }

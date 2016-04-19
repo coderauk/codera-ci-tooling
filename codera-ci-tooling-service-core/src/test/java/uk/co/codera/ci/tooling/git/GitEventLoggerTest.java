@@ -17,20 +17,20 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 @RunWith(MockitoJUnitRunner.class)
 public class GitEventLoggerTest {
 
-	@Mock
-	private Logger mockLogger;
+    @Mock
+    private Logger mockLogger;
 
-	private GitEventListener listener;
+    private GitEventListener listener;
 
-	@Before
-	public void before() {
-		this.listener = new GitEventLogger(this.mockLogger);
-	}
+    @Before
+    public void before() {
+        this.listener = new GitEventLogger(this.mockLogger);
+    }
 
-	@Test
-	public void shouldLogGitEventWhenInvoked() {
-		GitPushEvent event = aGitPushEvent().build();
-		this.listener.onPush(event);
-		verify(this.mockLogger).info("Received [{}]", event);
-	}
+    @Test
+    public void shouldLogGitEventWhenInvoked() {
+        GitPushEvent event = aGitPushEvent().build();
+        this.listener.onPush(event);
+        verify(this.mockLogger).info("Received [{}]", event);
+    }
 }

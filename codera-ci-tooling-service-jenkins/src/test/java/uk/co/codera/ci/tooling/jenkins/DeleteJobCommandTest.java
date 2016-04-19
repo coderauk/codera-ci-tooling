@@ -19,53 +19,50 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration;
 
 public class DeleteJobCommandTest {
 
-	private JenkinsConfiguration configuration;
-	private String jenkinsServerUrl;
+    private JenkinsConfiguration configuration;
+    private String jenkinsServerUrl;
 
-	@Before
-	public void before() {
-		this.jenkinsServerUrl = randomString();
-		this.configuration = aJenkinsConfiguration().serverUrl(
-				this.jenkinsServerUrl).build();
-	}
+    @Before
+    public void before() {
+        this.jenkinsServerUrl = randomString();
+        this.configuration = aJenkinsConfiguration().serverUrl(this.jenkinsServerUrl).build();
+    }
 
-	@Test
-	public void shouldHaveJenkinsServerUrlInArguments() {
-		String[] arguments = arguments(aValidDeleteJobCommand());
-		assertThat(arguments[0], is("-s"));
-		assertThat(arguments[1], is(this.jenkinsServerUrl));
-	}
+    @Test
+    public void shouldHaveJenkinsServerUrlInArguments() {
+        String[] arguments = arguments(aValidDeleteJobCommand());
+        assertThat(arguments[0], is("-s"));
+        assertThat(arguments[1], is(this.jenkinsServerUrl));
+    }
 
-	@Test
-	public void shouldHaveCorrectCommandNameInArguments() {
-		String[] arguments = arguments(aValidDeleteJobCommand());
-		assertThat(arguments[2], is("delete-job"));
-	}
+    @Test
+    public void shouldHaveCorrectCommandNameInArguments() {
+        String[] arguments = arguments(aValidDeleteJobCommand());
+        assertThat(arguments[2], is("delete-job"));
+    }
 
-	@Test
-	public void shouldHaveJobNameInArguments() {
-		String[] arguments = arguments(aValidDeleteJobCommand().jobName(
-				"job-name"));
-		assertThat(arguments[3], is("job-name"));
-	}
+    @Test
+    public void shouldHaveJobNameInArguments() {
+        String[] arguments = arguments(aValidDeleteJobCommand().jobName("job-name"));
+        assertThat(arguments[3], is("job-name"));
+    }
 
-	@Test
-	public void shouldInvokeCliInvokerWhenExecuted() {
-		JenkinsCommandLineInterfaceInvoker cliInvoker = mock(JenkinsCommandLineInterfaceInvoker.class);
-		aValidDeleteJobCommand().build().execute(cliInvoker);
-		verify(cliInvoker).invoke(anyVararg());
-	}
+    @Test
+    public void shouldInvokeCliInvokerWhenExecuted() {
+        JenkinsCommandLineInterfaceInvoker cliInvoker = mock(JenkinsCommandLineInterfaceInvoker.class);
+        aValidDeleteJobCommand().build().execute(cliInvoker);
+        verify(cliInvoker).invoke(anyVararg());
+    }
 
-	private DeleteJobCommand.Builder aValidDeleteJobCommand() {
-		return aDeleteJobCommand().with(this.configuration).jobName(
-				randomString());
-	}
+    private DeleteJobCommand.Builder aValidDeleteJobCommand() {
+        return aDeleteJobCommand().with(this.configuration).jobName(randomString());
+    }
 
-	private String randomString() {
-		return UUID.randomUUID().toString();
-	}
+    private String randomString() {
+        return UUID.randomUUID().toString();
+    }
 
-	private String[] arguments(DeleteJobCommand.Builder command) {
-		return command.build().getArguments();
-	}
+    private String[] arguments(DeleteJobCommand.Builder command) {
+        return command.build().getArguments();
+    }
 }

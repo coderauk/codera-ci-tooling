@@ -8,6 +8,7 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 
 public class GitEventLogger implements GitEventListener {
 
+    @SuppressWarnings("squid:S1312")
     private final Logger logger;
     
     public GitEventLogger() {

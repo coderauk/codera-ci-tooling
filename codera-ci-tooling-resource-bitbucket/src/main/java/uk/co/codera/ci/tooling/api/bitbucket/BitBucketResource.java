@@ -15,6 +15,7 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 @Consumes(MediaType.APPLICATION_JSON)
 public class BitBucketResource {
 
+    @SuppressWarnings("squid:S1312")
     private final Logger logger;
     private final GitPushEventAdapter gitPushEventAdapter;
     private final GitEventListener gitEventListener;

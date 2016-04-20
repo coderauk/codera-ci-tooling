@@ -1,6 +1,10 @@
-http:
-  port: 7060
-  adminPort: 7061
+server:
+  applicationConnectors:
+    - type: http
+      port: 7060
+  adminConnectors:
+    - type: http
+      port: 7061
 
 bitBucketServerName: {serverName}
 bitBucketServerPort: {serverPort}

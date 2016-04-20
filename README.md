@@ -39,7 +39,7 @@ Replace the tokens in braces with the appropriate values for your setup.
 1. The application can now be started using the command:
 ```
 nohup java -cp jenkins-cli.jar:codera-ci-tooling-application-<version>.jar uk.co.codera.ci.tooling.application.CiToolingApplication server codera-ci-tooling-application.yaml > codera-ci-tooling-application.out 2> codera-ci-tooling-application.err < /dev/null  &
-```.
+```
 1. Check the application has started by looking in the codera-ci-tooling-application.out file. It should report it is up and running:
 ```
 INFO  [2016-04-19 20:27:58,822] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@441cc260{/,null,AVAILABLE}

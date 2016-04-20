@@ -36,7 +36,15 @@ Replace the tokens in braces with the appropriate values for your setup.
 1. Create a configuration file using the template defined above. The following steps assume the config file is called codera-ci-tooling-application.yaml and is created in the same directory as the jar file.
 1. Download the correct Jenkins CLI library for you Jenkins instance. This can be obtained from Jenkins using the URL <jenkins-url>/jnlpJars/jenkins-cli.jar.
 1. Place the Jenkins CLI jar file in the same directory as the application, it should be called jenkins-cli.jar.
-1. The application can now be started using the command `nohup java -cp jenkins-cli.jar:codera-ci-tooling-application-<version>.jar uk.co.codera.ci.tooling.application.CiToolingApplication server codera-ci-tooling-application.yaml > codera-ci-tooling-application.out 2> codera-ci-tooling-application.err < /dev/null  &`.
+1. The application can now be started using the command:
+```nohup java -cp jenkins-cli.jar:codera-ci-tooling-application-<version>.jar uk.co.codera.ci.tooling.application.CiToolingApplication server codera-ci-tooling-application.yaml > codera-ci-tooling-application.out 2> codera-ci-tooling-application.err < /dev/null  &```.
+1. Check the application has started by looking in the codera-ci-tooling-application.out file. It should report it is up and running:
+```
+INFO  [2016-04-19 20:27:58,822] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@441cc260{/,null,AVAILABLE}
+INFO  [2016-04-19 20:27:58,826] org.eclipse.jetty.server.ServerConnector: Started application@7756c3cd{HTTP/1.1}{0.0.0.0:7060}
+INFO  [2016-04-19 20:27:58,827] org.eclipse.jetty.server.ServerConnector: Started admin@2313052e{HTTP/1.1}{0.0.0.0:7061}
+INFO  [2016-04-19 20:27:58,827] org.eclipse.jetty.server.Server: Started @1050ms
+```
 
 
 

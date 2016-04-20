@@ -1,7 +1,7 @@
 # codera-ci-tooling
 Tooling for Continuous Integration (CI), allows automated creation, deletion of jobs, etc
 
-## Configuration
+## Application Configuration
 
 The application server is configured using a YAML file. An example configuration is shown below:
 
@@ -30,6 +30,13 @@ jenkinsJobTemplateFile: {templateFile}
 
 Replace the tokens in braces with the appropriate values for your setup.
 
-## Deployment
+## Deployment and running
+
+1. Copy the codera-ci-tooling-application-<version>.jar file to the server which will run the application.
+1. Create a configuration file using the template defined above. The following steps assume the config file is called codera-ci-tooling-application.yaml and is created in the same directory as the jar file.
+1. Download the correct Jenkins CLI library for you Jenkins instance. This can be obtained from Jenkins using the URL <jenkins-url>/jnlpJars/jenkins-cli.jar.
+1. Place the Jenkins CLI jar file in the same directory as the application, it should be called jenkins-cli.jar.
+1. The application can now be started using the command `nohup java -cp jenkins-cli.jar:codera-ci-tooling-application-<version>.jar uk.co.codera.ci.tooling.application.CiToolingApplication server codera-ci-tooling-application.yaml > codera-ci-tooling-application.out 2> codera-ci-tooling-application.err < /dev/null  &`.
+
 
 

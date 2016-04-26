@@ -9,53 +9,64 @@ import io.dropwizard.Configuration;
 public class CiToolingConfiguration extends Configuration {
 
     @NotEmpty
+    @JsonProperty
     private String bitBucketServerName;
 
+    @JsonProperty
     private int bitBucketServerPort;
 
+    @JsonProperty
     @NotEmpty
     private String jenkinsServerUrl;
 
     @NotEmpty
+    @JsonProperty
     private String jenkinsJobTemplateFile;
 
     @JsonProperty
+    private SonarConfiguration sonar;
+
     public void setBitBucketServerName(String bitBucketServerName) {
         this.bitBucketServerName = bitBucketServerName;
     }
 
-    @JsonProperty
     public String getBitBucketServerName() {
         return this.bitBucketServerName;
     }
 
-    @JsonProperty
     public void setBitBucketServerPort(int bitBucketServerPort) {
         this.bitBucketServerPort = bitBucketServerPort;
     }
 
-    @JsonProperty
     public int getBitBucketServerPort() {
         return this.bitBucketServerPort;
     }
 
-    @JsonProperty
     public void setJenkinsServerUrl(String jenkinsServerUrl) {
         this.jenkinsServerUrl = jenkinsServerUrl;
     }
 
-    @JsonProperty
     public String getJenkinsServerUrl() {
         return this.jenkinsServerUrl;
     }
 
-    @JsonProperty
     public void setJenkinsJobTemplateFile(String jenkinsJobTemplateFile) {
         this.jenkinsJobTemplateFile = jenkinsJobTemplateFile;
     }
 
-    @JsonProperty
     public String getJenkinsJobTemplateFile() {
         return this.jenkinsJobTemplateFile;
+    }
+
+    public void setSonar(SonarConfiguration sonar) {
+        this.sonar = sonar;
+    }
+
+    public SonarConfiguration getSonar() {
+        return sonar;
+    }
+
+    public boolean isSonarConfigured() {
+        return getSonar() != null;
     }
 }

@@ -22,6 +22,7 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsJobCreator;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobDeleter;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
 import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
+import uk.co.codera.ci.tooling.sonar.SonarJobDeleter;
 import uk.co.codera.templating.TemplateEngine;
 import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
@@ -36,10 +37,22 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         GitEventBroadcaster gitEventBroadcaster = new GitEventBroadcaster();
         gitEventBroadcaster.registerListener(new GitEventLogger());
         gitEventBroadcaster.registerListener(jenkinsEventListener(configuration));
+
+        if (configuration.isSonarConfigured()) {
+            gitEventBroadcaster.registerListener(sonarEventListener(configuration));
+        }
+
         JerseyEnvironment jersey = environment.jersey();
         jersey.register(bitBucketResource(configuration, gitEventBroadcaster));
-        jersey.register(new GitHubResource(new uk.co.codera.ci.tooling.api.github.GitPushEventAdapter(),
-                gitEventBroadcaster));
+        jersey.register(gitHubResource(gitEventBroadcaster));
+    }
+
+    private GitEventListener sonarEventListener(CiToolingConfiguration configuration) {
+        SonarConfiguration sonarConfiguration = configuration.getSonar();
+        return aConfigurableGitEventListenerFactory().register(
+                GitPushType.DELETE,
+                new SonarJobDeleter(sonarConfiguration.getSonarUrl(), sonarConfiguration.getUser(), sonarConfiguration
+                        .getPassword())).build();
     }
 
     private GitEventListener jenkinsEventListener(CiToolingConfiguration configuration) {
@@ -85,5 +98,9 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         GitPushEventAdapter gitPushEventAdapter = new GitPushEventAdapter(configuration.getBitBucketServerName(),
                 configuration.getBitBucketServerPort());
         return new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
+    }
+
+    private GitHubResource gitHubResource(GitEventBroadcaster gitEventBroadcaster) {
+        return new GitHubResource(new uk.co.codera.ci.tooling.api.github.GitPushEventAdapter(), gitEventBroadcaster);
     }
 }

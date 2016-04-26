@@ -1,11 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,BitBucketResource,0,34,0,0,0,11,0,3,0,3
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,Repository.Builder,0,27,0,0,0,10,0,4,0,4
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,PushEvent,0,26,0,0,0,10,0,7,0,7
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,RefChange.Builder,0,27,0,0,0,10,0,4,0,4
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,RefChange,0,26,0,0,0,10,0,7,0,7
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,Project,0,15,0,0,0,6,0,4,0,4
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,Repository,0,22,0,0,0,9,0,6,0,6
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,GitPushEventAdapter,0,64,0,0,0,11,0,3,0,3
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,Project.Builder,0,18,0,0,0,7,0,3,0,3
-codera-ci-tooling-resource-bitbucket,uk.co.codera.ci.tooling.api.bitbucket,PushEvent.Builder,0,42,0,0,0,13,0,5,0,5
+codera-ci-tooling-resource-github,uk.co.codera.ci.tooling.api.github,GitHubResource,0,50,0,4,0,14,0,5,0,3
+codera-ci-tooling-resource-github,uk.co.codera.ci.tooling.api.github,GitHubPushEvent.Builder,0,36,0,0,0,13,0,5,0,5
+codera-ci-tooling-resource-github,uk.co.codera.ci.tooling.api.github,GitPushEventAdapter,0,54,0,0,0,10,0,5,0,5
+codera-ci-tooling-resource-github,uk.co.codera.ci.tooling.api.github,Repository,0,26,0,0,0,10,0,7,0,7
+codera-ci-tooling-resource-github,uk.co.codera.ci.tooling.api.github,Repository.Builder,0,27,0,0,0,10,0,4,0,4
+codera-ci-tooling-resource-github,uk.co.codera.ci.tooling.api.github,GitHubPushEvent,0,43,0,0,0,15,0,11,0,11

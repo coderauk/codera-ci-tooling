@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>codera-ci-tooling-service-api &#x2013; Project Dependencies</title>
+    <title>codera-ci-tooling-service-core &#x2013; Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -16,7 +16,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                codera-ci-tooling-service-api
+                codera-ci-tooling-service-core
                 </div>
                     <div class="clear">
         <hr/>
@@ -28,7 +28,7 @@
         <span id="publishDate">Last Published: 2016-04-26</span>
                   &nbsp;| <span id="projectVersion">Version: 0.0.1-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="./" title="codera-ci-tooling-service-api">codera-ci-tooling-service-api</a>
+            <div class="xright">                    <a href="./" title="codera-ci-tooling-service-core">codera-ci-tooling-service-core</a>
             
       </div>
       <div class="clear">
@@ -122,35 +122,41 @@
 <td>jar</td>
 <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a>-<a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></td></tr>
 <tr class="b">
-<td>org.apache.commons</td>
-<td><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">commons-lang3</a></td>
-<td>3.4</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
-<tr class="a">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">jcl-over-slf4j</a></td>
 <td>1.7.12</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">jul-to-slf4j</a></td>
 <td>1.7.12</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">log4j-over-slf4j</a></td>
 <td>1.7.12</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache Software Licenses</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j</td>
 <td><a class="externalLink" href="http://www.slf4j.org">slf4j-api</a></td>
 <td>1.7.12</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
+<td><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></td></tr>
+<tr class="b">
+<td>uk.co.codera</td>
+<td><a class="externalLink" href="https://github.com/coderauk/codera-ci-tooling/codera-ci-tooling-service-api">codera-ci-tooling-service-api</a></td>
+<td>0.0.1-SNAPSHOT</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://github.com/coderauk/jenkins-tooling/blob/master/LICENSE">MIT License</a></td></tr>
+<tr class="a">
+<td>uk.co.codera</td>
+<td><a class="externalLink" href="https://github.com/coderauk/codera-lang">codera-lang</a></td>
+<td>0.0.3</td>
+<td>jar</td>
+<td><a class="externalLink" href="https://github.com/coderauk/codera-lang/blob/master/LICENSE">MIT License</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
 <div class="section">
 <h3><a name="test"></a>test</h3>
 <p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
@@ -181,7 +187,29 @@
 <td><a class="externalLink" href="http://github.com/mockito/mockito/blob/master/LICENSE">The MIT License</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
 <div class="section">
 <h2><a name="Project_Transitive_Dependencies"></a>Project Transitive Dependencies</h2>
-<p>No transitive dependencies are required for this project.</p></div><a name="Project_Dependency_Graph"></a>
+<p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_compile"></a>
+<div class="section">
+<h3><a name="compile"></a>compile</h3>
+<p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>GroupId</th>
+<th>ArtifactId</th>
+<th>Version</th>
+<th>Type</th>
+<th>Licenses</th></tr>
+<tr class="b">
+<td>commons-io</td>
+<td><a class="externalLink" href="http://commons.apache.org/io/">commons-io</a></td>
+<td>2.4</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>org.apache.commons</td>
+<td><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">commons-lang3</a></td>
+<td>3.4</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr></table></div></div><a name="Project_Dependency_Graph"></a>
 <div class="section">
 <h2><a name="Project_Dependency_Graph"></a>Project Dependency Graph</h2>
 <script language="javascript" type="text/javascript">
@@ -207,7 +235,17 @@
 <div class="section">
 <h3><a name="Dependency_Tree"></a>Dependency Tree</h3>
 <ul>
-<li>uk.co.codera:codera-ci-tooling-service-api:jar:0.0.1-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep0', '_img1' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep0" style="display:none">
+<li>uk.co.codera:codera-ci-tooling-service-core:jar:0.0.1-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep0', '_img1' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep0" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>codera-ci-tooling-service-core</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Parent pom file for Codera CI Tooling</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/coderauk/codera-ci-tooling/codera-ci-tooling-service-core">https://github.com/coderauk/codera-ci-tooling/codera-ci-tooling-service-core</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://github.com/coderauk/jenkins-tooling/blob/master/LICENSE">MIT License</a></p></td></tr></table></div>
+<ul>
+<li>uk.co.codera:codera-ci-tooling-service-api:jar:0.0.1-SNAPSHOT (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep2', '_img3' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>codera-ci-tooling-service-api</th></tr>
@@ -217,7 +255,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://github.com/coderauk/codera-ci-tooling/codera-ci-tooling-service-api">https://github.com/coderauk/codera-ci-tooling/codera-ci-tooling-service-api</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="https://github.com/coderauk/jenkins-tooling/blob/master/LICENSE">MIT License</a></p></td></tr></table></div>
 <ul>
-<li>org.apache.commons:commons-lang3:jar:3.4 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep2', '_img3' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep2" style="display:none">
+<li>org.apache.commons:commons-lang3:jar:3.4 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep4', '_img5' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep4" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Apache Commons Lang</th></tr>
@@ -227,8 +265,28 @@
   classes that are in java.lang's hierarchy, or are considered to be so
   standard as to justify existence in java.lang.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">http://commons.apache.org/proper/commons-lang/</a></p>
-<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>org.slf4j:slf4j-api:jar:1.7.12 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep4', '_img5' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep4" style="display:none">
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
+<li>uk.co.codera:codera-lang:jar:0.0.3 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep6', '_img7' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep6" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>codera-lang</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Codera Lang Project</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/coderauk/codera-lang">https://github.com/coderauk/codera-lang</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="https://github.com/coderauk/codera-lang/blob/master/LICENSE">MIT License</a></p></td></tr></table></div>
+<ul>
+<li>commons-io:commons-io:jar:2.4 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep8', '_img9' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep8" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Commons IO</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>The Commons IO library contains utility classes, stream implementations, file filters, 
+file comparators, endian transformation classes, and much more.</p>
+<p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p>
+<p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
+<li>org.slf4j:slf4j-api:jar:1.7.12 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep10', '_img11' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>SLF4J API Module</th></tr>
@@ -237,7 +295,7 @@
 <p><b>Description: </b>The slf4j API</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li>
-<li>org.slf4j:jul-to-slf4j:jar:1.7.12 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep6', '_img7' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep6" style="display:none">
+<li>org.slf4j:jul-to-slf4j:jar:1.7.12 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep12', '_img13' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUL to SLF4J bridge</th></tr>
@@ -246,7 +304,7 @@
 <p><b>Description: </b>JUL to SLF4J bridge</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li>
-<li>org.slf4j:log4j-over-slf4j:jar:1.7.12 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep8', '_img9' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep8" style="display:none">
+<li>org.slf4j:log4j-over-slf4j:jar:1.7.12 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep14', '_img15' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Log4j Implemented Over SLF4J</th></tr>
@@ -255,7 +313,7 @@
 <p><b>Description: </b>Log4j implemented over SLF4J</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache Software Licenses</a></p></td></tr></table></div></li>
-<li>org.slf4j:jcl-over-slf4j:jar:1.7.12 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep10', '_img11' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep10" style="display:none">
+<li>org.slf4j:jcl-over-slf4j:jar:1.7.12 (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep16', '_img17' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep16" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JCL 1.1.1 implemented over SLF4J</th></tr>
@@ -264,7 +322,7 @@
 <p><b>Description: </b>JCL 1.1.1 implemented over SLF4J</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td></tr></table></div></li>
-<li>ch.qos.logback:logback-core:jar:1.1.3 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep12', '_img13' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep12" style="display:none">
+<li>ch.qos.logback:logback-core:jar:1.1.3 (compile) <img id="_img19" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep18', '_img19' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep18" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Logback Core Module</th></tr>
@@ -273,7 +331,7 @@
 <p><b>Description: </b>logback-core module</p>
 <p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch/logback-core">http://logback.qos.ch/logback-core</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a>, <a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div></li>
-<li>ch.qos.logback:logback-classic:jar:1.1.3 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep14', '_img15' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep14" style="display:none">
+<li>ch.qos.logback:logback-classic:jar:1.1.3 (compile) <img id="_img21" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep20', '_img21' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep20" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Logback Classic Module</th></tr>
@@ -282,7 +340,7 @@
 <p><b>Description: </b>logback-classic module</p>
 <p><b>URL: </b><a class="externalLink" href="http://logback.qos.ch/logback-classic">http://logback.qos.ch/logback-classic</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a>, <a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.12 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep16', '_img17' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep16" style="display:none">
+<li>junit:junit:jar:4.12 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep22', '_img23' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep22" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>JUnit</th></tr>
@@ -291,7 +349,7 @@
 <p><b>Description: </b>JUnit is a unit testing framework for Java, created by Erich Gamma and Kent Beck.</p>
 <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></p></td></tr></table></div></li>
-<li>org.hamcrest:hamcrest-all:jar:1.3 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep18', '_img19' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep18" style="display:none">
+<li>org.hamcrest:hamcrest-all:jar:1.3 (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep24', '_img25' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep24" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Hamcrest All</th></tr>
@@ -300,7 +358,7 @@
 <p><b>Description: </b>A self-contained hamcrest jar containing all of the sub-modules in a single artifact.</p>
 <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-all">https://github.com/hamcrest/JavaHamcrest/hamcrest-all</a></p>
 <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li>
-<li>org.mockito:mockito-all:jar:1.10.19 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep20', '_img21' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep20" style="display:none">
+<li>org.mockito:mockito-all:jar:1.10.19 (test) <img id="_img27" src="./images/icon_info_sml.gif" alt="[Information]" onclick="toggleDependencyDetails( '_dep26', '_img27' );" style="cursor: pointer; vertical-align: text-bottom;"></img><div id="_dep26" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Mockito</th></tr>
@@ -313,11 +371,12 @@
 <h2><a name="Licenses"></a>Licenses</h2>
 <p><b>Apache Software Licenses: </b>Log4j Implemented Over SLF4J</p>
 <p><b>Eclipse Public License 1.0: </b>JUnit</p>
-<p><b>MIT License: </b>JCL 1.1.1 implemented over SLF4J, JUL to SLF4J bridge, SLF4J API Module, codera-ci-tooling-service-api</p>
+<p><b>MIT License: </b>JCL 1.1.1 implemented over SLF4J, JUL to SLF4J bridge, SLF4J API Module, codera-ci-tooling-service-api, codera-ci-tooling-service-core, codera-lang</p>
 <p><b>The MIT License: </b>Mockito</p>
 <p><b>Apache License, Version 2.0: </b>Apache Commons Lang</p>
 <p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p>
 <p><b>New BSD License: </b>Hamcrest All</p>
+<p><b>The Apache Software License, Version 2.0: </b>Commons IO</p>
 <p><b>Eclipse Public License - v 1.0: </b>Logback Classic Module, Logback Core Module</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
 <h2><a name="Dependency_File_Details"></a>Dependency File Details</h2>
@@ -347,6 +406,14 @@
 <td>1.6</td>
 <td>Yes</td></tr>
 <tr class="b">
+<td>commons-io-2.4.jar</td>
+<td>185.1 kB</td>
+<td>128</td>
+<td>110</td>
+<td>6</td>
+<td>1.6</td>
+<td>Yes</td></tr>
+<tr class="a">
 <td>junit-4.12.jar</td>
 <td>314.9 kB</td>
 <td>323</td>
@@ -354,7 +421,7 @@
 <td>30</td>
 <td>1.5</td>
 <td>Yes</td></tr>
-<tr class="a">
+<tr class="b">
 <td>commons-lang3-3.4.jar</td>
 <td>434.7 kB</td>
 <td>248</td>
@@ -362,7 +429,7 @@
 <td>12</td>
 <td>1.6</td>
 <td>Yes</td></tr>
-<tr class="b">
+<tr class="a">
 <td>hamcrest-all-1.3.jar</td>
 <td>306.6 kB</td>
 <td>249</td>
@@ -370,7 +437,7 @@
 <td>23</td>
 <td>1.5</td>
 <td>Yes</td></tr>
-<tr class="a">
+<tr class="b">
 <td>mockito-all-1.10.19.jar</td>
 <td>1.2 MB</td>
 <td>1215</td>
@@ -378,7 +445,7 @@
 <td>79</td>
 <td>1.5</td>
 <td>Yes</td></tr>
-<tr class="b">
+<tr class="a">
 <td>jcl-over-slf4j-1.7.12.jar</td>
 <td>16.6 kB</td>
 <td>23</td>
@@ -386,7 +453,7 @@
 <td>2</td>
 <td>1.5</td>
 <td>Yes</td></tr>
-<tr class="a">
+<tr class="b">
 <td>jul-to-slf4j-1.7.12.jar</td>
 <td>4.7 kB</td>
 <td>11</td>
@@ -394,7 +461,7 @@
 <td>1</td>
 <td>1.5</td>
 <td>Yes</td></tr>
-<tr class="b">
+<tr class="a">
 <td>log4j-over-slf4j-1.7.12.jar</td>
 <td>24.6 kB</td>
 <td>44</td>
@@ -402,7 +469,7 @@
 <td>4</td>
 <td>1.5</td>
 <td>Yes</td></tr>
-<tr class="a">
+<tr class="b">
 <td>slf4j-api-1.7.12.jar</td>
 <td>32.1 kB</td>
 <td>39</td>
@@ -410,7 +477,23 @@
 <td>3</td>
 <td>1.5</td>
 <td>Yes</td></tr>
+<tr class="a">
+<td>codera-ci-tooling-service-api-0.0.1-SNAPSHOT.jar</td>
+<td>7 kB</td>
+<td>19</td>
+<td>6</td>
+<td>1</td>
+<td>1.8</td>
+<td>Yes</td></tr>
 <tr class="b">
+<td>codera-lang-0.0.3.jar</td>
+<td>11.1 kB</td>
+<td>25</td>
+<td>10</td>
+<td>5</td>
+<td>1.8</td>
+<td>Yes</td></tr>
+<tr class="a">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -418,23 +501,23 @@
 <th>Packages</th>
 <th>Java Version</th>
 <th>Debug Information</th></tr>
-<tr class="a">
-<td>10</td>
-<td>3.1 MB</td>
-<td>2783</td>
-<td>2073</td>
-<td>214</td>
-<td>1.6</td>
-<td>10</td></tr>
 <tr class="b">
-<td>compile: 7</td>
-<td>compile: 1.2 MB</td>
-<td>compile: 996</td>
-<td>compile: 831</td>
-<td>compile: 82</td>
-<td>-</td>
-<td>compile: 7</td></tr>
+<td>13</td>
+<td>3.3 MB</td>
+<td>2955</td>
+<td>2199</td>
+<td>226</td>
+<td>1.8</td>
+<td>13</td></tr>
 <tr class="a">
+<td>compile: 10</td>
+<td>compile: 1.5 MB</td>
+<td>compile: 1168</td>
+<td>compile: 957</td>
+<td>compile: 94</td>
+<td>-</td>
+<td>compile: 10</td></tr>
+<tr class="b">
 <td>test: 3</td>
 <td>test: 1.9 MB</td>
 <td>test: 1787</td>
@@ -475,34 +558,43 @@
 <td>ch.qos.logback:logback-core:jar:1.1.3</td>
 <td>-</td></tr>
 <tr class="b">
+<td>commons-io:commons-io:jar:2.4</td>
+<td>-</td></tr>
+<tr class="a">
 <td>junit:junit:jar:4.12</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.apache.commons:commons-lang3:jar:3.4</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.hamcrest:hamcrest-all:jar:1.3</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.mockito:mockito-all:jar:1.10.19</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j:jcl-over-slf4j:jar:1.7.12</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.slf4j:jul-to-slf4j:jar:1.7.12</td>
 <td>-</td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.slf4j:log4j-over-slf4j:jar:1.7.12</td>
 <td>-</td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.slf4j:slf4j-api:jar:1.7.12</td>
 <td>-</td></tr>
+<tr class="a">
+<td>uk.co.codera:codera-ci-tooling-service-api:jar:0.0.1-SNAPSHOT</td>
+<td>-</td></tr>
 <tr class="b">
+<td>uk.co.codera:codera-lang:jar:0.0.3</td>
+<td>-</td></tr>
+<tr class="a">
 <th>Total</th>
 <th>apache.snapshots</th></tr>
-<tr class="a">
-<td>10 (compile: 7, test: 3)</td>
+<tr class="b">
+<td>13 (compile: 10, test: 3)</td>
 <td>0</td></tr></table></div>
       </div>
     </div>

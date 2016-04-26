@@ -73,6 +73,16 @@ public class GitHubPushEventTest {
         assertThat(aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build().isBranch(), is(false));
     }
 
+    @Test
+    public void shouldReportNormalBranchNameAsNotGitHubPagesBranch() {
+        assertThat(aValidPushEvent().ref("my-branch").build().isGitHubPages(), is(false));
+    }
+
+    @Test
+    public void shouldReportGitHubPagesBranchNameAsGitHubPagesBranch() {
+        assertThat(aValidPushEvent().ref("gh-pages").build().isGitHubPages(), is(true));
+    }
+
     private Repository repository() {
         return readPushEvent().getRepository();
     }

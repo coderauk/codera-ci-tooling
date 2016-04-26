@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GitHubPushEvent {
 
+    public static final String REF_NAME_GIT_HUB_PAGES = "gh-pages";
     public static final String REF_TYPE_BRANCH = "branch";
     public static final String REF_TYPE_TAG = "tag";
 
@@ -49,6 +50,10 @@ public class GitHubPushEvent {
 
     public boolean isBranch() {
         return REF_TYPE_BRANCH.equals(getRefType());
+    }
+
+    public boolean isGitHubPages() {
+        return REF_NAME_GIT_HUB_PAGES.equals(getRef());
     }
 
     @Override

@@ -56,10 +56,25 @@ public class GitHubResourceTest {
     }
 
     @Test
-    public void shouldLogWhenIgnoringEvent() {
+    public void shouldNotInvokeListenerForGitHubPagesEvent() {
+        onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().ref(GitHubPushEvent.REF_NAME_GIT_HUB_PAGES)
+                .build());
+        verify(this.gitEventListener, never()).onPush(any(GitPushEvent.class));
+    }
+
+    @Test
+    public void shouldLogWhenIgnoringEventBecauseItIsNotABranch() {
         Logger logger = initResourceWithMockLogger();
         onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build());
         verify(logger).info("Ignoring event because it is not related to a branch");
+    }
+
+    @Test
+    public void shouldLogWhenIgnoringEventBecauseItIsTheGitHubPagesBranch() {
+        Logger logger = initResourceWithMockLogger();
+        onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().ref(GitHubPushEvent.REF_NAME_GIT_HUB_PAGES)
+                .build());
+        verify(logger).info("Ignoring event because it is for the github pages branch");
     }
 
     @Test

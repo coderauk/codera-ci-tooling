@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GitPushEventAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">codera-ci-tooling-resource-bitbucket</a> &gt; <a href="index.source.html" class="el_package">uk.co.codera.ci.tooling.api.bitbucket</a> &gt; <span class="el_source">GitPushEventAdapter.java</span></div><h1>GitPushEventAdapter.java</h1><pre class="source lang-java linenums">package uk.co.codera.ci.tooling.api.bitbucket;
+
+import uk.co.codera.ci.tooling.git.GitPushEvent;
+import uk.co.codera.ci.tooling.git.GitReference;
+
+public class GitPushEventAdapter {
+
+    private static final String TEMPLATE_REPOSITORY_URL = &quot;ssh://git@%s:%d/%s/%s.git&quot;;
+
+    private final String bitBucketServerName;
+    private final int bitBucketServerPort;
+
+<span class="fc" id="L13">    public GitPushEventAdapter(String bitBucketServerName, int bitBucketServerPort) {</span>
+<span class="fc" id="L14">        this.bitBucketServerName = bitBucketServerName;</span>
+<span class="fc" id="L15">        this.bitBucketServerPort = bitBucketServerPort;</span>
+<span class="fc" id="L16">    }</span>
+
+    public GitPushEvent from(PushEvent event) {
+<span class="fc" id="L19">        RefChange refChange = event.getRefChanges().get(0);</span>
+<span class="fc" id="L20">        return GitPushEvent.aGitPushEvent().pushType(refChange.getType())</span>
+<span class="fc" id="L21">                .reference(GitReference.from(refChange.getRefId())).repositoryName(event.getRepository().getSlug())</span>
+<span class="fc" id="L22">                .repositoryUrl(repositoryUrl(event)).build();</span>
+    }
+
+    private String repositoryUrl(PushEvent event) {
+<span class="fc" id="L26">        Repository repository = event.getRepository();</span>
+<span class="fc" id="L27">        return String.format(TEMPLATE_REPOSITORY_URL, this.bitBucketServerName, this.bitBucketServerPort, repository</span>
+<span class="fc" id="L28">                .getProject().getKey().toLowerCase(), repository.getSlug());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

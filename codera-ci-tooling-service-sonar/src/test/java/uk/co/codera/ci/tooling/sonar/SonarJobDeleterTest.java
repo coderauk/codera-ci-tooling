@@ -1,6 +1,7 @@
 package uk.co.codera.ci.tooling.sonar;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -58,11 +59,23 @@ public class SonarJobDeleterTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void shouldMapCheckedExceptionToRuntimeException() throws IOException {
+    public void shouldMapCheckedExceptionDuringHttpRequestToRuntimeException() throws IOException {
         when(this.httpClient.execute(any())).thenThrow(new IOException());
         push(aDeletePushEvent());
     }
-
+    
+    @Test(expected = IllegalStateException.class)
+    public void shouldMapCheckedExceptionDuringClosingOfHttpClientToRuntimeException() throws IOException {
+        doThrow(new IOException()).when(this.httpClient).close();
+        push(aDeletePushEvent());
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void shouldMapCheckedExceptionDuringClosingOfHttpResponseToRuntimeException() throws IOException {
+        doThrow(new IOException()).when(this.httpResponse).close();
+        push(aDeletePushEvent());
+    }
+    
     @Test
     public void shouldLogSuccessfulDeletionIfResponseIsSuccess() {
         Logger logger = deleterWithMockLogger();

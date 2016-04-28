@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 
-@SuppressWarnings("common-java:InsufficientBranchCoverage")
 public class SonarJobDeleter implements GitEventListener {
 
     private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
@@ -52,16 +51,29 @@ public class SonarJobDeleter implements GitEventListener {
     }
 
     private void executeWithPossibleCheckedException(String key) throws IOException {
-        try (CloseableHttpClient httpClient = httpClient()) {
+        CloseableHttpClient httpClient = null;
+        try {
+            httpClient = httpClient();
             executeRequest(key, httpClient);
+        } finally {
+            if (httpClient != null) {
+                httpClient.close();
+            }
         }
     }
 
     private void executeRequest(String key, CloseableHttpClient httpClient) throws IOException {
         HttpPost httpPost = httpPost(key);
-        try (CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
+        CloseableHttpResponse httpResponse = null;
+
+        try {
+            httpResponse = httpClient.execute(httpPost);
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             logResult(key, statusCode);
+        } finally {
+            if (httpResponse != null) {
+                httpResponse.close();
+            }
         }
     }
 

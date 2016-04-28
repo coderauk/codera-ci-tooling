@@ -5,8 +5,9 @@ Tooling for Continuous Integration (CI), allows automated creation, deletion of 
 
 The application server is configured using a YAML file. An example configuration is shown below:
 
-```
-# Standard dropwizard configuration for the application and admin http connection. Could be configured to use https in the standard way. See the dropwizard guide for more information
+```yaml
+# Standard dropwizard configuration for the application and admin http connection. 
+# Could be configured to use https in the standard way. See the dropwizard guide for more information
 server:
   applicationConnectors:
     - type: http
@@ -15,27 +16,38 @@ server:
     - type: http
       port: 7061
 
-# The name of the server hosting bitbucket, for example if the url is https://myserver:8080/bitbucket then the server name is myserver
+# The name of the server hosting bitbucket
+# If the url is https://myserver:8080/bitbucket then the server name is myserver
 bitBucketServerName: {serverName}
 
-# The port of the server hosting bitbucket, for example if the url is https://myserver:8080/bitbucket then the port is 8080
+# The port of the server hosting bitbucket
+# If the url is https://myserver:8080/bitbucket then the port is 8080
 bitBucketServerPort: {serverPort}
 
-# The full url of the jenkins server, if the jenkins page is accessed at https://myserver:8081/jenkins then the url is https://myserver:8081/jenkins
+# The full url of the jenkins server
+# If the jenkins page is accessed at https://myserver:8081/jenkins then the url is https://myserver:8081/jenkins
 jenkinsServerUrl: {serverUrl}
 
-# The location of the template file that will be used to create jobs in jenkins. Currently the application only supports one template for all jobs. The path can be relative to where the application is started from or an absolute path
+# The location of the template file that will be used to create jobs in jenkins. 
+# Currently the application only supports one template for all jobs. 
+# The path can be relative to where the application is started from or an absolute path
 jenkinsJobTemplateFile: {templateFile}
 
-# Optional block, if not set then sonar listener will not be instantiated. If set then it will delete sonar projects when the branch is deleted. Currently it is coded to assume the project key is in the form <repositoryName>:<shortBranchName>. Future versions will allow this to be templated.
+# Optional block, if not set then sonar listener will not be instantiated. 
+# If set then it will delete sonar projects when the branch is deleted. 
+# Currently it is coded to assume the project key is in the form <repositoryName>:<shortBranchName>. 
+# Future versions will allow this to be templated.
 sonar:
-  # The url of the sonar server, e.g. https://myserver.co.uk/sonar/. If the block is set this is required.
+  # The url of the sonar server, e.g. https://myserver.co.uk/sonar/. 
+  # If the block is set this is required.
   sonarUrl: {sonarUrl}
 
-  # The sonar user name. This user must have admin privilages to be able to delete projects. If the block is set this is required.
+  # The sonar user name. This user must have admin privilages to be able to delete projects. 
+  # If the block is set this is required.
   user: <username>
 
-  # The password for the sonar user. If the block is set this is required.
+  # The password for the sonar user. 
+  # If the block is set this is required.
   password: <password>
 
 ```

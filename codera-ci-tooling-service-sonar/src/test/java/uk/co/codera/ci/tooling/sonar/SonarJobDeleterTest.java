@@ -63,6 +63,19 @@ public class SonarJobDeleterTest {
         when(this.httpClientFactory.create()).thenReturn(null);
         push(aDeletePushEvent());
     }
+    
+    @Test(expected = NullPointerException.class)
+    public void shouldFailWhenNullHttpResponseReturned() throws IOException {
+        when(this.httpClient.execute(any())).thenReturn(null);
+        push(aDeletePushEvent());
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void shouldFailWhenNullHttpResponseReturnedAndCheckedExceptionThrownClosingHttpClient() throws IOException {
+        when(this.httpClient.execute(any())).thenReturn(null);
+        doThrow(new IOException()).when(this.httpClient).close();
+        push(aDeletePushEvent());
+    }
 
     @Test(expected = IllegalStateException.class)
     public void shouldMapCheckedExceptionDuringHttpRequestToRuntimeException() throws IOException {

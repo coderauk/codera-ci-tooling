@@ -19,6 +19,7 @@ public class SonarJobDeleter implements GitEventListener {
     private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
     private static final String ENDPOINT_URL = "api/projects/delete?key=%s";
 
+    @SuppressWarnings("squid:S1312")
     private final Logger logger;
     private final HttpClientFactory httpClientFactory;
     private final String urlTemplate;

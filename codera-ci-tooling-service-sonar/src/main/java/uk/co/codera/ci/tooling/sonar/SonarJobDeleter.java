@@ -5,7 +5,6 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -56,7 +55,7 @@ public class SonarJobDeleter implements GitEventListener {
         }
     }
 
-    private void executeRequest(String key, CloseableHttpClient httpClient) throws IOException, ClientProtocolException {
+    private void executeRequest(String key, CloseableHttpClient httpClient) throws IOException {
         HttpPost httpPost = httpPost(key);
         try (CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
             int statusCode = httpResponse.getStatusLine().getStatusCode();

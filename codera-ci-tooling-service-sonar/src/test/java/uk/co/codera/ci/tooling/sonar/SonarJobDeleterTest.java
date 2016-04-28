@@ -71,7 +71,21 @@ public class SonarJobDeleterTest {
     }
     
     @Test(expected = IllegalStateException.class)
+    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpClientToRuntimeException() throws IOException {
+        when(this.httpClient.execute(any())).thenThrow(new IOException());
+        doThrow(new IOException()).when(this.httpClient).close();
+        push(aDeletePushEvent());
+    }
+    
+    @Test(expected = IllegalStateException.class)
     public void shouldMapCheckedExceptionDuringClosingOfHttpResponseToRuntimeException() throws IOException {
+        doThrow(new IOException()).when(this.httpResponse).close();
+        push(aDeletePushEvent());
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpResponseToRuntimeException() throws IOException {
+        when(this.httpClient.execute(any())).thenThrow(new IOException());
         doThrow(new IOException()).when(this.httpResponse).close();
         push(aDeletePushEvent());
     }

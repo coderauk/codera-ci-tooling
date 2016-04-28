@@ -1,0 +1,5 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+codera-ci-tooling-service-api,uk.co.codera.ci.tooling.git,GitPushEvent,0,40,0,0,0,12,0,7,0,7
+codera-ci-tooling-service-api,uk.co.codera.ci.tooling.git,GitReference,0,99,0,10,0,27,0,15,0,10
+codera-ci-tooling-service-api,uk.co.codera.ci.tooling.git,GitPushType,9,39,0,0,0,2,2,2,2,2
+codera-ci-tooling-service-api,uk.co.codera.ci.tooling.git,GitPushEvent.Builder,0,29,0,0,0,11,0,6,0,6

@@ -26,6 +26,18 @@ jenkinsServerUrl: {serverUrl}
 
 # The location of the template file that will be used to create jobs in jenkins. Currently the application only supports one template for all jobs. The path can be relative to where the application is started from or an absolute path
 jenkinsJobTemplateFile: {templateFile}
+
+# Optional block, if not set then sonar listener will not be instantiated. If set then it will delete sonar projects when the branch is deleted. Currently it is coded to assume the project key is in the form <repositoryName>:<shortBranchName>. Future versions will allow this to be templated.
+sonar:
+  # The url of the sonar server, e.g. https://myserver.co.uk/sonar/. If the block is set this is required.
+  sonarUrl: {sonarUrl}
+
+  # The sonar user name. This user must have admin privilages to be able to delete projects. If the block is set this is required.
+  user: <username>
+
+  # The password for the sonar user. If the block is set this is required.
+  password: <password>
+
 ```
 
 Replace the tokens in braces with the appropriate values for your setup.

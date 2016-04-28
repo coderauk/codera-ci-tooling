@@ -8,8 +8,8 @@
 
 	<parent>
 		<groupId>uk.co.codera</groupId>
-		<artifactId>codera-parent</artifactId>
-		<version>0.0.12</version>
+		<artifactId>codera-parent-github</artifactId>
+		<version>0.0.14</version>
 	</parent>	
 
 	<description>Parent pom file for Codera CI Tooling</description>
@@ -18,7 +18,7 @@
 	<licenses>
 		<license>
 			<name>MIT License</name>
-			<url>https://github.com/coderauk/jenkins-tooling/blob/master/LICENSE</url>
+			<url>https://raw.githubusercontent.com/coderauk/codera-ci-tooling/master/LICENSE</url>
 		</license>
 	</licenses>
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PushEvent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">codera-ci-tooling-resource-bitbucket</a> &gt; <a href="index.source.html" class="el_package">uk.co.codera.ci.tooling.api.bitbucket</a> &gt; <span class="el_source">PushEvent.java</span></div><h1>PushEvent.java</h1><pre class="source lang-java linenums">package uk.co.codera.ci.tooling.api.bitbucket;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+<span class="fc" id="L12">public class PushEvent {</span>
+
+    private Repository repository;
+    private List&lt;RefChange&gt; refChanges;
+
+    public static Builder aPushEvent() {
+<span class="fc" id="L18">        return new Builder();</span>
+    }
+
+    public List&lt;RefChange&gt; getRefChanges() {
+<span class="fc" id="L22">        return this.refChanges;</span>
+    }
+
+    public void setRefChanges(List&lt;RefChange&gt; refChanges) {
+<span class="fc" id="L26">        this.refChanges = refChanges;</span>
+<span class="fc" id="L27">    }</span>
+
+    public void setRepository(Repository repository) {
+<span class="fc" id="L30">        this.repository = repository;</span>
+<span class="fc" id="L31">    }</span>
+
+    public Repository getRepository() {
+<span class="fc" id="L34">        return this.repository;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L39">        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);</span>
+    }
+
+<span class="fc" id="L42">    public static class Builder {</span>
+
+        private Repository repository;
+        private final List&lt;RefChange&gt; refChanges;
+
+<span class="fc" id="L47">        private Builder() {</span>
+<span class="fc" id="L48">            this.refChanges = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L49">        }</span>
+
+        public Builder with(Repository repository) {
+<span class="fc" id="L52">            this.repository = repository;</span>
+<span class="fc" id="L53">            return this;</span>
+        }
+
+        public Builder with(RefChange refChange) {
+<span class="fc" id="L57">            this.refChanges.add(refChange);</span>
+<span class="fc" id="L58">            return this;</span>
+        }
+
+        public Builder noRefChanges() {
+<span class="fc" id="L62">            this.refChanges.clear();</span>
+<span class="fc" id="L63">            return this;</span>
+        }
+
+        public PushEvent build() {
+<span class="fc" id="L67">            PushEvent event = new PushEvent();</span>
+<span class="fc" id="L68">            event.setRepository(this.repository);</span>
+<span class="fc" id="L69">            event.setRefChanges(new ArrayList&lt;&gt;(this.refChanges));</span>
+<span class="fc" id="L70">            return event;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

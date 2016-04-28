@@ -22,6 +22,7 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsJobCreator;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobDeleter;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
 import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
+import uk.co.codera.ci.tooling.sonar.HttpClientFactory;
 import uk.co.codera.ci.tooling.sonar.SonarJobDeleter;
 import uk.co.codera.templating.TemplateEngine;
 import uk.co.codera.templating.velocity.VelocityTemplateEngine;
@@ -49,10 +50,13 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     private GitEventListener sonarEventListener(CiToolingConfiguration configuration) {
         SonarConfiguration sonarConfiguration = configuration.getSonar();
-        return aConfigurableGitEventListenerFactory().register(
-                GitPushType.DELETE,
-                new SonarJobDeleter(sonarConfiguration.getSonarUrl(), sonarConfiguration.getUser(), sonarConfiguration
-                        .getPassword())).build();
+        return aConfigurableGitEventListenerFactory().register(GitPushType.DELETE, sonarJobDeleter(sonarConfiguration))
+                .build();
+    }
+
+    private SonarJobDeleter sonarJobDeleter(SonarConfiguration sonarConfiguration) {
+        return new SonarJobDeleter(new HttpClientFactory(), sonarConfiguration.getSonarUrl(),
+                sonarConfiguration.getUser(), sonarConfiguration.getPassword());
     }
 
     private GitEventListener jenkinsEventListener(CiToolingConfiguration configuration) {

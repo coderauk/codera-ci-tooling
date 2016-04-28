@@ -5,10 +5,10 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,15 +21,18 @@ public class SonarJobDeleter implements GitEventListener {
     private static final String ENDPOINT_URL = "api/projects/delete?key=%s";
 
     private final Logger logger;
+    private final HttpClientFactory httpClientFactory;
     private final String urlTemplate;
     private final String authHeader;
 
-    public SonarJobDeleter(String sonarUrl, String username, String password) {
-        this(LoggerFactory.getLogger(SonarJobDeleter.class), sonarUrl, username, password);
+    public SonarJobDeleter(HttpClientFactory httpClientFactory, String sonarUrl, String username, String password) {
+        this(LoggerFactory.getLogger(SonarJobDeleter.class), httpClientFactory, sonarUrl, username, password);
     }
 
-    public SonarJobDeleter(Logger logger, String sonarUrl, String username, String password) {
+    public SonarJobDeleter(Logger logger, HttpClientFactory httpClientFactory, String sonarUrl, String username,
+            String password) {
         this.logger = logger;
+        this.httpClientFactory = httpClientFactory;
         this.urlTemplate = sonarUrl + ENDPOINT_URL;
         this.authHeader = createAuthHeader(username, password);
     }
@@ -49,24 +52,37 @@ public class SonarJobDeleter implements GitEventListener {
 
     private void executeWithPossibleCheckedException(String key) throws IOException {
         try (CloseableHttpClient httpClient = httpClient()) {
-            HttpPost httpPost = new HttpPost(String.format(this.urlTemplate, key));
-            httpPost.setHeader(HttpHeaders.AUTHORIZATION, this.authHeader);
-            CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-            int statusCode = httpResponse.getStatusLine().getStatusCode();
+            executeRequest(key, httpClient);
+        }
+    }
 
-            switch (statusCode) {
-            case 204:
-                logger.info("Successfully deleted sonar project with key [{}]", key);
-                return;
-            case 404:
-                logger.info(
-                        "Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
-                        key);
-                return;
-            default:
-                logger.info("Unexpected http status code [{}] when trying to delete sonar project with key [{}]",
-                        statusCode, key);
-            }
+    private void executeRequest(String key, CloseableHttpClient httpClient) throws IOException, ClientProtocolException {
+        HttpPost httpPost = httpPost(key);
+        try (CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
+            int statusCode = httpResponse.getStatusLine().getStatusCode();
+            logResult(key, statusCode);
+        }
+    }
+
+    private HttpPost httpPost(String key) {
+        HttpPost httpPost = new HttpPost(String.format(this.urlTemplate, key));
+        httpPost.setHeader(HttpHeaders.AUTHORIZATION, this.authHeader);
+        return httpPost;
+    }
+
+    private void logResult(String key, int statusCode) {
+        switch (statusCode) {
+        case 204:
+            logger.info("Successfully deleted sonar project with key [{}]", key);
+            break;
+        case 404:
+            logger.info(
+                    "Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
+                    key);
+            break;
+        default:
+            logger.warn("Unexpected http status code [{}] when trying to delete sonar project with key [{}]",
+                    statusCode, key);
         }
     }
 
@@ -77,6 +93,6 @@ public class SonarJobDeleter implements GitEventListener {
     }
 
     private CloseableHttpClient httpClient() {
-        return HttpClientBuilder.create().build();
+        return this.httpClientFactory.create();
     }
 }

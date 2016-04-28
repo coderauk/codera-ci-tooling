@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SonarJobDeleter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">codera-ci-tooling-service-sonar</a> &gt; <a href="index.source.html" class="el_package">uk.co.codera.ci.tooling.sonar</a> &gt; <span class="el_source">SonarJobDeleter.java</span></div><h1>SonarJobDeleter.java</h1><pre class="source lang-java linenums">package uk.co.codera.ci.tooling.sonar;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import uk.co.codera.ci.tooling.git.GitEventListener;
+import uk.co.codera.ci.tooling.git.GitPushEvent;
+
+public class SonarJobDeleter implements GitEventListener {
+
+<span class="fc" id="L19">    private static final Charset CHARSET_UTF8 = Charset.forName(&quot;UTF-8&quot;);</span>
+    private static final String ENDPOINT_URL = &quot;api/projects/delete?key=%s&quot;;
+
+    @SuppressWarnings(&quot;squid:S1312&quot;)
+    private final Logger logger;
+    private final HttpClientFactory httpClientFactory;
+    private final String urlTemplate;
+    private final String authHeader;
+
+    public SonarJobDeleter(HttpClientFactory httpClientFactory, String sonarUrl, String username, String password) {
+<span class="fc" id="L29">        this(LoggerFactory.getLogger(SonarJobDeleter.class), httpClientFactory, sonarUrl, username, password);</span>
+<span class="fc" id="L30">    }</span>
+
+    public SonarJobDeleter(Logger logger, HttpClientFactory httpClientFactory, String sonarUrl, String username,
+<span class="fc" id="L33">            String password) {</span>
+<span class="fc" id="L34">        this.logger = logger;</span>
+<span class="fc" id="L35">        this.httpClientFactory = httpClientFactory;</span>
+<span class="fc" id="L36">        this.urlTemplate = sonarUrl + ENDPOINT_URL;</span>
+<span class="fc" id="L37">        this.authHeader = createAuthHeader(username, password);</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public void onPush(GitPushEvent event) {
+<span class="fc" id="L42">        execute(event.getRepositoryName() + &quot;:&quot; + event.getReference().shortBranchName());</span>
+<span class="fc" id="L43">    }</span>
+
+    private void execute(String key) {
+        try {
+<span class="fc" id="L47">            executeWithPossibleCheckedException(key);</span>
+<span class="fc" id="L48">        } catch (IOException e) {</span>
+<span class="fc" id="L49">            throw new IllegalStateException(&quot;Problem executing&quot;, e);</span>
+<span class="fc" id="L50">        }</span>
+<span class="fc" id="L51">    }</span>
+
+    private void executeWithPossibleCheckedException(String key) throws IOException {
+<span class="fc" id="L54">        CloseableHttpClient httpClient = null;</span>
+        try {
+<span class="fc" id="L56">            httpClient = httpClient();</span>
+<span class="fc" id="L57">            executeRequest(key, httpClient);</span>
+        } finally {
+<span class="pc bpc" id="L59" title="1 of 4 branches missed.">            if (httpClient != null) {</span>
+<span class="fc" id="L60">                httpClient.close();</span>
+            }
+        }
+<span class="fc" id="L63">    }</span>
+
+    private void executeRequest(String key, CloseableHttpClient httpClient) throws IOException {
+<span class="fc" id="L66">        HttpPost httpPost = httpPost(key);</span>
+<span class="fc" id="L67">        CloseableHttpResponse httpResponse = null;</span>
+
+        try {
+<span class="fc" id="L70">            httpResponse = httpClient.execute(httpPost);</span>
+<span class="fc" id="L71">            int statusCode = httpResponse.getStatusLine().getStatusCode();</span>
+<span class="fc" id="L72">            logResult(key, statusCode);</span>
+        } finally {
+<span class="pc bpc" id="L74" title="2 of 4 branches missed.">            if (httpResponse != null) {</span>
+<span class="pc" id="L75">                httpResponse.close();</span>
+            }
+        }
+<span class="fc" id="L78">    }</span>
+
+    private HttpPost httpPost(String key) {
+<span class="fc" id="L81">        HttpPost httpPost = new HttpPost(String.format(this.urlTemplate, key));</span>
+<span class="fc" id="L82">        httpPost.setHeader(HttpHeaders.AUTHORIZATION, this.authHeader);</span>
+<span class="fc" id="L83">        return httpPost;</span>
+    }
+
+    private void logResult(String key, int statusCode) {
+<span class="fc bfc" id="L87" title="All 3 branches covered.">        switch (statusCode) {</span>
+        case 204:
+<span class="fc" id="L89">            logger.info(&quot;Successfully deleted sonar project with key [{}]&quot;, key);</span>
+<span class="fc" id="L90">            break;</span>
+        case 404:
+<span class="fc" id="L92">            logger.info(</span>
+                    &quot;Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted&quot;,
+                    key);
+<span class="fc" id="L95">            break;</span>
+        default:
+<span class="fc" id="L97">            logger.warn(&quot;Unexpected http status code [{}] when trying to delete sonar project with key [{}]&quot;,</span>
+<span class="fc" id="L98">                    statusCode, key);</span>
+        }
+<span class="fc" id="L100">    }</span>
+
+    private String createAuthHeader(String username, String password) {
+<span class="fc" id="L103">        String unencodedAuth = username + &quot;:&quot; + password;</span>
+<span class="fc" id="L104">        byte[] encodedAuth = Base64.encodeBase64(unencodedAuth.getBytes(CHARSET_UTF8));</span>
+<span class="fc" id="L105">        return &quot;Basic &quot; + new String(encodedAuth);</span>
+    }
+
+    private CloseableHttpClient httpClient() {
+<span class="fc" id="L109">        return this.httpClientFactory.create();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

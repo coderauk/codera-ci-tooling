@@ -1,0 +1,3 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,SonarJobDeleter,2,191,3,8,0,45,3,14,0,11
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,HttpClientFactory,0,6,0,0,0,2,0,2,0,2

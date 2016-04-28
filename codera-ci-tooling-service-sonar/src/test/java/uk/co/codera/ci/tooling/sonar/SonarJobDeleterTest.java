@@ -63,13 +63,13 @@ public class SonarJobDeleterTest {
         when(this.httpClientFactory.create()).thenReturn(null);
         push(aDeletePushEvent());
     }
-    
+
     @Test(expected = NullPointerException.class)
     public void shouldFailWhenNullHttpResponseReturned() throws IOException {
         when(this.httpClient.execute(any())).thenReturn(null);
         push(aDeletePushEvent());
     }
-    
+
     @Test(expected = NullPointerException.class)
     public void shouldFailWhenNullHttpResponseReturnedAndCheckedExceptionThrownClosingHttpClient() throws IOException {
         when(this.httpClient.execute(any())).thenReturn(null);
@@ -90,8 +90,7 @@ public class SonarJobDeleterTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpClientToRuntimeException()
-            throws IOException {
+    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpClientToRuntimeException() throws IOException {
         when(this.httpClient.execute(any())).thenThrow(new IOException());
         doThrow(new IOException()).when(this.httpClient).close();
         push(aDeletePushEvent());
@@ -124,9 +123,9 @@ public class SonarJobDeleterTest {
         Logger logger = deleterWithMockLogger();
         whenHttpResponseIsNotFound();
         push(aDeletePushEvent());
-        verify(logger).info(
-                "Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
-                expectedSonarProjectKey());
+        verify(logger)
+                .info("Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
+                        expectedSonarProjectKey());
     }
 
     @Test

@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 
+@SuppressWarnings("common-java:InsufficientBranchCoverage")
 public class SonarJobDeleter implements GitEventListener {
 
     private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");

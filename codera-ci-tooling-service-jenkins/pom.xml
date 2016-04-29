@@ -11,6 +11,8 @@
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>	
 	
+	<description>Provides integration with jenkins such as creating and deleting jobs automatically.</description>
+	
 	<dependencies>
 		<dependency>
 			<groupId>uk.co.codera</groupId>

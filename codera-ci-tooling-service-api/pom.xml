@@ -11,6 +11,8 @@
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>	
 
+	<description>Describes the API for interacting with the services provided by the tooling.</description>
+
 	<dependencies>
 	    <dependency>
 	        <groupId>org.apache.commons</groupId>

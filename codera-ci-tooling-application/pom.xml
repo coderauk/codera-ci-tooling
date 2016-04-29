@@ -11,6 +11,8 @@
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
+	<description>Reponsible for wiring together the DropWizard configuration and application. Builds the runnable jar.</description>
+
 	<dependencies>
 		<dependency>
 			<groupId>uk.co.codera</groupId>

@@ -11,8 +11,8 @@ public class BitBucketConfiguration {
     private String bitBucketServerName;
 
     @JsonProperty
-    private int bitBucketServerPort;    
- 
+    private int bitBucketServerPort;
+
     public void setBitBucketServerName(String bitBucketServerName) {
         this.bitBucketServerName = bitBucketServerName;
     }
@@ -27,5 +27,5 @@ public class BitBucketConfiguration {
 
     public int getBitBucketServerPort() {
         return this.bitBucketServerPort;
-    }    
+    }
 }

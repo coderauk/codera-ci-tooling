@@ -8,7 +8,7 @@ public class CiToolingConfiguration extends Configuration {
 
     @JsonProperty
     private BitBucketConfiguration bitBucket;
-    
+
     @JsonProperty
     private JenkinsConfiguration jenkins;
 
@@ -18,11 +18,11 @@ public class CiToolingConfiguration extends Configuration {
     public void setBitBucket(BitBucketConfiguration bitbucket) {
         this.bitBucket = bitbucket;
     }
-    
+
     public BitBucketConfiguration getBitBucket() {
         return bitBucket;
     }
-    
+
     public void setJenkins(JenkinsConfiguration jenkins) {
         this.jenkins = jenkins;
     }
@@ -42,7 +42,7 @@ public class CiToolingConfiguration extends Configuration {
     public boolean isBitBucketConfigured() {
         return getBitBucket() != null;
     }
-    
+
     public boolean isJenkinsConfigured() {
         return getJenkins() != null;
     }

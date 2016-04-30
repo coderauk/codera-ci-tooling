@@ -35,6 +35,17 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     @Override
     public void run(CiToolingConfiguration configuration, Environment environment) throws Exception {
+        GitEventBroadcaster gitEventBroadcaster = gitEventBroadcaster(configuration);
+
+        JerseyEnvironment jersey = environment.jersey();
+
+        if (configuration.isBitBucketConfigured()) {
+            jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventBroadcaster));
+        }
+        jersey.register(gitHubResource(gitEventBroadcaster));
+    }
+
+    private GitEventBroadcaster gitEventBroadcaster(CiToolingConfiguration configuration) {
         GitEventBroadcaster gitEventBroadcaster = new GitEventBroadcaster();
         gitEventBroadcaster.registerListener(new GitEventLogger());
 
@@ -45,13 +56,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         if (configuration.isSonarConfigured()) {
             gitEventBroadcaster.registerListener(sonarEventListener(configuration.getSonar()));
         }
-
-        JerseyEnvironment jersey = environment.jersey();
-
-        if (configuration.isBitBucketConfigured()) {
-            jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventBroadcaster));
-        }
-        jersey.register(gitHubResource(gitEventBroadcaster));
+        return gitEventBroadcaster;
     }
 
     private GitEventListener sonarEventListener(SonarConfiguration configuration) {
@@ -64,8 +69,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
                 sonarConfiguration.getUser(), sonarConfiguration.getPassword());
     }
 
-    private GitEventListener jenkinsEventListener(
-            uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
+    private GitEventListener jenkinsEventListener(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
         TemplateEngine templateEngine = new VelocityTemplateEngine();
         JenkinsTemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
         JenkinsTemplateService jobFactory = jenkinsJobFactory(configuration, templateEngine);
@@ -75,8 +79,8 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
                 .register(GitPushType.DELETE, jenkinsJobDeleter(jobNameFactory, jenkinsService)).build();
     }
 
-    private GitEventListener jenkinsJobCreator(JenkinsTemplateService jobNameFactory, JenkinsTemplateService jobFactory,
-            JenkinsService jenkinsService) {
+    private GitEventListener jenkinsJobCreator(JenkinsTemplateService jobNameFactory,
+            JenkinsTemplateService jobFactory, JenkinsService jenkinsService) {
         return new JenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService);
     }
 

@@ -49,7 +49,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         JerseyEnvironment jersey = environment.jersey();
 
         if (configuration.isBitBucketConfigured()) {
-            jersey.register(bitBucketResource(configuration.getBitbucket(), gitEventBroadcaster));
+            jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventBroadcaster));
         }
         jersey.register(gitHubResource(gitEventBroadcaster));
     }

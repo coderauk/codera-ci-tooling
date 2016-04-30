@@ -18,7 +18,7 @@ server:
 
 # Optional block, if not set then bitbucket resource will not be instantiated.
 # If set then it will create the resource and listen for pushes to bitbucket.
-bitbucket:
+bitBucket:
   # The name of the server hosting bitbucket
   # If the url is https://myserver:8080/bitbucket then the server name is myserver
   bitBucketServerName: {serverName}

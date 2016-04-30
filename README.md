@@ -26,6 +26,7 @@ bitBucketServerPort: {serverPort}
 
 # Optional block, if not set then jenkins listener will not be instantiated.
 # If set then it will create and delete jenkins jobs using the template provided.
+jenkins:
   # The full url of the jenkins server
   # If the jenkins page is accessed at https://myserver:8081/jenkins then the url is https://myserver:8081/jenkins
   jenkinsServerUrl: {serverUrl}

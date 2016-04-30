@@ -24,14 +24,16 @@ bitBucketServerName: {serverName}
 # If the url is https://myserver:8080/bitbucket then the port is 8080
 bitBucketServerPort: {serverPort}
 
-# The full url of the jenkins server
-# If the jenkins page is accessed at https://myserver:8081/jenkins then the url is https://myserver:8081/jenkins
-jenkinsServerUrl: {serverUrl}
+# Optional block, if not set then jenkins listener will not be instantiated.
+# If set then it will create and delete jenkins jobs using the template provided.
+  # The full url of the jenkins server
+  # If the jenkins page is accessed at https://myserver:8081/jenkins then the url is https://myserver:8081/jenkins
+  jenkinsServerUrl: {serverUrl}
 
-# The location of the template file that will be used to create jobs in jenkins. 
-# Currently the application only supports one template for all jobs. 
-# The path can be relative to where the application is started from or an absolute path
-jenkinsJobTemplateFile: {templateFile}
+  # The location of the template file that will be used to create jobs in jenkins. 
+  # Currently the application only supports one template for all jobs. 
+  # The path can be relative to where the application is started from or an absolute path
+  jenkinsJobTemplateFile: {templateFile}
 
 # Optional block, if not set then sonar listener will not be instantiated. 
 # If set then it will delete sonar projects when the branch is deleted. 

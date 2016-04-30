@@ -16,12 +16,7 @@ public class CiToolingConfiguration extends Configuration {
     private int bitBucketServerPort;
 
     @JsonProperty
-    @NotEmpty
-    private String jenkinsServerUrl;
-
-    @NotEmpty
-    @JsonProperty
-    private String jenkinsJobTemplateFile;
+    private JenkinsConfiguration jenkins;
 
     @JsonProperty
     private SonarConfiguration sonar;
@@ -42,20 +37,12 @@ public class CiToolingConfiguration extends Configuration {
         return this.bitBucketServerPort;
     }
 
-    public void setJenkinsServerUrl(String jenkinsServerUrl) {
-        this.jenkinsServerUrl = jenkinsServerUrl;
+    public void setJenkins(JenkinsConfiguration jenkins) {
+        this.jenkins = jenkins;
     }
 
-    public String getJenkinsServerUrl() {
-        return this.jenkinsServerUrl;
-    }
-
-    public void setJenkinsJobTemplateFile(String jenkinsJobTemplateFile) {
-        this.jenkinsJobTemplateFile = jenkinsJobTemplateFile;
-    }
-
-    public String getJenkinsJobTemplateFile() {
-        return this.jenkinsJobTemplateFile;
+    public JenkinsConfiguration getJenkins() {
+        return this.jenkins;
     }
 
     public void setSonar(SonarConfiguration sonar) {
@@ -68,5 +55,9 @@ public class CiToolingConfiguration extends Configuration {
 
     public boolean isSonarConfigured() {
         return getSonar() != null;
+    }
+
+    public boolean isJenkinsConfigured() {
+        return getJenkins() != null;
     }
 }

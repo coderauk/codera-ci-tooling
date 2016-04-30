@@ -7,7 +7,7 @@ import io.dropwizard.Configuration;
 public class CiToolingConfiguration extends Configuration {
 
     @JsonProperty
-    private BitBucketConfiguration bitbucket;
+    private BitBucketConfiguration bitBucket;
     
     @JsonProperty
     private JenkinsConfiguration jenkins;
@@ -15,12 +15,12 @@ public class CiToolingConfiguration extends Configuration {
     @JsonProperty
     private SonarConfiguration sonar;
 
-    public void setBitbucket(BitBucketConfiguration bitbucket) {
-        this.bitbucket = bitbucket;
+    public void setBitBucket(BitBucketConfiguration bitbucket) {
+        this.bitBucket = bitbucket;
     }
     
-    public BitBucketConfiguration getBitbucket() {
-        return bitbucket;
+    public BitBucketConfiguration getBitBucket() {
+        return bitBucket;
     }
     
     public void setJenkins(JenkinsConfiguration jenkins) {
@@ -40,7 +40,7 @@ public class CiToolingConfiguration extends Configuration {
     }
 
     public boolean isBitBucketConfigured() {
-        return getBitbucket() != null;
+        return getBitBucket() != null;
     }
     
     public boolean isJenkinsConfigured() {

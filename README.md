@@ -16,13 +16,16 @@ server:
     - type: http
       port: 7061
 
-# The name of the server hosting bitbucket
-# If the url is https://myserver:8080/bitbucket then the server name is myserver
-bitBucketServerName: {serverName}
+# Optional block, if not set then bitbucket resource will not be instantiated.
+# If set then it will create the resource and listen for pushes to bitbucket.
+bitbucket:
+  # The name of the server hosting bitbucket
+  # If the url is https://myserver:8080/bitbucket then the server name is myserver
+  bitBucketServerName: {serverName}
 
-# The port of the server hosting bitbucket
-# If the url is https://myserver:8080/bitbucket then the port is 8080
-bitBucketServerPort: {serverPort}
+  # The port of the server hosting bitbucket
+  # If the url is https://myserver:8080/bitbucket then the port is 8080
+  bitBucketServerPort: {serverPort}
 
 # Optional block, if not set then jenkins listener will not be instantiated.
 # If set then it will create and delete jenkins jobs using the template provided.

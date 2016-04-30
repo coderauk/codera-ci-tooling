@@ -47,7 +47,10 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         }
 
         JerseyEnvironment jersey = environment.jersey();
-        jersey.register(bitBucketResource(configuration, gitEventBroadcaster));
+
+        if (configuration.isBitBucketConfigured()) {
+            jersey.register(bitBucketResource(configuration.getBitbucket(), gitEventBroadcaster));
+        }
         jersey.register(gitHubResource(gitEventBroadcaster));
     }
 
@@ -61,7 +64,8 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
                 sonarConfiguration.getUser(), sonarConfiguration.getPassword());
     }
 
-    private GitEventListener jenkinsEventListener(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
+    private GitEventListener jenkinsEventListener(
+            uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
         TemplateEngine templateEngine = new VelocityTemplateEngine();
         JenkinsTemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
         JenkinsTemplateService jobFactory = jenkinsJobFactory(configuration, templateEngine);
@@ -71,8 +75,8 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
                 .register(GitPushType.DELETE, jenkinsJobDeleter(jobNameFactory, jenkinsService)).build();
     }
 
-    private GitEventListener jenkinsJobCreator(JenkinsTemplateService jobNameFactory,
-            JenkinsTemplateService jobFactory, JenkinsService jenkinsService) {
+    private GitEventListener jenkinsJobCreator(JenkinsTemplateService jobNameFactory, JenkinsTemplateService jobFactory,
+            JenkinsService jenkinsService) {
         return new JenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService);
     }
 
@@ -100,7 +104,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         return new JenkinsTemplateService(templateEngine, "${repositoryName} - ${shortBranchName} - build");
     }
 
-    private BitBucketResource bitBucketResource(CiToolingConfiguration configuration,
+    private BitBucketResource bitBucketResource(BitBucketConfiguration configuration,
             GitEventBroadcaster gitEventBroadcaster) {
         GitPushEventAdapter gitPushEventAdapter = new GitPushEventAdapter(configuration.getBitBucketServerName(),
                 configuration.getBitBucketServerPort());

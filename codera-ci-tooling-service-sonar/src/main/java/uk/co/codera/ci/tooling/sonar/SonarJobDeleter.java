@@ -1,9 +1,7 @@
 package uk.co.codera.ci.tooling.sonar;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -16,7 +14,6 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 
 public class SonarJobDeleter implements GitEventListener {
 
-    private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
     private static final String ENDPOINT_URL = "api/projects/delete?key=%s";
 
     @SuppressWarnings("squid:S1312")
@@ -34,7 +31,7 @@ public class SonarJobDeleter implements GitEventListener {
         this.logger = logger;
         this.httpClientFactory = httpClientFactory;
         this.urlTemplate = sonarUrl + ENDPOINT_URL;
-        this.authHeader = createAuthHeader(username, password);
+        this.authHeader = AuthHeaderFactory.create(username, password);
     }
 
     @Override
@@ -97,12 +94,6 @@ public class SonarJobDeleter implements GitEventListener {
             logger.warn("Unexpected http status code [{}] when trying to delete sonar project with key [{}]",
                     statusCode, key);
         }
-    }
-
-    private String createAuthHeader(String username, String password) {
-        String unencodedAuth = username + ":" + password;
-        byte[] encodedAuth = Base64.encodeBase64(unencodedAuth.getBytes(CHARSET_UTF8));
-        return "Basic " + new String(encodedAuth);
     }
 
     private CloseableHttpClient httpClient() {

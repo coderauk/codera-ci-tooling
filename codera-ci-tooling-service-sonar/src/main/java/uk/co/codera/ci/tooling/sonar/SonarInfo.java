@@ -1,5 +1,8 @@
 package uk.co.codera.ci.tooling.sonar;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class SonarInfo {
 
     private final String version;
@@ -10,6 +13,11 @@ public class SonarInfo {
 
     public String getVersion() {
         return this.version;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     public static Builder someSonarInfo() {

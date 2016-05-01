@@ -36,7 +36,7 @@ abstract class AbstractSonarService<C, R> {
 
     abstract HttpUriRequest createRequest(C context);
 
-    abstract R processResponse(C context, HttpResponse response);
+    abstract R processResponse(C context, HttpResponse response) throws IOException;
 
     private R executeWithPossibleCheckedException(C context) throws IOException {
         CloseableHttpClient httpClient = null;

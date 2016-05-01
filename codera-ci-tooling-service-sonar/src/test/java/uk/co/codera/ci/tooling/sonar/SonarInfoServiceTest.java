@@ -9,27 +9,13 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import uk.co.codera.lang.io.ClasspathResource;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SonarInfoServiceTest {
-
-    @Mock
-    private HttpClientFactory httpClientFactory;
-
-    @Mock
-    private CloseableHttpClient httpClient;
-
-    @Mock
-    private CloseableHttpResponse httpResponse;
+public class SonarInfoServiceTest extends BaseSonarServiceTestCase {
 
     @Mock
     private HttpEntity httpEntity;
@@ -38,9 +24,9 @@ public class SonarInfoServiceTest {
 
     @Before
     public void before() throws IOException {
-        this.service = new SonarInfoService(this.httpClientFactory, "https://myserver.co.uk/sonar/", "user", "password");
-        when(this.httpClientFactory.create()).thenReturn(this.httpClient);
-        when(this.httpClient.execute(any())).thenReturn(this.httpResponse);
+        super.before();
+        this.service = new SonarInfoService(this.httpClientFactory, "https://myserver.co.uk/sonar/", "user",
+                "password");
         when(this.httpResponse.getEntity()).thenReturn(this.httpEntity);
         when(this.httpEntity.getContent()).thenReturn(new ClasspathResource("/sonar-configuration.json").getAsStream());
     }
@@ -58,6 +44,11 @@ public class SonarInfoServiceTest {
     @Test(expected = IllegalStateException.class)
     public void shouldConvertExceptionWhenInvokingHttpClientToRuntimeException() throws IOException {
         when(this.httpClient.execute(any())).thenThrow(new IOException());
+        this.service.get();
+    }
+
+    @Override
+    protected void invokeServiceExpectingFailure() {
         this.service.get();
     }
 }

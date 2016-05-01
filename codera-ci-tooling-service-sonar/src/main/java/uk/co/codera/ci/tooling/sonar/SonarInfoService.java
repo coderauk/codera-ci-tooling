@@ -31,16 +31,12 @@ public class SonarInfoService extends AbstractSonarService<Void, SonarInfo> {
     }
 
     @Override
-    SonarInfo processResponse(Void context, HttpResponse response) {
+    SonarInfo processResponse(Void context, HttpResponse response) throws IOException {
         SystemConfiguration systemConfiguration = convertResponseToObject(response);
         return SonarInfo.someSonarInfo().version(systemConfiguration.getSonarQube().getVersion()).build();
     }
 
-    private SystemConfiguration convertResponseToObject(HttpResponse response) {
-        try {
-            return this.objectMapper.readValue(response.getEntity().getContent(), SystemConfiguration.class);
-        } catch (UnsupportedOperationException | IOException e) {
-            throw new IllegalStateException(e);
-        }
+    private SystemConfiguration convertResponseToObject(HttpResponse response) throws IOException {
+        return this.objectMapper.readValue(response.getEntity().getContent(), SystemConfiguration.class);
     }
 }

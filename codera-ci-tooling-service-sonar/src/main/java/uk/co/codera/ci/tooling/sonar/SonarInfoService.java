@@ -2,44 +2,45 @@ package uk.co.codera.ci.tooling.sonar;
 
 import java.io.IOException;
 
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.client.methods.HttpUriRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.co.codera.ci.tooling.sonar.dto.SystemConfiguration;
 
-public class SonarInfoService {
+public class SonarInfoService extends AbstractSonarService<Void, SonarInfo> {
 
     private static final String ENDPOINT_URL = "api/system/info";
 
-    private final String url;
-    private final HttpClientFactory httpClientFactory;
-    private final String authHeader;
+    private final ObjectMapper objectMapper;
 
     public SonarInfoService(HttpClientFactory httpClientFactory, String sonarUrl, String username, String password) {
-        this.url = sonarUrl + ENDPOINT_URL;
-        this.httpClientFactory = httpClientFactory;
-        this.authHeader = AuthHeaderFactory.create(username, password);
+        super(httpClientFactory, sonarUrl + ENDPOINT_URL, username, password);
+        this.objectMapper = new ObjectMapper();
     }
 
     public SonarInfo get() {
-        CloseableHttpClient httpClient;
+        return execute(null);
+    }
 
+    @Override
+    HttpUriRequest createRequest(Void context) {
+        return new HttpGet(url());
+    }
+
+    @Override
+    SonarInfo processResponse(Void context, HttpResponse response) {
+        SystemConfiguration systemConfiguration = convertResponseToObject(response);
+        return SonarInfo.someSonarInfo().version(systemConfiguration.getSonarQube().getVersion()).build();
+    }
+
+    private SystemConfiguration convertResponseToObject(HttpResponse response) {
         try {
-            httpClient = this.httpClientFactory.create();
-            HttpGet request = new HttpGet(this.url);
-            request.setHeader(HttpHeaders.AUTHORIZATION, this.authHeader);
-            CloseableHttpResponse response = httpClient.execute(request);
-            ObjectMapper objectMapper = new ObjectMapper();
-            SystemConfiguration systemConfiguration = objectMapper.readValue(response.getEntity().getContent(),
-                    SystemConfiguration.class);
-            return SonarInfo.someSonarInfo().version(systemConfiguration.getSonarQube().getVersion()).build();
-        } catch (IOException e) {
+            return this.objectMapper.readValue(response.getEntity().getContent(), SystemConfiguration.class);
+        } catch (UnsupportedOperationException | IOException e) {
             throw new IllegalStateException(e);
-        } finally {
         }
     }
 }

@@ -8,7 +8,7 @@ public class AuthHeaderFactory {
 
     private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 
-    public static String create(String username, String password) {
+    public String create(String username, String password) {
         String unencodedAuth = username + ":" + password;
         byte[] encodedAuth = Base64.encodeBase64(unencodedAuth.getBytes(CHARSET_UTF8));
         return "Basic " + new String(encodedAuth);

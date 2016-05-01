@@ -50,9 +50,9 @@ public class SonarJobDeleterTest extends BaseSonarServiceTestCase {
         Logger logger = deleterWithMockLogger();
         whenHttpResponseIsNotFound();
         push(aDeletePushEvent());
-        verify(logger).info(
-                "Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
-                expectedSonarProjectKey());
+        verify(logger)
+                .info("Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
+                        expectedSonarProjectKey());
     }
 
     @Test

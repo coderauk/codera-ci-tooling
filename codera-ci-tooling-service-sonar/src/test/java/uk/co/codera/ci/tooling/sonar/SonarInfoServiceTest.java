@@ -25,8 +25,7 @@ public class SonarInfoServiceTest extends BaseSonarServiceTestCase {
     @Before
     public void before() throws IOException {
         super.before();
-        this.service = new SonarInfoService(this.httpClientFactory, "https://myserver.co.uk/sonar/", "user",
-                "password");
+        this.service = new SonarInfoService(this.httpClientFactory, "https://myserver.co.uk/sonar/", "user", "password");
         when(this.httpResponse.getEntity()).thenReturn(this.httpEntity);
         when(this.httpEntity.getContent()).thenReturn(new ClasspathResource("/sonar-configuration.json").getAsStream());
     }

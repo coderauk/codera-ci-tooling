@@ -50,7 +50,7 @@ public abstract class BaseSonarServiceTestCase {
         invokeServiceExpectingFailure();
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldFailWhenNullHttpResponseReturnedAndCheckedExceptionThrownClosingHttpClient() throws IOException {
         when(this.httpClient.execute(any())).thenReturn(null);
         doThrow(new IOException()).when(this.httpClient).close();
@@ -70,8 +70,7 @@ public abstract class BaseSonarServiceTestCase {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpClientToRuntimeException()
-            throws IOException {
+    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpClientToRuntimeException() throws IOException {
         when(this.httpClient.execute(any())).thenThrow(new IOException());
         doThrow(new IOException()).when(this.httpClient).close();
         invokeServiceExpectingFailure();

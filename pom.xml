@@ -34,6 +34,7 @@
       	<module>codera-ci-tooling-service-core</module>
       	<module>codera-ci-tooling-service-jenkins</module>
       	<module>codera-ci-tooling-service-sonar</module>
+      	<module>codera-ci-tooling-service-healthcheck</module>
   		<module>codera-ci-tooling-resource-bitbucket</module>
   		<module>codera-ci-tooling-resource-github</module>
   		<module>codera-ci-tooling-application</module>

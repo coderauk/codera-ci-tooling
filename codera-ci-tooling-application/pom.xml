@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-ci-tooling</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.2</version>
 	</parent>
 
 	<description>Reponsible for wiring together the DropWizard configuration and application. Builds the runnable jar.</description>

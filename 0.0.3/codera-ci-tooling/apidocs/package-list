@@ -1,0 +1,8 @@
+uk.co.codera.ci.tooling.api.bitbucket
+uk.co.codera.ci.tooling.api.github
+uk.co.codera.ci.tooling.application
+uk.co.codera.ci.tooling.git
+uk.co.codera.ci.tooling.jenkins
+uk.co.codera.ci.tooling.sonar
+uk.co.codera.ci.tooling.sonar.dto
+uk.co.codera.ci.tooling.template

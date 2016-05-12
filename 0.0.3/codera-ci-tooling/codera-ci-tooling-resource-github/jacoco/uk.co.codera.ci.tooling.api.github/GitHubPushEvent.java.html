@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GitHubPushEvent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">codera-ci-tooling-resource-github</a> &gt; <a href="index.source.html" class="el_package">uk.co.codera.ci.tooling.api.github</a> &gt; <span class="el_source">GitHubPushEvent.java</span></div><h1>GitHubPushEvent.java</h1><pre class="source lang-java linenums">package uk.co.codera.ci.tooling.api.github;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+<span class="fc" id="L10">public class GitHubPushEvent {</span>
+
+    public static final String REF_NAME_GIT_HUB_PAGES = &quot;gh-pages&quot;;
+    public static final String REF_TYPE_BRANCH = &quot;branch&quot;;
+    public static final String REF_TYPE_TAG = &quot;tag&quot;;
+
+    private String ref;
+
+    @JsonProperty(&quot;ref_type&quot;)
+    private String refType;
+
+    private Repository repository;
+
+    public static Builder aPushEvent() {
+<span class="fc" id="L24">        return new Builder();</span>
+    }
+
+    public void setRef(String ref) {
+<span class="fc" id="L28">        this.ref = ref;</span>
+<span class="fc" id="L29">    }</span>
+
+    public String getRef() {
+<span class="fc" id="L32">        return this.ref;</span>
+    }
+
+    public void setRefType(String refType) {
+<span class="fc" id="L36">        this.refType = refType;</span>
+<span class="fc" id="L37">    }</span>
+
+    public String getRefType() {
+<span class="fc" id="L40">        return this.refType;</span>
+    }
+
+    public void setRepository(Repository repository) {
+<span class="fc" id="L44">        this.repository = repository;</span>
+<span class="fc" id="L45">    }</span>
+
+    public Repository getRepository() {
+<span class="fc" id="L48">        return repository;</span>
+    }
+
+    public boolean isBranch() {
+<span class="fc" id="L52">        return REF_TYPE_BRANCH.equals(getRefType());</span>
+    }
+
+    public boolean isGitHubPages() {
+<span class="fc" id="L56">        return REF_NAME_GIT_HUB_PAGES.equals(getRef());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L61">        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);</span>
+    }
+
+<span class="fc" id="L64">    public static class Builder {</span>
+
+        private String ref;
+        private String refType;
+        private Repository repository;
+
+        private Builder() {
+<span class="fc" id="L71">            super();</span>
+<span class="fc" id="L72">        }</span>
+
+        public Builder ref(String ref) {
+<span class="fc" id="L75">            this.ref = ref;</span>
+<span class="fc" id="L76">            return this;</span>
+        }
+
+        public Builder refType(String refType) {
+<span class="fc" id="L80">            this.refType = refType;</span>
+<span class="fc" id="L81">            return this;</span>
+        }
+
+        public Builder with(Repository repository) {
+<span class="fc" id="L85">            this.repository = repository;</span>
+<span class="fc" id="L86">            return this;</span>
+        }
+
+        public GitHubPushEvent build() {
+<span class="fc" id="L90">            GitHubPushEvent event = new GitHubPushEvent();</span>
+<span class="fc" id="L91">            event.setRef(this.ref);</span>
+<span class="fc" id="L92">            event.setRefType(this.refType);</span>
+<span class="fc" id="L93">            event.setRepository(this.repository);</span>
+<span class="fc" id="L94">            return event;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

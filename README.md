@@ -41,8 +41,6 @@ jenkins:
 
 # Optional block, if not set then sonar listener will not be instantiated. 
 # If set then it will delete sonar projects when the branch is deleted. 
-# Currently it is coded to assume the project key is in the form <repositoryName>:<shortBranchName>. 
-# Future versions will allow this to be templated.
 sonar:
   # The url of the sonar server, e.g. https://myserver.co.uk/sonar/. 
   # If the block is set this is required.
@@ -55,7 +53,10 @@ sonar:
   # The password for the sonar user. 
   # If the block is set this is required.
   password: <password>
-
+  
+  # Specifies the template used to create the sonar job key 
+  # Optional, if not specified will default to ${repositoryName}:${branchName}
+  jobKeyTemplate: <template>
 ```
 
 Replace the tokens in braces with the appropriate values for your setup.

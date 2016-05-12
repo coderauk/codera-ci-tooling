@@ -21,7 +21,11 @@
 		<dependency>
 		    <groupId>uk.co.codera</groupId>
 		    <artifactId>codera-lang</artifactId>
-		</dependency>  			
+		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-templating-api</artifactId>
+		</dependency>		  			
 	</dependencies>
 
 </project>

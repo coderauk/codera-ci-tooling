@@ -1,4 +1,4 @@
-package uk.co.codera.ci.tooling.jenkins;
+package uk.co.codera.ci.tooling.template;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 import uk.co.codera.templating.TemplateEngine;
 
-public class JenkinsTemplateService {
+public class TemplateService {
 
     public static final String PARAMETER_BRANCH_NAME = "branchName";
     public static final String PARAMETER_SHORT_BRANCH_NAME = "shortBranchName";
@@ -16,7 +16,7 @@ public class JenkinsTemplateService {
     private final TemplateEngine templateEngine;
     private final String template;
 
-    public JenkinsTemplateService(TemplateEngine templateEngine, String template) {
+    public TemplateService(TemplateEngine templateEngine, String template) {
         this.templateEngine = templateEngine;
         this.template = template;
     }

@@ -1,4 +1,4 @@
-package uk.co.codera.ci.tooling.jenkins;
+package uk.co.codera.ci.tooling.template;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -19,22 +19,22 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 import uk.co.codera.ci.tooling.git.GitReference;
-import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
+import uk.co.codera.ci.tooling.template.TemplateService;
 import uk.co.codera.templating.TemplateEngine;
 
 @RunWith(MockitoJUnitRunner.class)
-public class JenkinsTemplateServiceTest {
+public class TemplateServiceTest {
 
     private static final String TEMPLATE = "This is a template";
 
     @Mock
     private TemplateEngine mockTemplateEngine;
 
-    private JenkinsTemplateService service;
+    private TemplateService service;
 
     @Before
     public void before() {
-        this.service = new JenkinsTemplateService(this.mockTemplateEngine, TEMPLATE);
+        this.service = new TemplateService(this.mockTemplateEngine, TEMPLATE);
     }
 
     @Test
@@ -46,27 +46,26 @@ public class JenkinsTemplateServiceTest {
     @Test
     public void shouldPassBranchNameToTemplateEngine() {
         create(aGitPushEvent().reference(GitReference.from("refs/heads/feature/AG-123-some-feature-branch")));
-        assertThat(passedParameters().get(JenkinsTemplateService.PARAMETER_BRANCH_NAME),
+        assertThat(passedParameters().get(TemplateService.PARAMETER_BRANCH_NAME),
                 is("feature/AG-123-some-feature-branch"));
     }
 
     @Test
     public void shouldPassShortBranchNameToTemplateEngine() {
         create(aGitPushEvent().reference(GitReference.from("refs/heads/feature/some-feature-branch")));
-        assertThat(passedParameters().get(JenkinsTemplateService.PARAMETER_SHORT_BRANCH_NAME),
-                is("some-feature-branch"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_SHORT_BRANCH_NAME), is("some-feature-branch"));
     }
 
     @Test
     public void shouldPassRepositoryUrlToTemplateEngine() {
         create(aGitPushEvent().repositoryUrl("ssh://repo"));
-        assertThat(passedParameters().get(JenkinsTemplateService.PARAMETER_REPOSITORY_URL), is("ssh://repo"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_REPOSITORY_URL), is("ssh://repo"));
     }
 
     @Test
     public void shouldPassRepositoryNameToTemlpateEngine() {
         create(aGitPushEvent().repositoryName("boatymcboatface"));
-        assertThat(passedParameters().get(JenkinsTemplateService.PARAMETER_REPOSITORY_NAME), is("boatymcboatface"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_REPOSITORY_NAME), is("boatymcboatface"));
     }
 
     @Test

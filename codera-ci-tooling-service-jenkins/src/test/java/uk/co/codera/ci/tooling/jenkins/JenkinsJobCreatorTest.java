@@ -17,16 +17,16 @@ import uk.co.codera.ci.tooling.git.GitPushEvent;
 import uk.co.codera.ci.tooling.git.GitReference;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobCreator;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
-import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
+import uk.co.codera.ci.tooling.template.TemplateService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JenkinsJobCreatorTest {
 
     @Mock
-    private JenkinsTemplateService mockJobNameFactory;
+    private TemplateService mockJobNameFactory;
 
     @Mock
-    private JenkinsTemplateService mockJobFactory;
+    private TemplateService mockJobFactory;
 
     @Mock
     private JenkinsService mockJenkinsService;

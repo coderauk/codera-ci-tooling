@@ -21,10 +21,10 @@ import uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobCreator;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobDeleter;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
-import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
 import uk.co.codera.ci.tooling.sonar.HttpClientFactory;
 import uk.co.codera.ci.tooling.sonar.SonarDeleteService;
 import uk.co.codera.ci.tooling.sonar.SonarJobDeleter;
+import uk.co.codera.ci.tooling.template.TemplateService;
 import uk.co.codera.templating.TemplateEngine;
 import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
@@ -73,20 +73,20 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     private GitEventListener jenkinsEventListener(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
         TemplateEngine templateEngine = new VelocityTemplateEngine();
-        JenkinsTemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
-        JenkinsTemplateService jobFactory = jenkinsJobFactory(configuration, templateEngine);
+        TemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
+        TemplateService jobFactory = jenkinsJobFactory(configuration, templateEngine);
         JenkinsService jenkinsService = jenkinsService(configuration);
         return aConfigurableGitEventListenerFactory()
                 .register(GitPushType.ADD, jenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService))
                 .register(GitPushType.DELETE, jenkinsJobDeleter(jobNameFactory, jenkinsService)).build();
     }
 
-    private GitEventListener jenkinsJobCreator(JenkinsTemplateService jobNameFactory,
-            JenkinsTemplateService jobFactory, JenkinsService jenkinsService) {
+    private GitEventListener jenkinsJobCreator(TemplateService jobNameFactory, TemplateService jobFactory,
+            JenkinsService jenkinsService) {
         return new JenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService);
     }
 
-    private GitEventListener jenkinsJobDeleter(JenkinsTemplateService jobNameFactory, JenkinsService jenkinsService) {
+    private GitEventListener jenkinsJobDeleter(TemplateService jobNameFactory, JenkinsService jenkinsService) {
         return new JenkinsJobDeleter(jobNameFactory, jenkinsService);
     }
 
@@ -96,18 +96,18 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         return new JenkinsService(jenkinsConfiguration);
     }
 
-    private JenkinsTemplateService jenkinsJobFactory(
-            uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration, TemplateEngine templateEngine) {
+    private TemplateService jenkinsJobFactory(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration,
+            TemplateEngine templateEngine) {
         try {
             String jobTemplate = FileUtils.readFileToString(new File(configuration.getJenkinsJobTemplateFile()));
-            return new JenkinsTemplateService(templateEngine, jobTemplate);
+            return new TemplateService(templateEngine, jobTemplate);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    private JenkinsTemplateService jenkinsJobNameFactory(TemplateEngine templateEngine) {
-        return new JenkinsTemplateService(templateEngine, "${repositoryName} - ${shortBranchName} - build");
+    private TemplateService jenkinsJobNameFactory(TemplateEngine templateEngine) {
+        return new TemplateService(templateEngine, "${repositoryName} - ${shortBranchName} - build");
     }
 
     private BitBucketResource bitBucketResource(BitBucketConfiguration configuration,

@@ -12,13 +12,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobDeleter;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
-import uk.co.codera.ci.tooling.jenkins.JenkinsTemplateService;
+import uk.co.codera.ci.tooling.template.TemplateService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JenkinsJobDeleterTest {
 
     @Mock
-    private JenkinsTemplateService mockJobNameFactory;
+    private TemplateService mockJobNameFactory;
 
     @Mock
     private JenkinsService mockJenkinsService;

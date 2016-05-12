@@ -30,6 +30,8 @@ import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
 public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
+    private static final String DEFAULT_SONAR_JOB_KEY_TEMPLATE = "${repositoryName}:${branchName}";
+
     public static void main(String[] args) throws Exception {
         new CiToolingApplication().run(args);
     }
@@ -66,9 +68,16 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
     }
 
     private SonarJobDeleter sonarJobDeleter(SonarConfiguration sonarConfiguration) {
+        TemplateService jobKeyFactory = sonarJobKeyFactory(sonarConfiguration);
         SonarDeleteService deleteService = new SonarDeleteService(new HttpClientFactory(),
                 sonarConfiguration.getSonarUrl(), sonarConfiguration.getUser(), sonarConfiguration.getPassword());
-        return new SonarJobDeleter(deleteService);
+        return new SonarJobDeleter(jobKeyFactory, deleteService);
+    }
+
+    private TemplateService sonarJobKeyFactory(SonarConfiguration sonarConfiguration) {
+        String template = sonarConfiguration.hasJobKeyTemplate() ? sonarConfiguration.getJobKeyTemplate()
+                : DEFAULT_SONAR_JOB_KEY_TEMPLATE;
+        return new TemplateService(new VelocityTemplateEngine(), template);
     }
 
     private GitEventListener jenkinsEventListener(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {

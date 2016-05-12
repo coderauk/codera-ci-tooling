@@ -18,6 +18,9 @@ public class SonarConfiguration {
     @JsonProperty
     private String password;
 
+    @JsonProperty
+    private String jobKeyTemplate;
+
     public void setSonarUrl(String sonarUrl) {
         this.sonarUrl = sonarUrl;
     }
@@ -40,5 +43,17 @@ public class SonarConfiguration {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public void setJobKeyTemplate(String jobKeyTemplate) {
+        this.jobKeyTemplate = jobKeyTemplate;
+    }
+
+    public String getJobKeyTemplate() {
+        return this.jobKeyTemplate;
+    }
+
+    public boolean hasJobKeyTemplate() {
+        return getJobKeyTemplate() != null;
     }
 }

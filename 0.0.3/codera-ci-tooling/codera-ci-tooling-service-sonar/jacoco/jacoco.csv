@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,AbstractSonarService,30,118,8,8,0,21,7,9,0,8
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,AuthHeaderFactory,0,35,0,0,0,5,0,3,0,3
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,SonarInfoService,0,50,0,0,0,8,0,5,0,5
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,SonarInfo,0,19,0,0,0,6,0,4,0,4
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,SonarJobDeleter,0,19,0,0,0,7,0,2,0,2
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,SonarInfo.Builder,0,14,0,0,0,5,0,3,0,3
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,SonarDeleteService,0,76,0,3,0,19,0,8,0,6
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar,HttpClientFactory,0,6,0,0,0,2,0,2,0,2
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar.dto,SystemConfiguration,0,10,0,0,0,4,0,3,0,3
+codera-ci-tooling-service-sonar,uk.co.codera.ci.tooling.sonar.dto,SonarQube,0,10,0,0,0,4,0,3,0,3

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SonarDeleteService.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">codera-ci-tooling-service-sonar</a> &gt; <a href="index.source.html" class="el_package">uk.co.codera.ci.tooling.sonar</a> &gt; <span class="el_source">SonarDeleteService.java</span></div><h1>SonarDeleteService.java</h1><pre class="source lang-java linenums">package uk.co.codera.ci.tooling.sonar;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class SonarDeleteService extends AbstractSonarService&lt;String, Void&gt; {
+
+    private static final String ENDPOINT_URL = &quot;api/projects/delete?key=%s&quot;;
+
+    @SuppressWarnings(&quot;squid:S1312&quot;)
+    private final Logger logger;
+
+    public SonarDeleteService(HttpClientFactory httpClientFactory, String sonarUrl, String username, String password) {
+<span class="fc" id="L17">        this(LoggerFactory.getLogger(SonarJobDeleter.class), httpClientFactory, sonarUrl, username, password);</span>
+<span class="fc" id="L18">    }</span>
+
+    public SonarDeleteService(Logger logger, HttpClientFactory httpClientFactory, String sonarUrl, String username,
+            String password) {
+<span class="fc" id="L22">        super(httpClientFactory, sonarUrl + ENDPOINT_URL, username, password);</span>
+<span class="fc" id="L23">        this.logger = logger;</span>
+<span class="fc" id="L24">    }</span>
+
+    public void deleteJob(String key) {
+<span class="fc" id="L27">        execute(key);</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    HttpUriRequest createRequest(String key) {
+<span class="fc" id="L32">        return new HttpPost(String.format(url(), key));</span>
+    }
+
+    @Override
+    Void processResponse(String key, HttpResponse response) {
+<span class="fc" id="L37">        int statusCode = response.getStatusLine().getStatusCode();</span>
+<span class="fc" id="L38">        logResult(key, statusCode);</span>
+<span class="fc" id="L39">        return null;</span>
+    }
+
+    private void logResult(String key, int statusCode) {
+<span class="fc bfc" id="L43" title="All 3 branches covered.">        switch (statusCode) {</span>
+        case 204:
+<span class="fc" id="L45">            logger.info(&quot;Successfully deleted sonar project with key [{}]&quot;, key);</span>
+<span class="fc" id="L46">            break;</span>
+        case 404:
+<span class="fc" id="L48">            logger.info(</span>
+                    &quot;Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted&quot;,
+                    key);
+<span class="fc" id="L51">            break;</span>
+        default:
+<span class="fc" id="L53">            logger.warn(&quot;Unexpected http status code [{}] when trying to delete sonar project with key [{}]&quot;,</span>
+<span class="fc" id="L54">                    statusCode, key);</span>
+        }
+<span class="fc" id="L56">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -17,22 +17,23 @@ public class GitReferenceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private static final String VALID_REFERENCE = "refs/heads/feature/JT-001-first-branch";
+    private static final String VALID_HEADS_REFERENCE = "refs/heads/feature/JT-001-first-branch";
+    private static final String VALID_TAGS_REFERENCE = "refs/tags/feature/JT-001-first-branch";
     private static final String INVALID_REFERENCE = "invalid-reference";
 
     @Test
     public void shouldBeAbleToConstructFromValidReference() {
-        assertThat(GitReference.from(VALID_REFERENCE), is(notNullValue()));
+        assertThat(GitReference.from(VALID_HEADS_REFERENCE), is(notNullValue()));
     }
 
     @Test
     public void toStringShouldRepresentFullReference() {
-        assertThat(GitReference.from(VALID_REFERENCE).toString(), is(equalTo(VALID_REFERENCE)));
+        assertThat(GitReference.from(VALID_HEADS_REFERENCE).toString(), is(equalTo(VALID_HEADS_REFERENCE)));
     }
 
     @Test
     public void shouldReportBranchNameCorrectly() {
-        assertThat(GitReference.from(VALID_REFERENCE).branchName(), is("feature/JT-001-first-branch"));
+        assertThat(GitReference.from(VALID_HEADS_REFERENCE).branchName(), is("feature/JT-001-first-branch"));
     }
 
     @Test
@@ -100,5 +101,30 @@ public class GitReferenceTest {
     public void differentReferenceShouldNotHaveSameHashCode() {
         assertThat(GitReference.from("refs/heads/feature/AB-123").hashCode(),
                 is(not(equalTo(GitReference.from("refs/heads/master").hashCode()))));
+    }
+    
+    @Test
+    public void shouldBeAbleToConstructFromValidTagsReference() {
+        assertThat(GitReference.from(VALID_TAGS_REFERENCE), is(notNullValue()));
+    }
+
+    @Test
+    public void shouldIdentifyTagReferencesAsTag() {
+        assertThat(GitReference.from(VALID_TAGS_REFERENCE).isTag(), is(true));
+    }
+
+    @Test
+    public void shouldNotIdentifyHeadReferencesAsTag() {
+        assertThat(GitReference.from(VALID_HEADS_REFERENCE).isTag(), is(false));
+    }
+
+    @Test
+    public void shouldReportTagReferencesBranchNameCorrectly() {
+        assertThat(GitReference.from(VALID_TAGS_REFERENCE).branchName(), is("feature/JT-001-first-branch"));
+    }
+
+    @Test
+    public void tagAndHeadReferencesWithSameBranchNameShouldNotBeEqual() {
+        assertThat(GitReference.from(VALID_HEADS_REFERENCE), is(not(equalTo(GitReference.from(VALID_TAGS_REFERENCE)))));
     }
 }

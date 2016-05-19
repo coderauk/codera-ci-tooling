@@ -39,7 +39,7 @@ public class GitHubResourceTest {
         String eventType = GitPushEventAdapter.EVENT_TYPE_CREATE;
         GitHubPushEvent event = aValidPushEvent().build();
         onPush(eventType, event);
-        verify(logger).info("Received eventType [{}] for event [{}]", eventType, event);
+        verify(logger).debug("Received eventType [{}] for event [{}]", eventType, event);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class GitHubResourceTest {
     public void shouldLogWhenIgnoringEventBecauseItIsNotABranch() {
         Logger logger = initResourceWithMockLogger();
         onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build());
-        verify(logger).info("Ignoring event because it is not related to a branch");
+        verify(logger).debug("Ignoring event because it is not related to a branch");
     }
 
     @Test
@@ -74,7 +74,7 @@ public class GitHubResourceTest {
         Logger logger = initResourceWithMockLogger();
         onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().ref(GitHubPushEvent.REF_NAME_GIT_HUB_PAGES)
                 .build());
-        verify(logger).info("Ignoring event because it is for the github pages branch");
+        verify(logger).debug("Ignoring event because it is for the github pages branch");
     }
 
     @Test

@@ -36,28 +36,28 @@ public class BitBucketResourceTest {
     @Before
     public void before() {
         this.resource = new BitBucketResource(gitPushEventAdapter, gitEventListener);
-        Mockito.when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitBranchPushEvent());
+        Mockito.when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitPushEvent());
     }
 
     @Test
     public void shouldLogPushEvent() {
         Logger logger = mock(Logger.class);
         this.resource = new BitBucketResource(logger, this.gitPushEventAdapter, this.gitEventListener);
-        PushEvent push = aBranchPushEvent();
+        PushEvent push = aPushEvent();
         onPush(push);
         verify(logger).debug("Received push event [{}]", push);
     }
 
     @Test
     public void shouldNotifyGitEventListenerOfPushEvent() {
-        onPush(aBranchPushEvent());
+        onPush(aPushEvent());
         verify(this.gitEventListener).onPush(any(GitPushEvent.class));
     }
 
     @Test
     public void shouldUseAdapterToAdaptFromBitBucketToGit() {
-        PushEvent pushEvent = aBranchPushEvent();
-        GitPushEvent gitPushEvent = aGitBranchPushEvent();
+        PushEvent pushEvent = aPushEvent();
+        GitPushEvent gitPushEvent = aGitPushEvent();
         when(this.gitPushEventAdapter.from(pushEvent)).thenReturn(gitPushEvent);
 
         onPush(pushEvent);
@@ -67,41 +67,41 @@ public class BitBucketResourceTest {
 
     @Test
     public void shouldIgnoreTagPushEvents() {
-        when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitTagPushEvent());
+        when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitPushEventForTags());
 
-        onPush(aTagPushEvent());
+        onPush(aPushEventForTags());
         verify(this.gitEventListener, never()).onPush(any(GitPushEvent.class));
     }
 
     @Test
     public void shouldLogTagPushEvent() {
-        when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitTagPushEvent());
+        when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitPushEventForTags());
 
         Logger logger = mock(Logger.class);
         this.resource = new BitBucketResource(logger, this.gitPushEventAdapter, this.gitEventListener);
-        PushEvent push = aBranchPushEvent();
+        PushEvent push = aPushEvent();
         onPush(push);
         verify(logger).debug("Received push event [{}]", push);
         verify(logger).debug("Ignoring event because it is not related to a branch");
     }
 
-    private PushEvent aTagPushEvent() {
-        return PushEvents.aValidTagPushEvent().build();
+    private PushEvent aPushEvent() {
+        return PushEvents.aValidPushEvent().build();
     }
-
-    private PushEvent aBranchPushEvent() {
-        return PushEvents.aValidBranchPushEvent().build();
+    
+    private PushEvent aPushEventForTags() {
+        return PushEvents.aValidPushEventForTags().build();
     }
 
     private void onPush(PushEvent event) {
         this.resource.push(event);
     }
 
-    private GitPushEvent aGitBranchPushEvent() {
+    private GitPushEvent aGitPushEvent() {
         return GitPushEvent.aGitPushEvent().reference(GitReference.from("refs/heads/master")).build();
     }
 
-    private GitPushEvent aGitTagPushEvent() {
+    private GitPushEvent aGitPushEventForTags() {
         return GitPushEvent.aGitPushEvent().reference(GitReference.from("refs/tags/master")).build();
     }
 }

@@ -102,7 +102,7 @@ public class GitReferenceTest {
         assertThat(GitReference.from("refs/heads/feature/AB-123").hashCode(),
                 is(not(equalTo(GitReference.from("refs/heads/master").hashCode()))));
     }
-    
+
     @Test
     public void shouldBeAbleToConstructFromValidTagsReference() {
         assertThat(GitReference.from(VALID_TAGS_REFERENCE), is(notNullValue()));

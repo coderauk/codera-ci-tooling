@@ -17,11 +17,11 @@ public class PushEvents {
         super();
     }
 
-    public static PushEvent.Builder aValidBranchPushEvent() {
+    public static PushEvent.Builder aValidPushEvent() {
         return PushEvent.aPushEvent().with(aValidRepository().build()).with(aValidBranchAddRefChange().build());
     }
 
-    public static PushEvent.Builder aValidTagPushEvent() {
+    public static PushEvent.Builder aValidPushEventForTags() {
         return PushEvent.aPushEvent().with(aValidRepository().build()).with(aValidTagAddRefChange().build());
     }
 

@@ -19,7 +19,6 @@ import uk.co.codera.ci.tooling.api.bitbucket.GitPushEventAdapter;
 import uk.co.codera.ci.tooling.api.bitbucket.PushEvent;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
-import uk.co.codera.ci.tooling.git.GitPushType;
 import uk.co.codera.ci.tooling.git.GitReference;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -32,11 +32,11 @@ public class BitBucketResource {
 
     @POST
     public void push(PushEvent pushEvent) {
-        this.logger.debug("Received push event [{}]", pushEvent);
+        this.logger.info("Received push event [{}]", pushEvent);
         GitPushEvent gitPushEvent = this.gitPushEventAdapter.from(pushEvent);
 
         if (gitPushEvent.getReference().isTag()) {
-            this.logger.debug("Ignoring event because it is not related to a branch");
+            this.logger.info("Ignoring event because it is not related to a branch");
         } else {
             this.gitEventListener.onPush(gitPushEvent);
         }

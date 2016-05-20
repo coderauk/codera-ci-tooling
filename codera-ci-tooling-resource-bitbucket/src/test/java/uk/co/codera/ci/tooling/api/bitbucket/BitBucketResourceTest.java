@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 
@@ -35,7 +34,7 @@ public class BitBucketResourceTest {
     @Before
     public void before() {
         this.resource = new BitBucketResource(gitPushEventAdapter, gitEventListener);
-        Mockito.when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitPushEvent());
+        when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitPushEvent());
     }
 
     @Test
@@ -44,7 +43,7 @@ public class BitBucketResourceTest {
         this.resource = new BitBucketResource(logger, this.gitPushEventAdapter, this.gitEventListener);
         PushEvent push = aPushEvent();
         onPush(push);
-        verify(logger).debug("Received push event [{}]", push);
+        verify(logger).info("Received push event [{}]", push);
     }
 
     @Test
@@ -73,21 +72,19 @@ public class BitBucketResourceTest {
     }
 
     @Test
-    public void shouldLogTagPushEvent() {
+    public void shouldLogIgnoringTagPushEvent() {
         when(this.gitPushEventAdapter.from(any(PushEvent.class))).thenReturn(aGitPushEventForTags());
 
         Logger logger = mock(Logger.class);
         this.resource = new BitBucketResource(logger, this.gitPushEventAdapter, this.gitEventListener);
-        PushEvent push = aPushEvent();
-        onPush(push);
-        verify(logger).debug("Received push event [{}]", push);
-        verify(logger).debug("Ignoring event because it is not related to a branch");
+        onPush(aPushEvent());
+        verify(logger).info("Ignoring event because it is not related to a branch");
     }
 
     private PushEvent aPushEvent() {
         return PushEvents.aValidPushEvent().build();
     }
-    
+
     private PushEvent aPushEventForTags() {
         return PushEvents.aValidPushEventForTags().build();
     }

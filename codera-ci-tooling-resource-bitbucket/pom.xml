@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-ci-tooling</artifactId>
-		<version>0.0.5</version>
+		<version>0.0.6-SNAPSHOT</version>
 	</parent>	
 
 	<description>Provides resources for bitbucket integration using their webhooks.</description>	

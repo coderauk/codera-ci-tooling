@@ -8,9 +8,11 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.swagger.annotations.Api;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 
+@Api(value = "/bitbucket")
 @Path("/bitbucket")
 @Consumes(MediaType.APPLICATION_JSON)
 public class BitBucketResource {
@@ -32,7 +34,7 @@ public class BitBucketResource {
 
     @POST
     public void push(PushEvent pushEvent) {
-        this.logger.debug("Received push event [{}]", pushEvent);
+        this.logger.info("Received push event [{}]", pushEvent);
         GitPushEvent gitPushEvent = this.gitPushEventAdapter.from(pushEvent);
         this.gitEventListener.onPush(gitPushEvent);
     }

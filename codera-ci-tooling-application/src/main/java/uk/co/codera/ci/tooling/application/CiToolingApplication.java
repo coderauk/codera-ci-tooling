@@ -8,8 +8,13 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 import uk.co.codera.ci.tooling.api.bitbucket.BitBucketResource;
 import uk.co.codera.ci.tooling.api.bitbucket.GitPushEventAdapter;
 import uk.co.codera.ci.tooling.api.github.GitHubResource;
@@ -37,11 +42,25 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
     }
 
     @Override
+    public void initialize(Bootstrap<CiToolingConfiguration> bootstrap) {
+        bootstrap.addBundle(new AssetsBundle("/swagger-ui", "/api-docs", "index.html"));
+    }
+
+    @Override
     public void run(CiToolingConfiguration configuration, Environment environment) throws Exception {
+        registerResources(configuration, environment.jersey());
+
+        BeanConfig config = new BeanConfig();
+        config.setTitle("Codera Ci Tooling");
+        config.setVersion("1.0.0");
+        config.setResourcePackage("uk.co.codera.ci");
+        config.setScan(true);
+    }
+
+    private void registerResources(CiToolingConfiguration configuration, JerseyEnvironment jersey) {
+        jersey.register(new ApiListingResource());
+        jersey.register(SwaggerSerializers.class);
         GitEventBroadcaster gitEventBroadcaster = gitEventBroadcaster(configuration);
-
-        JerseyEnvironment jersey = environment.jersey();
-
         if (configuration.isBitBucketConfigured()) {
             jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventBroadcaster));
         }

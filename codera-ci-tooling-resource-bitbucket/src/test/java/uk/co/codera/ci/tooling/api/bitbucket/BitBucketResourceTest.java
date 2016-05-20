@@ -40,7 +40,7 @@ public class BitBucketResourceTest {
         this.resource = new BitBucketResource(logger, this.gitPushEventAdapter, this.gitEventListener);
         PushEvent push = aPushEvent();
         onPush(push);
-        verify(logger).debug("Received push event [{}]", push);
+        verify(logger).info("Received push event [{}]", push);
     }
 
     @Test

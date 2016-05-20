@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
-import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidAddRefChange;
+import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidBranchAddRefChange;
 import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidProject;
 import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidPushEvent;
 import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidRepository;
@@ -40,7 +40,7 @@ public class GitPushEventAdapterTest {
 
     @Test
     public void shouldMapGitPushTypeFromPushEvent() {
-        assertThat(from(aValidAddRefChange()).getPushType(), is(GitPushType.ADD));
+        assertThat(from(aValidBranchAddRefChange()).getPushType(), is(GitPushType.ADD));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class GitPushEventAdapterTest {
 
     @Test
     public void shouldConstructGitReferenceFromPushEvent() {
-        assertThat(from(aValidAddRefChange().refId("refs/heads/master")).getReference(),
+        assertThat(from(aValidBranchAddRefChange().refId("refs/heads/master")).getReference(),
                 is(equalTo(GitReference.from("refs/heads/master"))));
     }
 

@@ -37,6 +37,10 @@ public class GitPushEvent {
         return this.repositoryUrl;
     }
 
+    public boolean isTag() {
+        return getReference().isTag();
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);

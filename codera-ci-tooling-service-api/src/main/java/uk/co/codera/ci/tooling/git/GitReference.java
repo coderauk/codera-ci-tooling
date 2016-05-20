@@ -5,15 +5,17 @@ import java.util.regex.Pattern;
 
 public class GitReference {
 
-    private static final Pattern PATTERN_VALID_GIT_REFERENCE = Pattern.compile("refs/\\w*/(.*)");
+    private static final Pattern PATTERN_VALID_GIT_REFERENCE = Pattern.compile("refs/(\\w*)/(.*)");
     private static final String BRANCH_DELIMITER = "/";
     private final String fullReference;
+    private final String referenceType;
     private final String branchName;
 
     private GitReference(String reference) {
         Matcher matcher = validate(reference);
         this.fullReference = reference;
-        this.branchName = matcher.group(1);
+        this.referenceType = matcher.group(1);
+        this.branchName = matcher.group(2);
     }
 
     public static GitReference from(String reference) {
@@ -67,5 +69,9 @@ public class GitReference {
 
     private Matcher matcher(String reference) {
         return PATTERN_VALID_GIT_REFERENCE.matcher(reference);
+    }
+
+    public boolean isTag() {
+        return referenceType.equals("tags");
     }
 }

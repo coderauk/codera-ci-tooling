@@ -1,4 +1,4 @@
-package uk.co.codera.ci.tooling.api.bitbucket;
+package uk.co.codera.ci.tooling.api.bitbucket.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import uk.co.codera.ci.tooling.git.GitPushType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RefChange {
+public class RefChangeDto {
 
     private String refId;
 
@@ -58,8 +58,8 @@ public class RefChange {
             return this;
         }
 
-        public RefChange build() {
-            RefChange refChange = new RefChange();
+        public RefChangeDto build() {
+            RefChangeDto refChange = new RefChangeDto();
             refChange.setRefId(this.refId);
             refChange.setType(this.type);
             return refChange;

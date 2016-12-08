@@ -11,7 +11,7 @@ import io.dropwizard.Application;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Environment;
 import uk.co.codera.ci.tooling.api.bitbucket.BitBucketResource;
-import uk.co.codera.ci.tooling.api.bitbucket.GitPushEventAdapter;
+import uk.co.codera.ci.tooling.api.bitbucket.PushEventDtoAdapter;
 import uk.co.codera.ci.tooling.api.github.GitHubResource;
 import uk.co.codera.ci.tooling.git.GitEventBroadcaster;
 import uk.co.codera.ci.tooling.git.GitEventListener;
@@ -121,7 +121,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     private BitBucketResource bitBucketResource(BitBucketConfiguration configuration,
             GitEventBroadcaster gitEventBroadcaster) {
-        GitPushEventAdapter gitPushEventAdapter = new GitPushEventAdapter(configuration.getBitBucketServerName(),
+        PushEventDtoAdapter gitPushEventAdapter = new PushEventDtoAdapter(configuration.getBitBucketServerName(),
                 configuration.getBitBucketServerPort());
         return new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
     }

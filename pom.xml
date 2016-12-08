@@ -32,6 +32,7 @@
   	<modules>
       	<module>codera-ci-tooling-service-api</module>
       	<module>codera-ci-tooling-service-core</module>
+      	<module>codera-ci-tooling-service-git</module>
       	<module>codera-ci-tooling-service-jenkins</module>
       	<module>codera-ci-tooling-service-sonar</module>
       	<module>codera-ci-tooling-service-healthcheck</module>
@@ -56,7 +57,12 @@
   				<groupId>uk.co.codera</groupId>
   				<artifactId>codera-ci-tooling-service-core</artifactId>
   				<version>${project.version}</version>
-  			</dependency>			
+  			</dependency>	
+   			<dependency>
+  				<groupId>uk.co.codera</groupId>
+  				<artifactId>codera-ci-tooling-service-git</artifactId>
+  				<version>${project.version}</version>
+  			</dependency>				
   			<dependency>
   				<groupId>uk.co.codera</groupId>
   				<artifactId>codera-ci-tooling-service-jenkins</artifactId>

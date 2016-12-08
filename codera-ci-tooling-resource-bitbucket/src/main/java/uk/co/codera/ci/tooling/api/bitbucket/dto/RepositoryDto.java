@@ -1,14 +1,14 @@
-package uk.co.codera.ci.tooling.api.bitbucket;
+package uk.co.codera.ci.tooling.api.bitbucket.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Repository {
+public class RepositoryDto {
 
     private String slug;
-    private Project project;
+    private ProjectDto project;
 
-    public static Repository.Builder aRepository() {
+    public static RepositoryDto.Builder aRepository() {
         return new Builder();
     }
 
@@ -20,18 +20,18 @@ public class Repository {
         return this.slug;
     }
 
-    public void setProject(Project project) {
+    public void setProject(ProjectDto project) {
         this.project = project;
     }
 
-    public Project getProject() {
+    public ProjectDto getProject() {
         return this.project;
     }
 
     public static class Builder {
 
         private String slug;
-        private Project project;
+        private ProjectDto project;
 
         private Builder() {
             super();
@@ -42,13 +42,13 @@ public class Repository {
             return this;
         }
 
-        public Builder with(Project project) {
+        public Builder with(ProjectDto project) {
             this.project = project;
             return this;
         }
 
-        public Repository build() {
-            Repository repository = new Repository();
+        public RepositoryDto build() {
+            RepositoryDto repository = new RepositoryDto();
             repository.setSlug(this.slug);
             repository.setProject(this.project);
             return repository;

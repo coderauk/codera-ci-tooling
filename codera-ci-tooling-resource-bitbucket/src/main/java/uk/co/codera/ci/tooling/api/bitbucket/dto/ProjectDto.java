@@ -1,13 +1,13 @@
-package uk.co.codera.ci.tooling.api.bitbucket;
+package uk.co.codera.ci.tooling.api.bitbucket.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Project {
+public class ProjectDto {
 
     private String key;
 
-    public static Project.Builder aProject() {
+    public static ProjectDto.Builder aProject() {
         return new Builder();
     }
 
@@ -32,8 +32,8 @@ public class Project {
             return this;
         }
 
-        public Project build() {
-            Project project = new Project();
+        public ProjectDto build() {
+            ProjectDto project = new ProjectDto();
             project.setKey(this.key);
             return project;
         }

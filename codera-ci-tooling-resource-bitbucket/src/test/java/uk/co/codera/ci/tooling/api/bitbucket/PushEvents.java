@@ -1,9 +1,9 @@
 package uk.co.codera.ci.tooling.api.bitbucket;
 
-import uk.co.codera.ci.tooling.api.bitbucket.Project;
-import uk.co.codera.ci.tooling.api.bitbucket.PushEvent;
-import uk.co.codera.ci.tooling.api.bitbucket.RefChange;
-import uk.co.codera.ci.tooling.api.bitbucket.Repository;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.ProjectDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.PushEventDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.RefChangeDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.RepositoryDto;
 import uk.co.codera.ci.tooling.git.GitPushType;
 
 public class PushEvents {
@@ -17,27 +17,27 @@ public class PushEvents {
         super();
     }
 
-    public static PushEvent.Builder aValidPushEvent() {
-        return PushEvent.aPushEvent().with(aValidRepository().build()).with(aValidBranchAddRefChange().build());
+    public static PushEventDto.Builder aValidPushEvent() {
+        return PushEventDto.aPushEvent().with(aValidRepository().build()).with(aValidBranchAddRefChange().build());
     }
 
-    public static PushEvent.Builder aValidPushEventForTags() {
-        return PushEvent.aPushEvent().with(aValidRepository().build()).with(aValidTagAddRefChange().build());
+    public static PushEventDto.Builder aValidPushEventForTags() {
+        return PushEventDto.aPushEvent().with(aValidRepository().build()).with(aValidTagAddRefChange().build());
     }
 
-    public static Repository.Builder aValidRepository() {
-        return Repository.aRepository().slug(REPOSITORY_SLUG).with(aValidProject().build());
+    public static RepositoryDto.Builder aValidRepository() {
+        return RepositoryDto.aRepository().slug(REPOSITORY_SLUG).with(aValidProject().build());
     }
 
-    public static Project.Builder aValidProject() {
-        return Project.aProject().key(PROJECT_KEY);
+    public static ProjectDto.Builder aValidProject() {
+        return ProjectDto.aProject().key(PROJECT_KEY);
     }
 
-    public static RefChange.Builder aValidBranchAddRefChange() {
-        return RefChange.aRefChange().refId(GIT_BRANCH_REFERENCE_ID).type(GitPushType.ADD);
+    public static RefChangeDto.Builder aValidBranchAddRefChange() {
+        return RefChangeDto.aRefChange().refId(GIT_BRANCH_REFERENCE_ID).type(GitPushType.ADD);
     }
 
-    public static RefChange.Builder aValidTagAddRefChange() {
-        return RefChange.aRefChange().refId(GIT_TAG_REFERENCE_ID).type(GitPushType.ADD);
+    public static RefChangeDto.Builder aValidTagAddRefChange() {
+        return RefChangeDto.aRefChange().refId(GIT_TAG_REFERENCE_ID).type(GitPushType.ADD);
     }
 }

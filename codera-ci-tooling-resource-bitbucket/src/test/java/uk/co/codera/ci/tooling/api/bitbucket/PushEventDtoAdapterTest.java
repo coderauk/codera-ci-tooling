@@ -13,24 +13,24 @@ import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.codera.ci.tooling.api.bitbucket.GitPushEventAdapter;
-import uk.co.codera.ci.tooling.api.bitbucket.PushEvent;
-import uk.co.codera.ci.tooling.api.bitbucket.RefChange;
-import uk.co.codera.ci.tooling.api.bitbucket.Repository;
+import uk.co.codera.ci.tooling.api.bitbucket.PushEventDtoAdapter;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.PushEventDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.RefChangeDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.RepositoryDto;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 import uk.co.codera.ci.tooling.git.GitPushType;
 import uk.co.codera.ci.tooling.git.GitReference;
 
-public class GitPushEventAdapterTest {
+public class PushEventDtoAdapterTest {
 
     private static final String BITBUCKET_SERVER_NAME = "myServer";
     private static final int BITBUCKET_SERVER_PORT = 7888;
 
-    private GitPushEventAdapter adapter;
+    private PushEventDtoAdapter adapter;
 
     @Before
     public void before() {
-        this.adapter = new GitPushEventAdapter(BITBUCKET_SERVER_NAME, BITBUCKET_SERVER_PORT);
+        this.adapter = new PushEventDtoAdapter(BITBUCKET_SERVER_NAME, BITBUCKET_SERVER_PORT);
     }
 
     @Test
@@ -66,15 +66,15 @@ public class GitPushEventAdapterTest {
                 containsString("/proj/"));
     }
 
-    private GitPushEvent from(Repository.Builder repository) {
+    private GitPushEvent from(RepositoryDto.Builder repository) {
         return from(aValidPushEvent().with(repository.build()));
     }
 
-    private GitPushEvent from(RefChange.Builder refChange) {
+    private GitPushEvent from(RefChangeDto.Builder refChange) {
         return from(aValidPushEvent().noRefChanges().with(refChange.build()));
     }
 
-    private GitPushEvent from(PushEvent.Builder event) {
+    private GitPushEvent from(PushEventDto.Builder event) {
         return this.adapter.from(event.build());
     }
 }

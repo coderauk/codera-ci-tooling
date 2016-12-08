@@ -1,4 +1,4 @@
-package uk.co.codera.ci.tooling.api.bitbucket;
+package uk.co.codera.ci.tooling.api.bitbucket.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,28 +9,28 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PushEvent {
+public class PushEventDto {
 
-    private Repository repository;
-    private List<RefChange> refChanges;
+    private RepositoryDto repository;
+    private List<RefChangeDto> refChanges;
 
     public static Builder aPushEvent() {
         return new Builder();
     }
 
-    public List<RefChange> getRefChanges() {
+    public List<RefChangeDto> getRefChanges() {
         return this.refChanges;
     }
 
-    public void setRefChanges(List<RefChange> refChanges) {
+    public void setRefChanges(List<RefChangeDto> refChanges) {
         this.refChanges = refChanges;
     }
 
-    public void setRepository(Repository repository) {
+    public void setRepository(RepositoryDto repository) {
         this.repository = repository;
     }
 
-    public Repository getRepository() {
+    public RepositoryDto getRepository() {
         return this.repository;
     }
 
@@ -41,19 +41,19 @@ public class PushEvent {
 
     public static class Builder {
 
-        private Repository repository;
-        private final List<RefChange> refChanges;
+        private RepositoryDto repository;
+        private final List<RefChangeDto> refChanges;
 
         private Builder() {
             this.refChanges = new ArrayList<>();
         }
 
-        public Builder with(Repository repository) {
+        public Builder with(RepositoryDto repository) {
             this.repository = repository;
             return this;
         }
 
-        public Builder with(RefChange refChange) {
+        public Builder with(RefChangeDto refChange) {
             this.refChanges.add(refChange);
             return this;
         }
@@ -63,8 +63,8 @@ public class PushEvent {
             return this;
         }
 
-        public PushEvent build() {
-            PushEvent event = new PushEvent();
+        public PushEventDto build() {
+            PushEventDto event = new PushEventDto();
             event.setRepository(this.repository);
             event.setRefChanges(new ArrayList<>(this.refChanges));
             return event;

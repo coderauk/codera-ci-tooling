@@ -1,4 +1,4 @@
-package uk.co.codera.ci.tooling.api.bitbucket;
+package uk.co.codera.ci.tooling.api.bitbucket.dto;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -13,14 +13,14 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import uk.co.codera.ci.tooling.api.bitbucket.Project;
-import uk.co.codera.ci.tooling.api.bitbucket.PushEvent;
-import uk.co.codera.ci.tooling.api.bitbucket.RefChange;
-import uk.co.codera.ci.tooling.api.bitbucket.Repository;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.ProjectDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.PushEventDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.RefChangeDto;
+import uk.co.codera.ci.tooling.api.bitbucket.dto.RepositoryDto;
 import uk.co.codera.ci.tooling.git.GitPushType;
 import uk.co.codera.lang.io.ClasspathResource;
 
-public class PushEventTest {
+public class PushEventDtoTest {
 
     private static final String PATH_JSON_BRANCH_CREATED = "/git/branch-created.json";
     private static final String PATH_JSON_BRANCH_UPDATED = "/git/branch-updated.json";
@@ -93,40 +93,40 @@ public class PushEventTest {
         assertThat(project().getKey(), is(notNullValue()));
     }
 
-    private Repository repository() {
+    private RepositoryDto repository() {
         return readPushEvent().getRepository();
     }
 
-    private Project project() {
+    private ProjectDto project() {
         return repository().getProject();
     }
 
-    private GitPushType pushTypeFor(PushEvent push) {
+    private GitPushType pushTypeFor(PushEventDto push) {
         return refChangeFor(push).getType();
     }
 
-    private RefChange refChangeFor(PushEvent push) {
+    private RefChangeDto refChangeFor(PushEventDto push) {
         return push.getRefChanges().get(0);
     }
 
-    private PushEvent branchCreatedEvent() {
+    private PushEventDto branchCreatedEvent() {
         return readPushEvent();
     }
 
-    private PushEvent branchUpdatedEvent() {
+    private PushEventDto branchUpdatedEvent() {
         return readPushEvent(jsonForBranchUpdated());
     }
 
-    private PushEvent branchDeletedEvent() {
+    private PushEventDto branchDeletedEvent() {
         return readPushEvent(jsonForBranchDeleted());
     }
 
-    private PushEvent readPushEvent() {
+    private PushEventDto readPushEvent() {
         return readPushEvent(jsonForBranchCreated());
     }
 
-    private PushEvent readPushEvent(String json) {
-        return read(json, PushEvent.class);
+    private PushEventDto readPushEvent(String json) {
+        return read(json, PushEventDto.class);
     }
 
     private <T> T read(String json, Class<T> targetClass) {

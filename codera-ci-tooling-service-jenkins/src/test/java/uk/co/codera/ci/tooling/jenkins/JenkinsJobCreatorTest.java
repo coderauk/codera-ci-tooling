@@ -12,11 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import uk.co.codera.ci.tooling.git.GitEventListener;
-import uk.co.codera.ci.tooling.git.GitPushEvent;
-import uk.co.codera.ci.tooling.git.GitReference;
-import uk.co.codera.ci.tooling.jenkins.JenkinsJobCreator;
-import uk.co.codera.ci.tooling.jenkins.JenkinsService;
+import uk.co.codera.ci.tooling.scm.ScmEvent;
+import uk.co.codera.ci.tooling.scm.ScmEventListener;
 import uk.co.codera.ci.tooling.template.TemplateService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,7 +28,7 @@ public class JenkinsJobCreatorTest {
     @Mock
     private JenkinsService mockJenkinsService;
 
-    private GitEventListener jobCreator;
+    private ScmEventListener jobCreator;
 
     @Before
     public void before() {
@@ -40,35 +37,35 @@ public class JenkinsJobCreatorTest {
 
     @Test
     public void shouldUseJobFactoryToCreateJobDefinition() {
-        GitPushEvent event = aGitPushEvent();
-        this.jobCreator.onPush(event);
+        ScmEvent event = anScmEvent();
+        this.jobCreator.on(event);
         verify(this.mockJobFactory).create(event);
     }
 
     @Test
     public void shouldUseJobNameFactoryToCreateJobName() {
-        GitPushEvent event = aGitPushEvent();
-        this.jobCreator.onPush(event);
+        ScmEvent event = anScmEvent();
+        this.jobCreator.on(event);
         verify(this.mockJobNameFactory).create(event);
     }
 
     @Test
     public void shouldPassJobDefinitionFromFactoryToJenkinsServiceToCreateJob() {
         String jobDefinition = "this is a jenkins job definition";
-        when(this.mockJobFactory.create(any(GitPushEvent.class))).thenReturn(jobDefinition);
-        this.jobCreator.onPush(aGitPushEvent());
+        when(this.mockJobFactory.create(any(ScmEvent.class))).thenReturn(jobDefinition);
+        this.jobCreator.on(anScmEvent());
         verify(this.mockJenkinsService).createJob(anyString(), eq(jobDefinition));
     }
 
     @Test
     public void shouldPassJobNameFromFactoryToJenkinsServiceToCreateJob() {
         String jobName = "this is a job name";
-        when(this.mockJobNameFactory.create(any(GitPushEvent.class))).thenReturn(jobName);
-        this.jobCreator.onPush(aGitPushEvent());
+        when(this.mockJobNameFactory.create(any(ScmEvent.class))).thenReturn(jobName);
+        this.jobCreator.on(anScmEvent());
         verify(this.mockJenkinsService).createJob(eq(jobName), anyString());
     }
 
-    private GitPushEvent aGitPushEvent() {
-        return GitPushEvent.aGitPushEvent().reference(GitReference.from("refs/heads/master")).build();
+    private ScmEvent anScmEvent() {
+        return ScmEvent.anScmEvent().build();
     }
 }

@@ -1,6 +1,6 @@
 package uk.co.codera.ci.tooling.application;
 
-import static uk.co.codera.ci.tooling.git.ConfigurableGitEventListenerFactory.aConfigurableGitEventListenerFactory;
+import static uk.co.codera.ci.tooling.scm.ConfigurableScmEventListenerFactory.aConfigurableScmEventListenerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +13,16 @@ import io.dropwizard.setup.Environment;
 import uk.co.codera.ci.tooling.api.bitbucket.BitBucketResource;
 import uk.co.codera.ci.tooling.api.bitbucket.PushEventDtoAdapter;
 import uk.co.codera.ci.tooling.api.github.GitHubResource;
-import uk.co.codera.ci.tooling.git.GitEventBroadcaster;
 import uk.co.codera.ci.tooling.git.GitEventListener;
-import uk.co.codera.ci.tooling.git.GitEventLogger;
-import uk.co.codera.ci.tooling.git.GitPushType;
-import uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration;
+import uk.co.codera.ci.tooling.git.GitPushEventAdapter;
+import uk.co.codera.ci.tooling.jenkins.JenkinsConnectionDetails;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobCreator;
 import uk.co.codera.ci.tooling.jenkins.JenkinsJobDeleter;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
+import uk.co.codera.ci.tooling.scm.ScmEventBroadcaster;
+import uk.co.codera.ci.tooling.scm.ScmEventListener;
+import uk.co.codera.ci.tooling.scm.ScmEventLogger;
+import uk.co.codera.ci.tooling.scm.ScmEventType;
 import uk.co.codera.ci.tooling.sonar.HttpClientFactory;
 import uk.co.codera.ci.tooling.sonar.SonarDeleteService;
 import uk.co.codera.ci.tooling.sonar.SonarJobDeleter;
@@ -38,32 +40,33 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     @Override
     public void run(CiToolingConfiguration configuration, Environment environment) throws Exception {
-        GitEventBroadcaster gitEventBroadcaster = gitEventBroadcaster(configuration);
+        ScmEventListener scmEventBroadcaster = scmEventBroadcaster(configuration);
 
         JerseyEnvironment jersey = environment.jersey();
 
+        GitEventListener gitEventListener = new GitEventListener(new GitPushEventAdapter(), scmEventBroadcaster);
         if (configuration.isBitBucketConfigured()) {
-            jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventBroadcaster));
+            jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventListener));
         }
-        jersey.register(gitHubResource(gitEventBroadcaster));
+        jersey.register(gitHubResource(gitEventListener));
     }
 
-    private GitEventBroadcaster gitEventBroadcaster(CiToolingConfiguration configuration) {
-        GitEventBroadcaster gitEventBroadcaster = new GitEventBroadcaster();
-        gitEventBroadcaster.registerListener(new GitEventLogger());
+    private ScmEventListener scmEventBroadcaster(CiToolingConfiguration configuration) {
+        ScmEventBroadcaster scmEventBroadcaster = new ScmEventBroadcaster();
+        scmEventBroadcaster.registerListener(new ScmEventLogger());
 
         if (configuration.isJenkinsConfigured()) {
-            gitEventBroadcaster.registerListener(jenkinsEventListener(configuration.getJenkins()));
+            scmEventBroadcaster.registerListener(jenkinsEventListener(configuration.getJenkins()));
         }
 
         if (configuration.isSonarConfigured()) {
-            gitEventBroadcaster.registerListener(sonarEventListener(configuration.getSonar()));
+            scmEventBroadcaster.registerListener(sonarEventListener(configuration.getSonar()));
         }
-        return gitEventBroadcaster;
+        return scmEventBroadcaster;
     }
 
-    private GitEventListener sonarEventListener(SonarConfiguration configuration) {
-        return aConfigurableGitEventListenerFactory().register(GitPushType.DELETE, sonarJobDeleter(configuration))
+    private ScmEventListener sonarEventListener(SonarConfiguration configuration) {
+        return aConfigurableScmEventListenerFactory().register(ScmEventType.DELETE, sonarJobDeleter(configuration))
                 .build();
     }
 
@@ -80,33 +83,32 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         return new TemplateService(new VelocityTemplateEngine(), template);
     }
 
-    private GitEventListener jenkinsEventListener(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
+    private ScmEventListener jenkinsEventListener(JenkinsConfiguration jenkinsConfiguration) {
         TemplateEngine templateEngine = new VelocityTemplateEngine();
         TemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
-        TemplateService jobFactory = jenkinsJobFactory(configuration, templateEngine);
-        JenkinsService jenkinsService = jenkinsService(configuration);
-        return aConfigurableGitEventListenerFactory()
-                .register(GitPushType.ADD, jenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService))
-                .register(GitPushType.DELETE, jenkinsJobDeleter(jobNameFactory, jenkinsService)).build();
+        TemplateService jobFactory = jenkinsJobFactory(jenkinsConfiguration, templateEngine);
+        JenkinsService jenkinsService = jenkinsService(jenkinsConfiguration);
+        return aConfigurableScmEventListenerFactory()
+                .register(ScmEventType.ADD, jenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService))
+                .register(ScmEventType.DELETE, jenkinsJobDeleter(jobNameFactory, jenkinsService)).build();
     }
 
-    private GitEventListener jenkinsJobCreator(TemplateService jobNameFactory, TemplateService jobFactory,
+    private ScmEventListener jenkinsJobCreator(TemplateService jobNameFactory, TemplateService jobFactory,
             JenkinsService jenkinsService) {
         return new JenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService);
     }
 
-    private GitEventListener jenkinsJobDeleter(TemplateService jobNameFactory, JenkinsService jenkinsService) {
+    private ScmEventListener jenkinsJobDeleter(TemplateService jobNameFactory, JenkinsService jenkinsService) {
         return new JenkinsJobDeleter(jobNameFactory, jenkinsService);
     }
 
-    private JenkinsService jenkinsService(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration) {
-        JenkinsConfiguration jenkinsConfiguration = JenkinsConfiguration.aJenkinsConfiguration()
+    private JenkinsService jenkinsService(JenkinsConfiguration configuration) {
+        JenkinsConnectionDetails jenkinsConfiguration = JenkinsConnectionDetails.aJenkinsConfiguration()
                 .serverUrl(configuration.getJenkinsServerUrl()).build();
         return new JenkinsService(jenkinsConfiguration);
     }
 
-    private TemplateService jenkinsJobFactory(uk.co.codera.ci.tooling.application.JenkinsConfiguration configuration,
-            TemplateEngine templateEngine) {
+    private TemplateService jenkinsJobFactory(JenkinsConfiguration configuration, TemplateEngine templateEngine) {
         try {
             String jobTemplate = FileUtils.readFileToString(new File(configuration.getJenkinsJobTemplateFile()));
             return new TemplateService(templateEngine, jobTemplate);
@@ -120,13 +122,13 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
     }
 
     private BitBucketResource bitBucketResource(BitBucketConfiguration configuration,
-            GitEventBroadcaster gitEventBroadcaster) {
+            GitEventListener gitEventBroadcaster) {
         PushEventDtoAdapter gitPushEventAdapter = new PushEventDtoAdapter(configuration.getBitBucketServerName(),
                 configuration.getBitBucketServerPort());
         return new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
     }
 
-    private GitHubResource gitHubResource(GitEventBroadcaster gitEventBroadcaster) {
+    private GitHubResource gitHubResource(GitEventListener gitEventBroadcaster) {
         return new GitHubResource(new uk.co.codera.ci.tooling.api.github.GitPushEventAdapter(), gitEventBroadcaster);
     }
 }

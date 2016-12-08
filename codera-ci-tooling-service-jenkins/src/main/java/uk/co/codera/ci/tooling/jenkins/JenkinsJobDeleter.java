@@ -1,10 +1,10 @@
 package uk.co.codera.ci.tooling.jenkins;
 
-import uk.co.codera.ci.tooling.git.GitEventListener;
-import uk.co.codera.ci.tooling.git.GitPushEvent;
+import uk.co.codera.ci.tooling.scm.ScmEvent;
+import uk.co.codera.ci.tooling.scm.ScmEventListener;
 import uk.co.codera.ci.tooling.template.TemplateService;
 
-public class JenkinsJobDeleter implements GitEventListener {
+public class JenkinsJobDeleter implements ScmEventListener {
 
     private final TemplateService jobNameFactory;
     private final JenkinsService jenkinsService;
@@ -15,7 +15,7 @@ public class JenkinsJobDeleter implements GitEventListener {
     }
 
     @Override
-    public void onPush(GitPushEvent event) {
+    public void on(ScmEvent event) {
         String jobName = this.jobNameFactory.create(event);
         this.jenkinsService.deleteJob(jobName);
     }

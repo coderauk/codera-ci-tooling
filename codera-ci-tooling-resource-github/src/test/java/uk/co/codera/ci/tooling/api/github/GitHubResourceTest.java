@@ -46,20 +46,20 @@ public class GitHubResourceTest {
     public void shouldInvokeListenerForBranchEvent() {
         onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_BRANCH)
                 .build());
-        verify(this.gitEventListener).onPush(any(GitPushEvent.class));
+        verify(this.gitEventListener).on(any(GitPushEvent.class));
     }
 
     @Test
     public void shouldNotInvokeListenerForBranchEvent() {
         onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().refType(GitHubPushEvent.REF_TYPE_TAG).build());
-        verify(this.gitEventListener, never()).onPush(any(GitPushEvent.class));
+        verify(this.gitEventListener, never()).on(any(GitPushEvent.class));
     }
 
     @Test
     public void shouldNotInvokeListenerForGitHubPagesEvent() {
         onPush(GitPushEventAdapter.EVENT_TYPE_CREATE, aValidPushEvent().ref(GitHubPushEvent.REF_NAME_GIT_HUB_PAGES)
                 .build());
-        verify(this.gitEventListener, never()).onPush(any(GitPushEvent.class));
+        verify(this.gitEventListener, never()).on(any(GitPushEvent.class));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class GitHubResourceTest {
 
         onPush(eventType, gitHubPushEvent);
 
-        verify(this.gitEventListener).onPush(gitPushEvent);
+        verify(this.gitEventListener).on(gitPushEvent);
     }
 
     private void onPush(String eventType, GitHubPushEvent event) {

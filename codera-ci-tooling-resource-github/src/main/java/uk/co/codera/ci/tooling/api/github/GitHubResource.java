@@ -36,7 +36,7 @@ public class GitHubResource {
         if (event.isGitHubPages()) {
             this.logger.info("Ignoring event because it is for the github pages branch");
         } else if (event.isBranch()) {
-            this.gitEventListener.onPush(this.gitPushEventAdapter.from(eventType, event));
+            this.gitEventListener.on(this.gitPushEventAdapter.from(eventType, event));
         } else {
             this.logger.info("Ignoring event because it is not related to a branch");
         }

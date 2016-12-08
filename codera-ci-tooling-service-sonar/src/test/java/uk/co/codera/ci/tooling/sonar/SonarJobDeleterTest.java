@@ -10,16 +10,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import uk.co.codera.ci.tooling.git.GitPushEvent;
-import uk.co.codera.ci.tooling.git.GitPushType;
-import uk.co.codera.ci.tooling.git.GitReference;
+import uk.co.codera.ci.tooling.scm.ScmEvent;
+import uk.co.codera.ci.tooling.scm.ScmEventType;
 import uk.co.codera.ci.tooling.template.TemplateService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SonarJobDeleterTest {
 
-    private static final String REPOSITORY_NAME = "our-repo";
-    private static final GitReference GIT_REFERENCE = GitReference.from("refs/heads/some-feature-branch");
+    private static final String PROJECT_NAME = "our-project";
 
     private SonarJobDeleter deleter;
 
@@ -36,34 +34,33 @@ public class SonarJobDeleterTest {
 
     @Test
     public void shouldInvokeDeleteServiceWithCorrectKeyOnPushEvent() {
-        push(aDeletePushEvent());
+        push(aDeleteEvent());
         verify(this.deleteService).deleteJob(any());
     }
 
     @Test
     public void shouldPassPushEventToTemplateServiceToCreateJobKey() {
-        GitPushEvent event = aDeletePushEvent().build();
-        push(event);
+        ScmEvent event = aDeleteEvent().build();
+        on(event);
         verify(this.templateService).create(event);
     }
 
     @Test
     public void shouldPassGeneratedJobKeyToDeleteService() {
-        when(this.templateService.create(any(GitPushEvent.class))).thenReturn("sonar:key");
-        push(aDeletePushEvent());
+        when(this.templateService.create(any(ScmEvent.class))).thenReturn("sonar:key");
+        push(aDeleteEvent());
         verify(this.deleteService).deleteJob("sonar:key");
     }
 
-    private void push(GitPushEvent.Builder event) {
-        push(event.build());
+    private void push(ScmEvent.Builder event) {
+        on(event.build());
     }
 
-    private void push(GitPushEvent event) {
-        this.deleter.onPush(event);
+    private void on(ScmEvent event) {
+        this.deleter.on(event);
     }
 
-    private GitPushEvent.Builder aDeletePushEvent() {
-        return GitPushEvent.aGitPushEvent().pushType(GitPushType.DELETE).repositoryName(REPOSITORY_NAME)
-                .reference(GIT_REFERENCE);
+    private ScmEvent.Builder aDeleteEvent() {
+        return ScmEvent.anScmEvent().eventType(ScmEventType.DELETE).projectName(PROJECT_NAME);
     }
 }

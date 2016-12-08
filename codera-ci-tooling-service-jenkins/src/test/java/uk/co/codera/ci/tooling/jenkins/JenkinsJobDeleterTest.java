@@ -9,9 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import uk.co.codera.ci.tooling.git.GitPushEvent;
-import uk.co.codera.ci.tooling.jenkins.JenkinsJobDeleter;
-import uk.co.codera.ci.tooling.jenkins.JenkinsService;
+import uk.co.codera.ci.tooling.scm.ScmEvent;
 import uk.co.codera.ci.tooling.template.TemplateService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,12 +30,11 @@ public class JenkinsJobDeleterTest {
 
     @Test
     public void shouldUseJobNameFactoryToCreateJobNameToDelete() {
-        GitPushEvent event = GitPushEvent.aGitPushEvent().build();
+        ScmEvent event = ScmEvent.anScmEvent().build();
         String jobName = "job-to-delete";
         when(this.mockJobNameFactory.create(event)).thenReturn(jobName);
 
-        this.jobDeleter.onPush(event);
-
+        this.jobDeleter.on(event);
         verify(this.mockJenkinsService).deleteJob(jobName);
     }
 }

@@ -49,7 +49,7 @@ public class BitBucketResourceTest {
     @Test
     public void shouldNotifyGitEventListenerOfPushEvent() {
         onPush(aPushEvent());
-        verify(this.gitEventListener).onPush(any(GitPushEvent.class));
+        verify(this.gitEventListener).on(any(GitPushEvent.class));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class BitBucketResourceTest {
 
         onPush(pushEvent);
 
-        verify(this.gitEventListener).onPush(gitPushEvent);
+        verify(this.gitEventListener).on(gitPushEvent);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class BitBucketResourceTest {
         when(this.gitPushEventAdapter.from(any(PushEventDto.class))).thenReturn(aGitPushEventForTags());
 
         onPush(aPushEventForTags());
-        verify(this.gitEventListener, never()).onPush(any(GitPushEvent.class));
+        verify(this.gitEventListener, never()).on(any(GitPushEvent.class));
     }
 
     @Test

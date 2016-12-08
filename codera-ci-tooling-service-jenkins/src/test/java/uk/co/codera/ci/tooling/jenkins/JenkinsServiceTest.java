@@ -12,14 +12,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import uk.co.codera.ci.tooling.jenkins.JenkinsCommandLineInterfaceInvoker;
-import uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration;
+import uk.co.codera.ci.tooling.jenkins.JenkinsConnectionDetails;
 import uk.co.codera.ci.tooling.jenkins.JenkinsService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JenkinsServiceTest {
 
     private String serverUrl;
-    private JenkinsConfiguration configuration;
+    private JenkinsConnectionDetails configuration;
 
     @Mock
     private JenkinsCommandLineInterfaceInvoker cliInvoker;
@@ -29,7 +29,7 @@ public class JenkinsServiceTest {
     @Before
     public void before() {
         this.serverUrl = randomString();
-        this.configuration = JenkinsConfiguration.aJenkinsConfiguration().serverUrl(this.serverUrl).build();
+        this.configuration = JenkinsConnectionDetails.aJenkinsConfiguration().serverUrl(this.serverUrl).build();
         this.service = new JenkinsService(this.configuration, this.cliInvoker);
     }
 

@@ -6,7 +6,7 @@ import static org.mockito.Matchers.anyVararg;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static uk.co.codera.ci.tooling.jenkins.DeleteJobCommand.aDeleteJobCommand;
-import static uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration.aJenkinsConfiguration;
+import static uk.co.codera.ci.tooling.jenkins.JenkinsConnectionDetails.aJenkinsConfiguration;
 
 import java.util.UUID;
 
@@ -15,11 +15,11 @@ import org.junit.Test;
 
 import uk.co.codera.ci.tooling.jenkins.DeleteJobCommand;
 import uk.co.codera.ci.tooling.jenkins.JenkinsCommandLineInterfaceInvoker;
-import uk.co.codera.ci.tooling.jenkins.JenkinsConfiguration;
+import uk.co.codera.ci.tooling.jenkins.JenkinsConnectionDetails;
 
 public class DeleteJobCommandTest {
 
-    private JenkinsConfiguration configuration;
+    private JenkinsConnectionDetails configuration;
     private String jenkinsServerUrl;
 
     @Before

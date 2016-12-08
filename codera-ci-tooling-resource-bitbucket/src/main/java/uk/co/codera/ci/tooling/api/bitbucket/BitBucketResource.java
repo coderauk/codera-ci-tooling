@@ -39,7 +39,7 @@ public class BitBucketResource {
         if (gitPushEvent.getReference().isTag()) {
             this.logger.info("Ignoring event because it is not related to a branch");
         } else {
-            this.gitEventListener.onPush(gitPushEvent);
+            this.gitEventListener.on(gitPushEvent);
         }
     }
 }

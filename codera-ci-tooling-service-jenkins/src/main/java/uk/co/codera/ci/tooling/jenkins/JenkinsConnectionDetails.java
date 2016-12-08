@@ -1,10 +1,10 @@
 package uk.co.codera.ci.tooling.jenkins;
 
-public class JenkinsConfiguration {
+public class JenkinsConnectionDetails {
 
     private final String serverUrl;
 
-    private JenkinsConfiguration(Builder builder) {
+    private JenkinsConnectionDetails(Builder builder) {
         this.serverUrl = builder.serverUrl;
     }
 
@@ -29,8 +29,8 @@ public class JenkinsConfiguration {
             return this;
         }
 
-        public JenkinsConfiguration build() {
-            return new JenkinsConfiguration(this);
+        public JenkinsConnectionDetails build() {
+            return new JenkinsConnectionDetails(this);
         }
     }
 }

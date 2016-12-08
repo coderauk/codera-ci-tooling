@@ -1,7 +1,7 @@
-package uk.co.codera.ci.tooling.svn;
+package uk.co.codera.ci.tooling.scm;
 
 import static org.mockito.Mockito.verify;
-import static uk.co.codera.ci.tooling.svn.SvnCommitEvent.anSvnCommitEvent;
+import static uk.co.codera.ci.tooling.scm.ScmEvent.anScmEvent;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,22 +11,22 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SvnEventLoggerTest {
+public class ScmEventLoggerTest {
 
     @Mock
     private Logger mockLogger;
 
-    private SvnEventListener listener;
+    private ScmEventListener listener;
 
     @Before
     public void before() {
-        this.listener = new SvnEventLogger(this.mockLogger);
+        this.listener = new ScmEventLogger(this.mockLogger);
     }
 
     @Test
     public void shouldLogGitEventWhenInvoked() {
-        SvnCommitEvent event = anSvnCommitEvent().build();
-        this.listener.onCommit(event);
+        ScmEvent event = anScmEvent().build();
+        this.listener.on(event);
         verify(this.mockLogger).info("Received [{}]", event);
     }
 }

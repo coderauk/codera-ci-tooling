@@ -2,7 +2,7 @@ package uk.co.codera.ci.tooling.jenkins;
 
 public abstract class JenkinsCommand {
 
-    private final JenkinsConfiguration jenkinsConfiguration;
+    private final JenkinsConnectionDetails jenkinsConfiguration;
 
     protected JenkinsCommand(Builder<?, ?> builder) {
         this.jenkinsConfiguration = builder.jenkinsConfiguration;
@@ -20,9 +20,9 @@ public abstract class JenkinsCommand {
 
     @SuppressWarnings("unchecked")
     public abstract static class Builder<T, C extends JenkinsCommand> {
-        private JenkinsConfiguration jenkinsConfiguration;
+        private JenkinsConnectionDetails jenkinsConfiguration;
 
-        public T with(JenkinsConfiguration jenkinsConfiguration) {
+        public T with(JenkinsConnectionDetails jenkinsConfiguration) {
             this.jenkinsConfiguration = jenkinsConfiguration;
             return (T) this;
         }

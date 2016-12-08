@@ -7,14 +7,14 @@ public class JenkinsService {
 
     private static final Logger logger = LoggerFactory.getLogger(JenkinsService.class);
 
-    private final JenkinsConfiguration jenkinsConfiguration;
+    private final JenkinsConnectionDetails jenkinsConfiguration;
     private final JenkinsCommandLineInterfaceInvoker cliInvoker;
 
-    public JenkinsService(JenkinsConfiguration jenkinsConfiguration) {
+    public JenkinsService(JenkinsConnectionDetails jenkinsConfiguration) {
         this(jenkinsConfiguration, new JenkinsCommandLineInterfaceInvoker());
     }
 
-    public JenkinsService(JenkinsConfiguration jenkinsConfiguration, JenkinsCommandLineInterfaceInvoker cliInvoker) {
+    public JenkinsService(JenkinsConnectionDetails jenkinsConfiguration, JenkinsCommandLineInterfaceInvoker cliInvoker) {
         this.jenkinsConfiguration = jenkinsConfiguration;
         this.cliInvoker = cliInvoker;
     }

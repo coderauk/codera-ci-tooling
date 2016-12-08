@@ -49,7 +49,7 @@ public class SonarJobDeleterTest {
 
     @Test
     public void shouldPassGeneratedJobKeyToDeleteService() {
-        when(this.templateService.create(any())).thenReturn("sonar:key");
+        when(this.templateService.create(any(GitPushEvent.class))).thenReturn("sonar:key");
         push(aDeletePushEvent());
         verify(this.deleteService).deleteJob("sonar:key");
     }

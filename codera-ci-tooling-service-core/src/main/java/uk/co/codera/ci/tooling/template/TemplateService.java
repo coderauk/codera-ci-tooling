@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import uk.co.codera.ci.tooling.git.GitPushEvent;
+import uk.co.codera.ci.tooling.svn.SvnCommitEvent;
 import uk.co.codera.templating.TemplateEngine;
 
 public class TemplateService {
@@ -27,6 +28,15 @@ public class TemplateService {
         params.put(PARAMETER_SHORT_BRANCH_NAME, event.getReference().shortBranchName());
         params.put(PARAMETER_REPOSITORY_URL, event.getRepositoryUrl());
         params.put(PARAMETER_REPOSITORY_NAME, event.getRepositoryName());
+        return this.templateEngine.merge(this.template, params);
+    }
+
+    public String create(SvnCommitEvent event) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(PARAMETER_BRANCH_NAME, event.branchName());
+        params.put(PARAMETER_SHORT_BRANCH_NAME, event.branchName());
+        params.put(PARAMETER_REPOSITORY_URL, event.svnLocation());
+        params.put(PARAMETER_REPOSITORY_NAME, event.projectName());
         return this.templateEngine.merge(this.template, params);
     }
 }

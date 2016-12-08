@@ -7,6 +7,7 @@ import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static uk.co.codera.ci.tooling.svn.SvnCommitEvent.anSvnCommitEvent;
 
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import uk.co.codera.ci.tooling.git.GitPushEvent;
 import uk.co.codera.ci.tooling.git.GitReference;
+import uk.co.codera.ci.tooling.svn.SvnCommitEvent;
 import uk.co.codera.ci.tooling.template.TemplateService;
 import uk.co.codera.templating.TemplateEngine;
 
@@ -38,41 +40,81 @@ public class TemplateServiceTest {
     }
 
     @Test
-    public void shouldUseJobTemplateWhenProducingJobDetails() {
+    public void shouldUseJobTemplateWhenProducingJobDetailsForGitPushEvent() {
         create(aGitPushEvent());
         verify(this.mockTemplateEngine).merge(eq(TEMPLATE), anyMapOf(String.class, Object.class));
     }
 
     @Test
-    public void shouldPassBranchNameToTemplateEngine() {
+    public void shouldPassBranchNameToTemplateEngineFromGitPushEvent() {
         create(aGitPushEvent().reference(GitReference.from("refs/heads/feature/AG-123-some-feature-branch")));
         assertThat(passedParameters().get(TemplateService.PARAMETER_BRANCH_NAME),
                 is("feature/AG-123-some-feature-branch"));
     }
 
     @Test
-    public void shouldPassShortBranchNameToTemplateEngine() {
+    public void shouldPassShortBranchNameToTemplateEngineFromGitPushEvent() {
         create(aGitPushEvent().reference(GitReference.from("refs/heads/feature/some-feature-branch")));
         assertThat(passedParameters().get(TemplateService.PARAMETER_SHORT_BRANCH_NAME), is("some-feature-branch"));
     }
 
     @Test
-    public void shouldPassRepositoryUrlToTemplateEngine() {
+    public void shouldPassRepositoryUrlToTemplateEngineFromGitPushEvent() {
         create(aGitPushEvent().repositoryUrl("ssh://repo"));
         assertThat(passedParameters().get(TemplateService.PARAMETER_REPOSITORY_URL), is("ssh://repo"));
     }
 
     @Test
-    public void shouldPassRepositoryNameToTemlpateEngine() {
+    public void shouldPassRepositoryNameToTemlpateEngineFromGitPushEvent() {
         create(aGitPushEvent().repositoryName("boatymcboatface"));
         assertThat(passedParameters().get(TemplateService.PARAMETER_REPOSITORY_NAME), is("boatymcboatface"));
     }
 
     @Test
-    public void shouldReturnResultFromTemplateEngine() {
-        String result = "The merged result";
-        when(this.mockTemplateEngine.merge(any(String.class), anyMapOf(String.class, Object.class))).thenReturn(result);
+    public void shouldReturnResultFromTemplateEngineForGitPushEvent() {
+        String result = whenTemplateEngineReturns("The merged result");
         assertThat(create(aGitPushEvent()), is(result));
+    }
+
+    @Test
+    public void shouldUseJobTemplateWhenProducingJobDetailsForSvnCommitEvent() {
+        create(anSvnCommitEvent());
+        verify(this.mockTemplateEngine).merge(eq(TEMPLATE), anyMapOf(String.class, Object.class));
+    }
+
+    @Test
+    public void shouldPassBranchNameToTemplateEngineFromSvnCommitEvent() {
+        create(anSvnCommitEvent().branchName("my-branch"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_BRANCH_NAME), is("my-branch"));
+    }
+
+    @Test
+    public void shouldPassShortBranchNameToTemplateEngineFromSvnCommitEvent() {
+        create(anSvnCommitEvent().branchName("my-short-branch"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_SHORT_BRANCH_NAME), is("my-short-branch"));
+    }
+
+    @Test
+    public void shouldPassRepositoryUrlToTemplateEngineFromSvnCommitEvent() {
+        create(anSvnCommitEvent().svnLocation("svn://host/project/trunk"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_REPOSITORY_URL), is("svn://host/project/trunk"));
+    }
+
+    @Test
+    public void shouldPassProjectNameToTemlpateEngineFromSvnEvent() {
+        create(anSvnCommitEvent().projectName("boatymcboatface"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_REPOSITORY_NAME), is("boatymcboatface"));
+    }
+
+    @Test
+    public void shouldReturnResultFromTemplateEngineForSvnCommitEvent() {
+        String result = whenTemplateEngineReturns("The merged result");
+        assertThat(create(anSvnCommitEvent()), is(result));
+    }
+
+    private String whenTemplateEngineReturns(String result) {
+        when(this.mockTemplateEngine.merge(any(String.class), anyMapOf(String.class, Object.class))).thenReturn(result);
+        return result;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -88,5 +130,9 @@ public class TemplateServiceTest {
 
     private String create(GitPushEvent.Builder pushEvent) {
         return this.service.create(pushEvent.build());
+    }
+
+    private String create(SvnCommitEvent.Builder commitEvent) {
+        return this.service.create(commitEvent.build());
     }
 }

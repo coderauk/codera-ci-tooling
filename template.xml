@@ -3,31 +3,13 @@
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <jenkins.plugins.slack.SlackNotifier_-SlackJobProperty plugin="slack@1.8.1">
-      <teamDomain>coderauk</teamDomain>
-      <token>jOtZrvGwHEMgeJMi0p43TcVO</token>
-      <room>#tooling-ci</room>
-      <startNotification>false</startNotification>
-      <notifySuccess>true</notifySuccess>
-      <notifyAborted>false</notifyAborted>
-      <notifyNotBuilt>true</notifyNotBuilt>
-      <notifyUnstable>true</notifyUnstable>
-      <notifyFailure>true</notifyFailure>
-      <notifyBackToNormal>true</notifyBackToNormal>
-      <notifyRepeatedFailure>true</notifyRepeatedFailure>
-      <includeTestSummary>true</includeTestSummary>
-      <showCommitList>true</showCommitList>
-      <includeCustomMessage>false</includeCustomMessage>
-      <customMessage></customMessage>
-    </jenkins.plugins.slack.SlackNotifier_-SlackJobProperty>
-  </properties>
+  <properties />
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <url>$repositoryUrl</url>
-        <credentialsId>3dde7f9f-b33e-4419-ae0f-4fc23f886f78</credentialsId>
+        <credentialsId>credential-id</credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -66,14 +48,7 @@
   <settings class="jenkins.mvn.DefaultSettingsProvider"/>
   <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
   <reporters/>
-  <publishers>
-    <jenkins.plugins.slack.SlackNotifier plugin="slack@1.8.1">
-      <teamDomain>coderauk</teamDomain>
-      <authToken>jOtZrvGwHEMgeJMi0p43TcVO</authToken>
-      <buildServerUrl>https://dev.codera.co.uk/jenkins/</buildServerUrl>
-      <room></room>
-    </jenkins.plugins.slack.SlackNotifier>
-  </publishers>
+  <publishers />
   <buildWrappers/>
   <prebuilders/>
   <postbuilders/>

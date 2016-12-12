@@ -15,6 +15,20 @@ public class CiToolingConfiguration extends Configuration {
     @JsonProperty
     private SonarConfiguration sonar;
 
+    public CiToolingConfiguration() {
+        super();
+    }
+
+    private CiToolingConfiguration(Builder builder) {
+        this();
+        this.sonar = builder.sonarConfiguration;
+
+    }
+
+    public static Builder someCiToolingConfiguration() {
+        return new Builder();
+    }
+
     public BitBucketConfiguration getBitBucket() {
         return bitBucket;
     }
@@ -37,5 +51,23 @@ public class CiToolingConfiguration extends Configuration {
 
     public boolean isSonarConfigured() {
         return getSonar() != null;
+    }
+
+    public static class Builder {
+
+        private SonarConfiguration sonarConfiguration;
+
+        private Builder() {
+            super();
+        }
+
+        public Builder with(SonarConfiguration.Builder sonarConfiguration) {
+            this.sonarConfiguration = sonarConfiguration.build();
+            return this;
+        }
+
+        public CiToolingConfiguration build() {
+            return new CiToolingConfiguration(this);
+        }
     }
 }

@@ -21,32 +21,32 @@ public class SonarConfiguration {
     @JsonProperty
     private String jobKeyTemplate;
 
-    public void setSonarUrl(String sonarUrl) {
-        this.sonarUrl = sonarUrl;
+    public SonarConfiguration() {
+        super();
+    }
+
+    private SonarConfiguration(Builder builder) {
+        this();
+        this.sonarUrl = builder.sonarUrl;
+        this.user = builder.user;
+        this.password = builder.password;
+        this.jobKeyTemplate = builder.jobKeyTemplate;
+    }
+
+    public static Builder someSonarConfiguration() {
+        return new Builder();
     }
 
     public String getSonarUrl() {
         return this.sonarUrl;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public String getUser() {
         return this.user;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPassword() {
         return this.password;
-    }
-
-    public void setJobKeyTemplate(String jobKeyTemplate) {
-        this.jobKeyTemplate = jobKeyTemplate;
     }
 
     public String getJobKeyTemplate() {
@@ -55,5 +55,41 @@ public class SonarConfiguration {
 
     public boolean hasJobKeyTemplate() {
         return getJobKeyTemplate() != null;
+    }
+
+    public static class Builder {
+
+        private String sonarUrl;
+        private String user;
+        private String password;
+        private String jobKeyTemplate;
+
+        private Builder() {
+            super();
+        }
+
+        public Builder sonarUrl(String sonarUrl) {
+            this.sonarUrl = sonarUrl;
+            return this;
+        }
+
+        public Builder user(String user) {
+            this.user = user;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder jobKeyTemplate(String jobKeyTemplate) {
+            this.jobKeyTemplate = jobKeyTemplate;
+            return this;
+        }
+
+        public SonarConfiguration build() {
+            return new SonarConfiguration(this);
+        }
     }
 }

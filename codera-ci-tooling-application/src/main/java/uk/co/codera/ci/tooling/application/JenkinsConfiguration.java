@@ -14,16 +14,8 @@ public class JenkinsConfiguration {
     @JsonProperty
     private String jenkinsJobTemplateFile;
 
-    public void setJenkinsServerUrl(String jenkinsServerUrl) {
-        this.jenkinsServerUrl = jenkinsServerUrl;
-    }
-
     public String getJenkinsServerUrl() {
         return this.jenkinsServerUrl;
-    }
-
-    public void setJenkinsJobTemplateFile(String jenkinsJobTemplateFile) {
-        this.jenkinsJobTemplateFile = jenkinsJobTemplateFile;
     }
 
     public String getJenkinsJobTemplateFile() {

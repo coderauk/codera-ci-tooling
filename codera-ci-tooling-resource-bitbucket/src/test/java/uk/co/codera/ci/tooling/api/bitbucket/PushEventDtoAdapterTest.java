@@ -5,10 +5,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
-import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidBranchAddRefChange;
-import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidProject;
-import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidPushEvent;
-import static uk.co.codera.ci.tooling.api.bitbucket.PushEvents.aValidRepository;
+import static uk.co.codera.ci.tooling.api.bitbucket.data.TestPushEvents.aValidBranchAddRefChange;
+import static uk.co.codera.ci.tooling.api.bitbucket.data.TestPushEvents.aValidProject;
+import static uk.co.codera.ci.tooling.api.bitbucket.data.TestPushEvents.aValidPushEvent;
+import static uk.co.codera.ci.tooling.api.bitbucket.data.TestPushEvents.aValidRepository;
 
 import org.junit.Before;
 import org.junit.Test;

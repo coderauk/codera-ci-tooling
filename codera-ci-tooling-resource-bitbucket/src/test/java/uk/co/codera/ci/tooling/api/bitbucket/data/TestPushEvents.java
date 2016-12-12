@@ -1,4 +1,4 @@
-package uk.co.codera.ci.tooling.api.bitbucket;
+package uk.co.codera.ci.tooling.api.bitbucket.data;
 
 import uk.co.codera.ci.tooling.api.bitbucket.dto.ProjectDto;
 import uk.co.codera.ci.tooling.api.bitbucket.dto.PushEventDto;
@@ -6,14 +6,14 @@ import uk.co.codera.ci.tooling.api.bitbucket.dto.RefChangeDto;
 import uk.co.codera.ci.tooling.api.bitbucket.dto.RepositoryDto;
 import uk.co.codera.ci.tooling.git.GitPushType;
 
-public class PushEvents {
+public class TestPushEvents {
 
     public static final String GIT_BRANCH_REFERENCE_ID = "refs/head/master";
     public static final String GIT_TAG_REFERENCE_ID = "refs/tags/master";
     public static final String REPOSITORY_SLUG = "tooling";
     public static final String PROJECT_KEY = "tooly";
 
-    private PushEvents() {
+    private TestPushEvents() {
         super();
     }
 

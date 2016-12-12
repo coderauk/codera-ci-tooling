@@ -15,24 +15,12 @@ public class CiToolingConfiguration extends Configuration {
     @JsonProperty
     private SonarConfiguration sonar;
 
-    public void setBitBucket(BitBucketConfiguration bitbucket) {
-        this.bitBucket = bitbucket;
-    }
-
     public BitBucketConfiguration getBitBucket() {
         return bitBucket;
     }
 
-    public void setJenkins(JenkinsConfiguration jenkins) {
-        this.jenkins = jenkins;
-    }
-
     public JenkinsConfiguration getJenkins() {
         return this.jenkins;
-    }
-
-    public void setSonar(SonarConfiguration sonar) {
-        this.sonar = sonar;
     }
 
     public SonarConfiguration getSonar() {

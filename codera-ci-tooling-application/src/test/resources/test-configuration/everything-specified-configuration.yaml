@@ -1,0 +1,21 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 7060
+  adminConnectors:
+    - type: http
+      port: 7061
+
+bitBucket:
+  bitBucketServerName: my-bitbucket-server
+  bitBucketServerPort: 8080
+
+jenkins:
+  jenkinsServerUrl: https://my-jenkins-server/jenkins
+  jenkinsJobTemplateFile: /var/tooling/jenkins-job-template.xml
+
+sonar:
+  sonarUrl: https://my-sonar-server/sonar
+  user: bob
+  password: fred
+  jobKeyTemplate: ${projectName}:${branchName}

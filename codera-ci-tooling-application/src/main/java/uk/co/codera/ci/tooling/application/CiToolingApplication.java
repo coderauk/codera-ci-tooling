@@ -10,8 +10,6 @@ import org.apache.commons.io.FileUtils;
 import io.dropwizard.Application;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Environment;
-import uk.co.codera.ci.tooling.api.bitbucket.BitBucketResource;
-import uk.co.codera.ci.tooling.api.bitbucket.PushEventDtoAdapter;
 import uk.co.codera.ci.tooling.api.github.GitHubResource;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEventAdapter;
@@ -46,7 +44,7 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
         GitEventListener gitEventListener = new GitEventListener(new GitPushEventAdapter(), scmEventBroadcaster);
         if (configuration.isBitBucketConfigured()) {
-            jersey.register(bitBucketResource(configuration.getBitBucket(), gitEventListener));
+            jersey.register(BitBucketResourceFactory.create(configuration.getBitBucket(), gitEventListener));
         }
         jersey.register(gitHubResource(gitEventListener));
     }
@@ -119,13 +117,6 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
 
     private TemplateService jenkinsJobNameFactory(TemplateEngine templateEngine) {
         return new TemplateService(templateEngine, "${repositoryName} - ${shortBranchName} - build");
-    }
-
-    private BitBucketResource bitBucketResource(BitBucketConfiguration configuration,
-            GitEventListener gitEventBroadcaster) {
-        PushEventDtoAdapter gitPushEventAdapter = new PushEventDtoAdapter(configuration.getBitBucketServerName(),
-                configuration.getBitBucketServerPort());
-        return new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
     }
 
     private GitHubResource gitHubResource(GitEventListener gitEventBroadcaster) {

@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 
 import uk.co.codera.ci.tooling.api.bitbucket.BitBucketResource;
 import uk.co.codera.ci.tooling.api.bitbucket.PushEventDtoAdapter;
+import uk.co.codera.ci.tooling.api.bitbucket.data.TestPushEvents;
 import uk.co.codera.ci.tooling.api.bitbucket.dto.PushEventDto;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEvent;
@@ -82,11 +83,11 @@ public class BitBucketResourceTest {
     }
 
     private PushEventDto aPushEvent() {
-        return PushEvents.aValidPushEvent().build();
+        return TestPushEvents.aValidPushEvent().build();
     }
 
     private PushEventDto aPushEventForTags() {
-        return PushEvents.aValidPushEventForTags().build();
+        return TestPushEvents.aValidPushEventForTags().build();
     }
 
     private void onPush(PushEventDto event) {

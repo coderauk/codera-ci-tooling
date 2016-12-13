@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SvnConfiguration {
 
+    public static final int DEFAULT_PORT = 80;
+
     @NotEmpty
     @JsonProperty
     private String host;
@@ -31,8 +33,8 @@ public class SvnConfiguration {
         return this.host;
     }
 
-    public Integer getPort() {
-        return this.port;
+    public int getPort() {
+        return this.port == null ? DEFAULT_PORT : this.port.intValue();
     }
 
     public static class Builder {

@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-ci-tooling</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
+		<version>0.2.0-SNAPSHOT</version>
 	</parent>	
 
 	<description>Provides resources for github integration using their webhooks.</description>

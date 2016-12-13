@@ -21,8 +21,7 @@ public class JenkinsService {
 
     public void createJob(String jobName, String jobDefinition) {
         logger.info("Create job with definition [{}]", jobDefinition);
-        execute(CreateJobCommand.aCreateJobCommand().jobName(jobName).jobDefinition(jobDefinition)
-                .with(this.jenkinsConfiguration));
+        execute(CreateJobCommand.aCreateJobCommand().jobName(jobName).jobDefinition(jobDefinition).with(this.jenkinsConfiguration));
     }
 
     public void deleteJob(String jobName) {

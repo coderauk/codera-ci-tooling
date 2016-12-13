@@ -39,20 +39,18 @@ public class ScmEventBroadcasterConfigurer {
     }
 
     private static ScmEventListener sonarEventListener(SonarConfiguration configuration) {
-        return aConfigurableScmEventListenerFactory().register(ScmEventType.DELETE, sonarJobDeleter(configuration))
-                .build();
+        return aConfigurableScmEventListenerFactory().register(ScmEventType.DELETE, sonarJobDeleter(configuration)).build();
     }
 
     private static SonarJobDeleter sonarJobDeleter(SonarConfiguration sonarConfiguration) {
         TemplateService jobKeyFactory = sonarJobKeyFactory(sonarConfiguration);
-        SonarDeleteService deleteService = new SonarDeleteService(new HttpClientFactory(),
-                sonarConfiguration.getSonarUrl(), sonarConfiguration.getUser(), sonarConfiguration.getPassword());
+        SonarDeleteService deleteService = new SonarDeleteService(new HttpClientFactory(), sonarConfiguration.getSonarUrl(), sonarConfiguration.getUser(),
+                sonarConfiguration.getPassword());
         return new SonarJobDeleter(jobKeyFactory, deleteService);
     }
 
     private static TemplateService sonarJobKeyFactory(SonarConfiguration sonarConfiguration) {
-        String template = sonarConfiguration.hasJobKeyTemplate() ? sonarConfiguration.getJobKeyTemplate()
-                : DEFAULT_SONAR_JOB_KEY_TEMPLATE;
+        String template = sonarConfiguration.hasJobKeyTemplate() ? sonarConfiguration.getJobKeyTemplate() : DEFAULT_SONAR_JOB_KEY_TEMPLATE;
         return new TemplateService(new VelocityTemplateEngine(), template);
     }
 
@@ -61,13 +59,11 @@ public class ScmEventBroadcasterConfigurer {
         TemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
         TemplateService jobFactory = jenkinsJobFactory(jenkinsConfiguration, templateEngine);
         JenkinsService jenkinsService = jenkinsService(jenkinsConfiguration);
-        return aConfigurableScmEventListenerFactory()
-                .register(ScmEventType.ADD, jenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService))
+        return aConfigurableScmEventListenerFactory().register(ScmEventType.ADD, jenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService))
                 .register(ScmEventType.DELETE, jenkinsJobDeleter(jobNameFactory, jenkinsService)).build();
     }
 
-    private static ScmEventListener jenkinsJobCreator(TemplateService jobNameFactory, TemplateService jobFactory,
-            JenkinsService jenkinsService) {
+    private static ScmEventListener jenkinsJobCreator(TemplateService jobNameFactory, TemplateService jobFactory, JenkinsService jenkinsService) {
         return new JenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService);
     }
 
@@ -76,8 +72,7 @@ public class ScmEventBroadcasterConfigurer {
     }
 
     private static JenkinsService jenkinsService(JenkinsConfiguration configuration) {
-        JenkinsConnectionDetails jenkinsConfiguration = JenkinsConnectionDetails.aJenkinsConfiguration()
-                .serverUrl(configuration.getJenkinsServerUrl()).build();
+        JenkinsConnectionDetails jenkinsConfiguration = JenkinsConnectionDetails.aJenkinsConfiguration().serverUrl(configuration.getJenkinsServerUrl()).build();
         return new JenkinsService(jenkinsConfiguration);
     }
 

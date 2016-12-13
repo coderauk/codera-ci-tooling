@@ -22,8 +22,8 @@ public class GitPushEventAdapter {
 
     public GitPushEvent from(String eventType, GitHubPushEvent event) {
         Repository repository = event.getRepository();
-        return GitPushEvent.aGitPushEvent().reference(gitReference(event)).repositoryName(repository.getName())
-                .repositoryUrl(repository.getSshUrl()).pushType(pushType(eventType)).build();
+        return GitPushEvent.aGitPushEvent().reference(gitReference(event)).repositoryName(repository.getName()).repositoryUrl(repository.getSshUrl())
+                .pushType(pushType(eventType)).build();
     }
 
     private GitReference gitReference(GitHubPushEvent event) {

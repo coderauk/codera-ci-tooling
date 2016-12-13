@@ -56,8 +56,7 @@ public class GitPushEventAdapterTest {
 
     @Test
     public void shouldConstructGitReferenceFromPushEvent() {
-        assertThat(from(aValidPushEvent().ref("my-branch")).getReference(),
-                is(equalTo(GitReference.from("refs/heads/my-branch"))));
+        assertThat(from(aValidPushEvent().ref("my-branch")).getReference(), is(equalTo(GitReference.from("refs/heads/my-branch"))));
     }
 
     private GitPushEvent from(Repository.Builder repository) {

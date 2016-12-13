@@ -44,9 +44,7 @@ public class SonarDeleteServiceTest extends BaseSonarServiceTestCase {
         Logger logger = deleterWithMockLogger();
         whenHttpResponseIsNotFound();
         delete("carly");
-        verify(logger)
-                .info("Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
-                        "carly");
+        verify(logger).info("Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted", "carly");
     }
 
     @Test
@@ -54,8 +52,7 @@ public class SonarDeleteServiceTest extends BaseSonarServiceTestCase {
         Logger logger = deleterWithMockLogger();
         whenHttpResponseIsServerError();
         delete("simon");
-        verify(logger).warn("Unexpected http status code [{}] when trying to delete sonar project with key [{}]", 500,
-                "simon");
+        verify(logger).warn("Unexpected http status code [{}] when trying to delete sonar project with key [{}]", 500, "simon");
     }
 
     @Override

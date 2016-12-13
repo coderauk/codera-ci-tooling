@@ -71,8 +71,7 @@ public class GitReferenceTest {
 
     @Test
     public void differentReferenceShouldNotBeEqual() {
-        assertThat(GitReference.from("refs/heads/feature/AB-123"),
-                is(not(equalTo(GitReference.from("refs/heads/master")))));
+        assertThat(GitReference.from("refs/heads/feature/AB-123"), is(not(equalTo(GitReference.from("refs/heads/master")))));
     }
 
     @Test
@@ -93,14 +92,12 @@ public class GitReferenceTest {
 
     @Test
     public void differentInstanceButSameReferenceShouldHaveSameHashCode() {
-        assertThat(GitReference.from("refs/heads/master").hashCode(), is(equalTo(GitReference.from("refs/heads/master")
-                .hashCode())));
+        assertThat(GitReference.from("refs/heads/master").hashCode(), is(equalTo(GitReference.from("refs/heads/master").hashCode())));
     }
 
     @Test
     public void differentReferenceShouldNotHaveSameHashCode() {
-        assertThat(GitReference.from("refs/heads/feature/AB-123").hashCode(),
-                is(not(equalTo(GitReference.from("refs/heads/master").hashCode()))));
+        assertThat(GitReference.from("refs/heads/feature/AB-123").hashCode(), is(not(equalTo(GitReference.from("refs/heads/master").hashCode()))));
     }
 
     @Test

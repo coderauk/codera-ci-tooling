@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-parent-github</artifactId>
-		<version>0.0.14</version>
+		<version>0.0.26</version>
 	</parent>	
 
 	<description>Parent pom file for Codera CI Tooling</description>

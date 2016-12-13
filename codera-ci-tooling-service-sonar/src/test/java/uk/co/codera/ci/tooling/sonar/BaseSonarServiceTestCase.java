@@ -83,8 +83,7 @@ public abstract class BaseSonarServiceTestCase {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpResponseToRuntimeException()
-            throws IOException {
+    public void shouldMapCheckedExceptionDuringHttpRequestAndClosingOfHttpResponseToRuntimeException() throws IOException {
         when(this.httpClient.execute(any())).thenThrow(new IOException());
         doThrow(new IOException()).when(this.httpResponse).close();
         invokeServiceExpectingFailure();

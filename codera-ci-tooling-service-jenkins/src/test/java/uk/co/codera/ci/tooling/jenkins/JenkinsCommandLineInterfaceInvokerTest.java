@@ -39,8 +39,7 @@ public class JenkinsCommandLineInterfaceInvokerTest {
     @Test
     public void shouldPrintUsageWhenInvokedWithNoArguments() {
         this.invoker.invoke(new String[] {});
-        assertThat(capturedErrorOutput(), CoreMatchers.anyOf(containsString("Jenkins CLI"),
-                containsString("Failed to authenticate with your SSH keys")));
+        assertThat(capturedErrorOutput(), CoreMatchers.anyOf(containsString("Jenkins CLI"), containsString("Failed to authenticate with your SSH keys")));
     }
 
     private String capturedErrorOutput() {

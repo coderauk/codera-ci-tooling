@@ -45,8 +45,7 @@ public class TemplateServiceTest {
     @Test
     public void shouldPassBranchNameToTemplateEngineFromScmEvent() {
         create(anScmEvent().branchName("feature/AG-123-some-feature-branch"));
-        assertThat(passedParameters().get(TemplateService.PARAMETER_BRANCH_NAME),
-                is("feature/AG-123-some-feature-branch"));
+        assertThat(passedParameters().get(TemplateService.PARAMETER_BRANCH_NAME), is("feature/AG-123-some-feature-branch"));
     }
 
     @Test

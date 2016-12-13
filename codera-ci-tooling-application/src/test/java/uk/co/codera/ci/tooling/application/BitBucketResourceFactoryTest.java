@@ -30,8 +30,7 @@ public class BitBucketResourceFactoryTest {
 
     @Before
     public void before() {
-        this.bitBucketConfiguration = someBitBucketConfiguration().host(randomAlphanumeric(10)).port(nextInt(80, 8081))
-                .build();
+        this.bitBucketConfiguration = someBitBucketConfiguration().host(randomAlphanumeric(10)).port(nextInt(80, 8081)).build();
     }
 
     @Test

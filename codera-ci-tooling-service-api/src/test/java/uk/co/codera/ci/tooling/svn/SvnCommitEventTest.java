@@ -22,8 +22,7 @@ public class SvnCommitEventTest {
 
     @Test
     public void shouldBeAbleToSetSvnLocation() {
-        assertThat(anSvnCommitEvent().svnLocation("my-project/branches/JIRA-0001").build().svnLocation(),
-                is("my-project/branches/JIRA-0001"));
+        assertThat(anSvnCommitEvent().svnLocation("my-project/branches/JIRA-0001").build().svnLocation(), is("my-project/branches/JIRA-0001"));
     }
 
     @Test

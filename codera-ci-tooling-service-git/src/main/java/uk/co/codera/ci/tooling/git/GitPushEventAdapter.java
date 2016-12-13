@@ -17,9 +17,8 @@ public class GitPushEventAdapter {
     }
 
     public ScmEvent adapt(GitPushEvent gitPushEvent) {
-        return ScmEvent.anScmEvent().eventType(eventTypeMappings.get(gitPushEvent.getPushType()))
-                .repositoryUrl(gitPushEvent.getRepositoryUrl()).projectName(gitPushEvent.getRepositoryName())
-                .branchName(gitPushEvent.getReference().branchName())
+        return ScmEvent.anScmEvent().eventType(eventTypeMappings.get(gitPushEvent.getPushType())).repositoryUrl(gitPushEvent.getRepositoryUrl())
+                .projectName(gitPushEvent.getRepositoryName()).branchName(gitPushEvent.getReference().branchName())
                 .shortBranchName(gitPushEvent.getReference().shortBranchName()).build();
     }
 }

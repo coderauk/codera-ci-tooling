@@ -20,14 +20,13 @@ public class PushEventDtoAdapter {
 
     public GitPushEvent from(PushEventDto event) {
         RefChangeDto refChange = event.getRefChanges().get(0);
-        return GitPushEvent.aGitPushEvent().pushType(refChange.getType())
-                .reference(GitReference.from(refChange.getRefId())).repositoryName(event.getRepository().getSlug())
-                .repositoryUrl(repositoryUrl(event)).build();
+        return GitPushEvent.aGitPushEvent().pushType(refChange.getType()).reference(GitReference.from(refChange.getRefId()))
+                .repositoryName(event.getRepository().getSlug()).repositoryUrl(repositoryUrl(event)).build();
     }
 
     private String repositoryUrl(PushEventDto event) {
         RepositoryDto repository = event.getRepository();
-        return String.format(TEMPLATE_REPOSITORY_URL, this.bitBucketServerName, this.bitBucketServerPort, repository
-                .getProject().getKey().toLowerCase(), repository.getSlug());
+        return String.format(TEMPLATE_REPOSITORY_URL, this.bitBucketServerName, this.bitBucketServerPort, repository.getProject().getKey().toLowerCase(),
+                repository.getSlug());
     }
 }

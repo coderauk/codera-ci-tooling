@@ -29,9 +29,8 @@ public class SvnEventDtoAdapter {
     }
 
     public ScmEvent from(SvnEventDto svnEvent) {
-        return ScmEvent.anScmEvent().repositoryUrl(repositoryUrl(svnEvent)).eventType(eventType(svnEvent))
-                .branchName(svnEvent.getBranch()).shortBranchName(svnEvent.getBranch())
-                .projectName(svnEvent.getProject()).build();
+        return ScmEvent.anScmEvent().repositoryUrl(repositoryUrl(svnEvent)).eventType(eventType(svnEvent)).branchName(svnEvent.getBranch())
+                .shortBranchName(svnEvent.getBranch()).projectName(svnEvent.getProject()).build();
     }
 
     private String repositoryUrl(SvnEventDto svnEvent) {

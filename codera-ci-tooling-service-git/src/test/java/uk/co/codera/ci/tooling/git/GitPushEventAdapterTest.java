@@ -37,15 +37,12 @@ public class GitPushEventAdapterTest {
 
     @Test
     public void shouldAdaptBranchName() {
-        assertThat(
-                adapt(aGitPushEvent().reference(GitReference.from("refs/branches/feature/my-feature"))).branchName(),
-                is("feature/my-feature"));
+        assertThat(adapt(aGitPushEvent().reference(GitReference.from("refs/branches/feature/my-feature"))).branchName(), is("feature/my-feature"));
     }
 
     @Test
     public void shouldAdaptShortBranchName() {
-        assertThat(adapt(aGitPushEvent().reference(GitReference.from("refs/branches/feature/my-feature")))
-                .shortBranchName(), is("my-feature"));
+        assertThat(adapt(aGitPushEvent().reference(GitReference.from("refs/branches/feature/my-feature"))).shortBranchName(), is("my-feature"));
     }
 
     @Test

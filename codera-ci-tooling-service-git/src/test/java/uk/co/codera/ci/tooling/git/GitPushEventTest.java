@@ -57,7 +57,7 @@ public class GitPushEventTest {
     }
 
     private GitPushEvent aGitPushEventWithGitReferenceFrom(String reference) {
-        return GitPushEvent.aGitPushEvent().pushType(GitPushType.ADD).reference(GitReference.from(reference))
-                .repositoryName("mctooly").repositoryUrl("ssh://git@server.co.uk:7999/tooly/mctooly.git").build();
+        return GitPushEvent.aGitPushEvent().pushType(GitPushType.ADD).reference(GitReference.from(reference)).repositoryName("mctooly")
+                .repositoryUrl("ssh://git@server.co.uk:7999/tooly/mctooly.git").build();
     }
 }

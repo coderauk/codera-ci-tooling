@@ -7,8 +7,8 @@ import uk.co.codera.ci.tooling.application.SonarConfiguration;
 public class TestSonarConfigurations {
 
     public static SonarConfiguration.Builder randomSonarConfiguration() {
-        return SonarConfiguration.someSonarConfiguration().sonarUrl(randomString()).user(randomString())
-                .password(randomString()).jobKeyTemplate(randomString());
+        return SonarConfiguration.someSonarConfiguration().sonarUrl(randomString()).user(randomString()).password(randomString())
+                .jobKeyTemplate(randomString());
     }
 
     private static String randomString() {

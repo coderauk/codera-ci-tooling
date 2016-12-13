@@ -22,8 +22,7 @@ public class ScmEventTest {
 
     @Test
     public void shouldBeAbleToSetRepositoryUrl() {
-        assertThat(anScmEvent().repositoryUrl("https://host/scm/location").build().repositoryUrl(),
-                is("https://host/scm/location"));
+        assertThat(anScmEvent().repositoryUrl("https://host/scm/location").build().repositoryUrl(), is("https://host/scm/location"));
     }
 
     @Test

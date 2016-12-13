@@ -24,8 +24,8 @@ public class CiToolingConfigurationTest {
     @Before
     public void before() {
         Bootstrap<CiToolingConfiguration> bootstrap = new Bootstrap<>(new CiToolingApplication());
-        this.configurationFactory = new ConfigurationFactory<>(CiToolingConfiguration.class, bootstrap
-                .getValidatorFactory().getValidator(), bootstrap.getObjectMapper(), PROPERTY_PREFIX_DROP_WIZARD);
+        this.configurationFactory = new ConfigurationFactory<>(CiToolingConfiguration.class, bootstrap.getValidatorFactory().getValidator(),
+                bootstrap.getObjectMapper(), PROPERTY_PREFIX_DROP_WIZARD);
     }
 
     @Test

@@ -17,8 +17,7 @@ public class SonarDeleteService extends AbstractSonarService<String, Void> {
         this(LoggerFactory.getLogger(SonarJobDeleter.class), httpClientFactory, sonarUrl, username, password);
     }
 
-    public SonarDeleteService(Logger logger, HttpClientFactory httpClientFactory, String sonarUrl, String username,
-            String password) {
+    public SonarDeleteService(Logger logger, HttpClientFactory httpClientFactory, String sonarUrl, String username, String password) {
         super(httpClientFactory, sonarUrl + ENDPOINT_URL, username, password);
         this.logger = logger;
     }
@@ -45,13 +44,10 @@ public class SonarDeleteService extends AbstractSonarService<String, Void> {
             logger.info("Successfully deleted sonar project with key [{}]", key);
             break;
         case 404:
-            logger.info(
-                    "Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted",
-                    key);
+            logger.info("Unable to delete sonar project with key [{}]. Most likely it did not exist or has already been deleted", key);
             break;
         default:
-            logger.warn("Unexpected http status code [{}] when trying to delete sonar project with key [{}]",
-                    statusCode, key);
+            logger.warn("Unexpected http status code [{}] when trying to delete sonar project with key [{}]", statusCode, key);
         }
     }
 }

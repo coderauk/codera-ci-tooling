@@ -7,8 +7,7 @@ import uk.co.codera.ci.tooling.git.GitEventListener;
 public class BitBucketResourceFactory {
 
     public static BitBucketResource create(BitBucketConfiguration configuration, GitEventListener gitEventBroadcaster) {
-        PushEventDtoAdapter gitPushEventAdapter = new PushEventDtoAdapter(configuration.getBitBucketServerName(),
-                configuration.getBitBucketServerPort());
+        PushEventDtoAdapter gitPushEventAdapter = new PushEventDtoAdapter(configuration.getBitBucketServerName(), configuration.getBitBucketServerPort());
         return new BitBucketResource(gitPushEventAdapter, gitEventBroadcaster);
     }
 }

@@ -50,8 +50,7 @@ public class PushEventDtoAdapterTest {
 
     @Test
     public void shouldConstructGitReferenceFromPushEvent() {
-        assertThat(from(aValidBranchAddRefChange().refId("refs/heads/master")).getReference(),
-                is(equalTo(GitReference.from("refs/heads/master"))));
+        assertThat(from(aValidBranchAddRefChange().refId("refs/heads/master")).getReference(), is(equalTo(GitReference.from("refs/heads/master"))));
     }
 
     @Test
@@ -62,8 +61,7 @@ public class PushEventDtoAdapterTest {
 
     @Test
     public void shouldMakeProjectKeyLowercaseInRepositoryUrl() {
-        assertThat(from(aValidRepository().with(aValidProject().key("PROJ").build())).getRepositoryUrl(),
-                containsString("/proj/"));
+        assertThat(from(aValidRepository().with(aValidProject().key("PROJ").build())).getRepositoryUrl(), containsString("/proj/"));
     }
 
     private GitPushEvent from(RepositoryDto.Builder repository) {

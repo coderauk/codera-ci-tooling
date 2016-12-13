@@ -7,11 +7,11 @@ import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static uk.co.codera.ci.tooling.scm.ConfigurableScmEventListenerFactory.aConfigurableScmEventListenerFactory;
+import static uk.co.codera.ci.tooling.scm.ConfigurableScmEventListener.aConfigurableScmEventListenerFactory;
 
 import org.junit.Test;
 
-public class ConfigurableScmEventListenerFactoryTest {
+public class ConfigurableScmEventListenerTest {
 
     @Test
     public void shouldHaveDefaultListenerForAnyPushType() {
@@ -26,33 +26,31 @@ public class ConfigurableScmEventListenerFactoryTest {
     @Test
     public void shouldBeAbleToOverrideDefaultListener() {
         ScmEventListener newDefaultListener = newListener();
-        ConfigurableScmEventListenerFactory factory = newFactoryBuilder().defaultListener(newDefaultListener).build();
+        ConfigurableScmEventListener factory = newFactoryBuilder().defaultListener(newDefaultListener).build();
         assertThat(factory.listenerFor(ScmEventType.ADD), is(sameInstance(newDefaultListener)));
     }
 
     @Test
     public void shouldBeAbleToRegisterListenerForPushType() {
         ScmEventListener newListener = newListener();
-        ConfigurableScmEventListenerFactory factory = newFactoryBuilder().register(ScmEventType.ADD, newListener)
-                .build();
+        ConfigurableScmEventListener factory = newFactoryBuilder().register(ScmEventType.ADD, newListener).build();
         assertThat(factory.listenerFor(ScmEventType.ADD), is(sameInstance(newListener)));
     }
 
     @Test
     public void shouldFindAppropriateListenerAndInvokeOnPush() {
         ScmEventListener mockListener = mock(ScmEventListener.class);
-        ConfigurableScmEventListenerFactory factory = newFactoryBuilder().register(ScmEventType.ADD, mockListener)
-                .build();
+        ConfigurableScmEventListener factory = newFactoryBuilder().register(ScmEventType.ADD, mockListener).build();
         ScmEvent event = ScmEvent.anScmEvent().eventType(ScmEventType.ADD).build();
         factory.on(event);
         verify(mockListener).on(event);
     }
 
-    private ConfigurableScmEventListenerFactory newFactory() {
+    private ConfigurableScmEventListener newFactory() {
         return newFactoryBuilder().build();
     }
 
-    private ConfigurableScmEventListenerFactory.Builder newFactoryBuilder() {
+    private ConfigurableScmEventListener.Builder newFactoryBuilder() {
         return aConfigurableScmEventListenerFactory();
     }
 

@@ -3,14 +3,14 @@ package uk.co.codera.ci.tooling.scm;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class ConfigurableScmEventListenerFactory implements ScmEventListener {
+public class ConfigurableScmEventListener implements ScmEventListener {
 
     public static final ScmEventListener LOGGING_SCM_EVENT_LISTENER = new ScmEventLogger();
 
     private final Map<ScmEventType, ScmEventListener> listeners;
     private final ScmEventListener defaultListener;
 
-    private ConfigurableScmEventListenerFactory(Builder builder) {
+    private ConfigurableScmEventListener(Builder builder) {
         this.listeners = new EnumMap<>(builder.listeners);
         this.defaultListener = builder.defaultListener;
     }
@@ -20,7 +20,7 @@ public class ConfigurableScmEventListenerFactory implements ScmEventListener {
         listenerFor(event.eventType()).on(event);
     }
 
-    public ScmEventListener listenerFor(ScmEventType eventType) {
+    protected ScmEventListener listenerFor(ScmEventType eventType) {
         if (this.listeners.containsKey(eventType)) {
             return this.listeners.get(eventType);
         }
@@ -50,8 +50,8 @@ public class ConfigurableScmEventListenerFactory implements ScmEventListener {
             return this;
         }
 
-        public ConfigurableScmEventListenerFactory build() {
-            return new ConfigurableScmEventListenerFactory(this);
+        public ConfigurableScmEventListener build() {
+            return new ConfigurableScmEventListener(this);
         }
     }
 }

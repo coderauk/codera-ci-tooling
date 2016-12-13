@@ -15,6 +15,9 @@ public class CiToolingConfiguration extends Configuration {
     @JsonProperty
     private SonarConfiguration sonar;
 
+    @JsonProperty
+    private SvnConfiguration svn;
+
     public CiToolingConfiguration() {
         super();
     }
@@ -22,6 +25,7 @@ public class CiToolingConfiguration extends Configuration {
     private CiToolingConfiguration(Builder builder) {
         this();
         this.sonar = builder.sonarConfiguration;
+        this.jenkins = builder.jenkinsConfiguration;
 
     }
 
@@ -30,7 +34,7 @@ public class CiToolingConfiguration extends Configuration {
     }
 
     public BitBucketConfiguration getBitBucket() {
-        return bitBucket;
+        return this.bitBucket;
     }
 
     public JenkinsConfiguration getJenkins() {
@@ -38,7 +42,11 @@ public class CiToolingConfiguration extends Configuration {
     }
 
     public SonarConfiguration getSonar() {
-        return sonar;
+        return this.sonar;
+    }
+
+    public SvnConfiguration getSvn() {
+        return this.svn;
     }
 
     public boolean isBitBucketConfigured() {
@@ -53,9 +61,14 @@ public class CiToolingConfiguration extends Configuration {
         return getSonar() != null;
     }
 
+    public boolean isSvnConfigured() {
+        return getSvn() != null;
+    }
+
     public static class Builder {
 
         private SonarConfiguration sonarConfiguration;
+        private JenkinsConfiguration jenkinsConfiguration;
 
         private Builder() {
             super();
@@ -66,8 +79,14 @@ public class CiToolingConfiguration extends Configuration {
             return this;
         }
 
+        public Builder with(JenkinsConfiguration.Builder jenkinsConfiguration) {
+            this.jenkinsConfiguration = jenkinsConfiguration.build();
+            return this;
+        }
+
         public CiToolingConfiguration build() {
             return new CiToolingConfiguration(this);
         }
+
     }
 }

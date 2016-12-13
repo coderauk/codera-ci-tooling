@@ -49,6 +49,11 @@ public class CiToolingConfigurationTest {
     }
 
     @Test
+    public void shouldNotHaveSvnConfigurationSetIfNotPresentInConfigurationFile() {
+        assertThat(buildMostBasicConfiguration().isSvnConfigured(), is(false));
+    }
+
+    @Test
     public void shouldBeAbleToBuildFullConfiguration() {
         assertThat(buildFullConfiguration(), is(notNullValue()));
     }
@@ -66,6 +71,11 @@ public class CiToolingConfigurationTest {
     @Test
     public void shouldHaveSonarConfigurationSetIfPresentInConfigurationFile() {
         assertThat(buildFullConfiguration().isSonarConfigured(), is(true));
+    }
+
+    @Test
+    public void shouldHaveSvnConfigurationSetIfPresentInConfigurationFile() {
+        assertThat(buildFullConfiguration().isSvnConfigured(), is(true));
     }
 
     private CiToolingConfiguration buildFullConfiguration() {

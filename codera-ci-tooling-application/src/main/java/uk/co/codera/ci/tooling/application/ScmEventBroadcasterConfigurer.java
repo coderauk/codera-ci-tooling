@@ -1,6 +1,6 @@
 package uk.co.codera.ci.tooling.application;
 
-import static uk.co.codera.ci.tooling.scm.ConfigurableScmEventListenerFactory.aConfigurableScmEventListenerFactory;
+import static uk.co.codera.ci.tooling.scm.ConfigurableScmEventListener.aConfigurableScmEventListenerFactory;
 
 import java.io.File;
 import java.io.IOException;

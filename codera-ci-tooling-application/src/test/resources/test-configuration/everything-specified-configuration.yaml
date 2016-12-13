@@ -19,3 +19,7 @@ sonar:
   user: bob
   password: fred
   jobKeyTemplate: ${projectName}:${branchName}
+  
+svn:
+  host: my-svn-box
+  port: 8080

@@ -3,7 +3,6 @@ package uk.co.codera.ci.tooling.application;
 import io.dropwizard.Application;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Environment;
-import uk.co.codera.ci.tooling.api.github.GitHubResource;
 import uk.co.codera.ci.tooling.git.GitEventListener;
 import uk.co.codera.ci.tooling.git.GitPushEventAdapter;
 import uk.co.codera.ci.tooling.scm.ScmEventBroadcaster;
@@ -25,16 +24,12 @@ public class CiToolingApplication extends Application<CiToolingConfiguration> {
         if (configuration.isBitBucketConfigured()) {
             jersey.register(BitBucketResourceFactory.create(configuration.getBitBucket(), gitEventListener));
         }
-        jersey.register(gitHubResource(gitEventListener));
+        ResourceConfigurer.configure(jersey, configuration, scmEventBroadcaster);
     }
 
     private ScmEventListener scmEventBroadcaster(CiToolingConfiguration configuration) {
         ScmEventBroadcaster scmEventBroadcaster = new ScmEventBroadcaster();
         ScmEventBroadcasterConfigurer.configure(scmEventBroadcaster, configuration);
         return scmEventBroadcaster;
-    }
-
-    private GitHubResource gitHubResource(GitEventListener gitEventBroadcaster) {
-        return new GitHubResource(new uk.co.codera.ci.tooling.api.github.GitPushEventAdapter(), gitEventBroadcaster);
     }
 }

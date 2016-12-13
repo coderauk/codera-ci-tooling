@@ -5,7 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static uk.co.codera.ci.tooling.application.CiToolingConfiguration.someCiToolingConfiguration;
-import static uk.co.codera.ci.tooling.application.data.TestJenkinsConfiguration.randomJenkinsConfiguration;
+import static uk.co.codera.ci.tooling.application.data.TestJenkinsConfigurations.randomJenkinsConfiguration;
 import static uk.co.codera.ci.tooling.application.data.TestSonarConfigurations.randomSonarConfiguration;
 
 import org.junit.Test;

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import uk.co.codera.ci.tooling.application.JenkinsConfiguration;
 
-public class TestJenkinsConfiguration {
+public class TestJenkinsConfigurations {
 
     private static final String EMPTY_JOB_TEMPLATE = "src/test/resources/test-job-template/empty-job.xml";
 

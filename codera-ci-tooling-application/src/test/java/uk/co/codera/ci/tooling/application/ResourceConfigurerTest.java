@@ -4,6 +4,7 @@ import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static uk.co.codera.ci.tooling.application.CiToolingConfiguration.someCiToolingConfiguration;
+import static uk.co.codera.ci.tooling.application.data.TestBitBucketConfigurations.randomBitBucketConfiguration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,12 @@ public class ResourceConfigurerTest {
     public void shouldNotRegisterBitBucketResourceIfNotConfigured() {
         configure(someCiToolingConfiguration());
         verify(this.mockJerseyEnvironment, never()).register(isA(BitBucketResource.class));
+    }
+    
+    @Test
+    public void shouldRegisterBitBucketResourceIfConfigured() {
+        configure(someCiToolingConfiguration().with(randomBitBucketConfiguration()));
+        verify(this.mockJerseyEnvironment).register(isA(BitBucketResource.class));
     }
 
     private void configure(CiToolingConfiguration.Builder configuration) {

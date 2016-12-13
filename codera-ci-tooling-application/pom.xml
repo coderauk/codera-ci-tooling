@@ -25,6 +25,10 @@
 		</dependency>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-ci-tooling-resource-svn</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
 			<artifactId>codera-ci-tooling-service-core</artifactId>
 		</dependency>
 		<dependency>

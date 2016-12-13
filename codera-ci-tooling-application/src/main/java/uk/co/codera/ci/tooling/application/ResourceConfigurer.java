@@ -11,11 +11,15 @@ public class ResourceConfigurer {
     public static void configure(JerseyEnvironment jerseyEnvironment, CiToolingConfiguration configuration,
             ScmEventListener scmEventListener) {
         GitEventListener gitEventListener = new GitEventListener(new GitPushEventAdapter(), scmEventListener);
-        
+
         jerseyEnvironment.register(gitHubResource(gitEventListener));
-        
+
         if (configuration.isBitBucketConfigured()) {
             jerseyEnvironment.register(BitBucketResourceFactory.create(configuration.getBitBucket(), gitEventListener));
+        }
+
+        if (configuration.isSvnConfigured()) {
+            jerseyEnvironment.register(SvnResourceFactory.create(configuration.getSvn(), scmEventListener));
         }
     }
 

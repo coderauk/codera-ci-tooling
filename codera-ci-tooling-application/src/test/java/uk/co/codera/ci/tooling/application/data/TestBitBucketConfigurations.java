@@ -10,8 +10,7 @@ import uk.co.codera.ci.tooling.application.BitBucketConfiguration;
 public class TestBitBucketConfigurations {
 
     public static BitBucketConfiguration.Builder randomBitBucketConfiguration() {
-        return someBitBucketConfiguration().host(randomString())
-                .port(RandomUtils.nextInt(81, 8081));
+        return someBitBucketConfiguration().host(randomString()).port(RandomUtils.nextInt(81, 8081));
     }
 
     private static String randomString() {

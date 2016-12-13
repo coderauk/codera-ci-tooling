@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>codera-ci-tooling-service-svn</artifactId>
+	<artifactId>codera-ci-tooling-resource-svn</artifactId>
 	<packaging>jar</packaging>
 
 	<parent>
@@ -11,13 +11,17 @@
 		<version>0.0.7-SNAPSHOT</version>
 	</parent>	
 
-	<description>Describes the API for svn implementations interacting with the services provided by the tooling.</description>
+	<description>Describes the REST API for svn implementations interacting with the services provided by the tooling.</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>uk.co.codera</groupId>
 			<artifactId>codera-ci-tooling-service-api</artifactId>
 		</dependency> 
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-jersey</artifactId>
+		</dependency>		
 	</dependencies>
 
 </project>

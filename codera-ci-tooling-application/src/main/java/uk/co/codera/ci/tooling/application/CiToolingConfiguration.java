@@ -27,6 +27,7 @@ public class CiToolingConfiguration extends Configuration {
         this.sonar = builder.sonarConfiguration;
         this.jenkins = builder.jenkinsConfiguration;
         this.bitBucket = builder.bitBucketConfiguration;
+        this.svn = builder.svnConfiguration;
     }
 
     public static Builder someCiToolingConfiguration() {
@@ -70,6 +71,7 @@ public class CiToolingConfiguration extends Configuration {
         private SonarConfiguration sonarConfiguration;
         private JenkinsConfiguration jenkinsConfiguration;
         private BitBucketConfiguration bitBucketConfiguration;
+        private SvnConfiguration svnConfiguration;
 
         private Builder() {
             super();
@@ -84,9 +86,14 @@ public class CiToolingConfiguration extends Configuration {
             this.jenkinsConfiguration = jenkinsConfiguration.build();
             return this;
         }
-        
+
         public Builder with(BitBucketConfiguration.Builder bitBucketConfiguration) {
             this.bitBucketConfiguration = bitBucketConfiguration.build();
+            return this;
+        }
+
+        public Builder with(SvnConfiguration.Builder svnConfiguration) {
+            this.svnConfiguration = svnConfiguration.build();
             return this;
         }
 

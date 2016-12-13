@@ -24,7 +24,7 @@ import uk.co.codera.templating.velocity.VelocityTemplateEngine;
 
 public class ScmEventBroadcasterConfigurer {
 
-    private static final String DEFAULT_SONAR_JOB_KEY_TEMPLATE = "${repositoryName}:${branchName}";
+    private static final String DEFAULT_SONAR_JOB_KEY_TEMPLATE = "${projectName}:${branchName}";
 
     public static void configure(ScmEventBroadcaster scmEventBroadcaster, CiToolingConfiguration configuration) {
         scmEventBroadcaster.registerListener(new ScmEventLogger());
@@ -91,6 +91,6 @@ public class ScmEventBroadcasterConfigurer {
     }
 
     private static TemplateService jenkinsJobNameFactory(TemplateEngine templateEngine) {
-        return new TemplateService(templateEngine, "${repositoryName} - ${shortBranchName} - build");
+        return new TemplateService(templateEngine, "${projectName} - ${shortBranchName} - build");
     }
 }

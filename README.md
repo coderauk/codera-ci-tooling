@@ -64,7 +64,7 @@ sonar:
   password: <password>
   
   # Specifies the template used to create the sonar job key 
-  # Optional, if not specified will default to ${repositoryName}:${branchName}
+  # Optional, if not specified will default to ${projectName}:${branchName}
   jobKeyTemplate: <template>
 ```
 

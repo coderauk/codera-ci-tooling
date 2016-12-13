@@ -2,6 +2,7 @@ package uk.co.codera.ci.tooling.scm;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static uk.co.codera.ci.tooling.scm.ScmEvent.anScmEvent;
 
@@ -38,5 +39,10 @@ public class ScmEventTest {
     @Test
     public void shouldBeAbleToSetShortBranchName() {
         assertThat(anScmEvent().shortBranchName("brnch").build().shortBranchName(), is("brnch"));
+    }
+
+    @Test
+    public void toStringShouldNotBeObjectReference() {
+        assertThat(anScmEvent().build().toString(), containsString("repositoryUrl="));
     }
 }

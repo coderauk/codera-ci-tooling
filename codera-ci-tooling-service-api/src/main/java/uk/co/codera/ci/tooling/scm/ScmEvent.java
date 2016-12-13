@@ -1,5 +1,8 @@
 package uk.co.codera.ci.tooling.scm;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class ScmEvent {
 
     private final ScmEventType eventType;
@@ -38,6 +41,11 @@ public class ScmEvent {
 
     public String shortBranchName() {
         return this.shortBranchName;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
     public static class Builder {

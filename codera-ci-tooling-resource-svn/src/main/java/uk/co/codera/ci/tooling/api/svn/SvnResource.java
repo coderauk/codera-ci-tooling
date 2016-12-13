@@ -1,5 +1,10 @@
 package uk.co.codera.ci.tooling.api.svn;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,6 +12,8 @@ import uk.co.codera.ci.tooling.api.svn.dto.SvnEventDto;
 import uk.co.codera.ci.tooling.scm.ScmEvent;
 import uk.co.codera.ci.tooling.scm.ScmEventListener;
 
+@Path("/svn")
+@Consumes(MediaType.APPLICATION_JSON)
 public class SvnResource {
 
     private final Logger logger;
@@ -23,6 +30,7 @@ public class SvnResource {
         this.scmEventListener = scmEventListener;
     }
 
+    @POST
     public void on(SvnEventDto svnEvent) {
         logger.info("Received event [{}]", svnEvent);
         ScmEvent scmEvent = this.svnEventAdapter.from(svnEvent);

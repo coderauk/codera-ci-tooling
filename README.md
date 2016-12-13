@@ -27,6 +27,15 @@ bitBucket:
   # If the url is https://myserver:8080/bitbucket then the port is 8080
   bitBucketServerPort: {serverPort}
 
+# Optional block, if not set then the svn resource will not be instantiated.
+# If set then it will create the resource and listen for pushes to svn.
+svn:
+  # The host name of the svn server
+  host: {host}
+  
+  # Optional, the port on which the svn server listens, defaults to 80 if not set
+  port: {port}
+
 # Optional block, if not set then jenkins listener will not be instantiated.
 # If set then it will create and delete jenkins jobs using the template provided.
 jenkins:

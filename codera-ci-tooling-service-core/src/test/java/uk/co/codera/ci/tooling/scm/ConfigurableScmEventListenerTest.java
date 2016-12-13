@@ -1,6 +1,5 @@
 package uk.co.codera.ci.tooling.scm;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
@@ -16,11 +15,6 @@ public class ConfigurableScmEventListenerTest {
     @Test
     public void shouldHaveDefaultListenerForAnyPushType() {
         assertThat(newFactory().listenerFor(ScmEventType.ADD), is(notNullValue()));
-    }
-
-    @Test
-    public void defaultListenerIfNotSpecifiedShouldLogEvent() {
-        assertThat(newFactory().listenerFor(ScmEventType.ADD), is(instanceOf(ScmEventLogger.class)));
     }
 
     @Test

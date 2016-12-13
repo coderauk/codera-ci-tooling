@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class ConfigurableScmEventListener implements ScmEventListener {
 
-    public static final ScmEventListener LOGGING_SCM_EVENT_LISTENER = new ScmEventLogger();
-
     private final Map<ScmEventType, ScmEventListener> listeners;
     private final ScmEventListener defaultListener;
 
@@ -34,7 +32,8 @@ public class ConfigurableScmEventListener implements ScmEventListener {
     public static class Builder {
 
         private final Map<ScmEventType, ScmEventListener> listeners;
-        private ScmEventListener defaultListener = LOGGING_SCM_EVENT_LISTENER;
+        private ScmEventListener defaultListener = event -> {
+        };
 
         private Builder() {
             this.listeners = new EnumMap<>(ScmEventType.class);

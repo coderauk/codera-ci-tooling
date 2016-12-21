@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-ci-tooling</artifactId>
-		<version>0.2.1</version>
+		<version>0.2.2-SNAPSHOT</version>
 	</parent>	
 
 	<description>Provides integration with sonar such as deleting projects automatically.</description>	

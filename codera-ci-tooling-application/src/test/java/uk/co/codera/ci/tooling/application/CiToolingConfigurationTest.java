@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import io.dropwizard.configuration.ConfigurationException;
 import io.dropwizard.configuration.ConfigurationFactory;
+import io.dropwizard.configuration.YamlConfigurationFactory;
 import io.dropwizard.setup.Bootstrap;
 
 public class CiToolingConfigurationTest {
@@ -24,7 +25,7 @@ public class CiToolingConfigurationTest {
     @Before
     public void before() {
         Bootstrap<CiToolingConfiguration> bootstrap = new Bootstrap<>(new CiToolingApplication());
-        this.configurationFactory = new ConfigurationFactory<>(CiToolingConfiguration.class, bootstrap.getValidatorFactory().getValidator(),
+        this.configurationFactory = new YamlConfigurationFactory<>(CiToolingConfiguration.class, bootstrap.getValidatorFactory().getValidator(),
                 bootstrap.getObjectMapper(), PROPERTY_PREFIX_DROP_WIZARD);
     }
 

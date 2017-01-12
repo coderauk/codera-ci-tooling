@@ -12,4 +12,9 @@ public class JenkinsConfigurationTest {
     public void shouldDefaultJenkinsJobNameTemplateIfNotSet() {
         assertThat(randomJenkinsConfiguration().jobNameTemplate(null).build().getJobNameTemplate(), is("${projectName} - ${shortBranchName} - build"));
     }
+
+    @Test
+    public void willUseValueSetForJobNameTemplate() {
+        assertThat(randomJenkinsConfiguration().jobNameTemplate("bob").build().getJobNameTemplate(), is("bob"));
+    }
 }

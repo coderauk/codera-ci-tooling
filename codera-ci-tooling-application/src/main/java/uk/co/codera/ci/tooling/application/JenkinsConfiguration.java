@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JenkinsConfiguration {
 
+    private static final String DEFAULT_JOB_NAME_TEMPLATE = "${projectName} - ${shortBranchName} - build";
+
     @JsonProperty
     @NotEmpty
     private String jenkinsServerUrl;
@@ -13,6 +15,9 @@ public class JenkinsConfiguration {
     @NotEmpty
     @JsonProperty
     private String jenkinsJobTemplateFile;
+
+    @JsonProperty
+    private String jobNameTemplate;
 
     public JenkinsConfiguration() {
         super();
@@ -22,6 +27,7 @@ public class JenkinsConfiguration {
         this();
         this.jenkinsServerUrl = builder.serverUrl;
         this.jenkinsJobTemplateFile = builder.jobTemplateFile;
+        this.jobNameTemplate = builder.jobNameTemplate;
     }
 
     public static Builder someJenkinsConfiguration() {
@@ -36,10 +42,15 @@ public class JenkinsConfiguration {
         return this.jenkinsJobTemplateFile;
     }
 
+    public String getJobNameTemplate() {
+        return this.jobNameTemplate == null ? DEFAULT_JOB_NAME_TEMPLATE : this.jobNameTemplate;
+    }
+
     public static class Builder {
 
         private String serverUrl;
         private String jobTemplateFile;
+        private String jobNameTemplate;
 
         private Builder() {
             super();
@@ -52,6 +63,11 @@ public class JenkinsConfiguration {
 
         public Builder jobTemplateFile(String jobTemplateFile) {
             this.jobTemplateFile = jobTemplateFile;
+            return this;
+        }
+
+        public Builder jobNameTemplate(String jobNameTemplate) {
+            this.jobNameTemplate = jobNameTemplate;
             return this;
         }
 

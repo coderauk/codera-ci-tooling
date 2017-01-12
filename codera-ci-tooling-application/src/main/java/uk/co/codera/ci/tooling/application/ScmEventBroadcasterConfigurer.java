@@ -56,7 +56,7 @@ public class ScmEventBroadcasterConfigurer {
 
     private static ScmEventListener jenkinsEventListener(JenkinsConfiguration jenkinsConfiguration) {
         TemplateEngine templateEngine = new VelocityTemplateEngine();
-        TemplateService jobNameFactory = jenkinsJobNameFactory(templateEngine);
+        TemplateService jobNameFactory = jenkinsJobNameFactory(jenkinsConfiguration, templateEngine);
         TemplateService jobFactory = jenkinsJobFactory(jenkinsConfiguration, templateEngine);
         JenkinsService jenkinsService = jenkinsService(jenkinsConfiguration);
         return aConfigurableScmEventListenerFactory().register(ScmEventType.ADD, jenkinsJobCreator(jobNameFactory, jobFactory, jenkinsService))
@@ -85,7 +85,7 @@ public class ScmEventBroadcasterConfigurer {
         }
     }
 
-    private static TemplateService jenkinsJobNameFactory(TemplateEngine templateEngine) {
-        return new TemplateService(templateEngine, "${projectName} - ${shortBranchName} - build");
+    private static TemplateService jenkinsJobNameFactory(JenkinsConfiguration configuration, TemplateEngine templateEngine) {
+        return new TemplateService(templateEngine, configuration.getJobNameTemplate());
     }
 }

@@ -47,6 +47,10 @@ jenkins:
   # Currently the application only supports one template for all jobs. 
   # The path can be relative to where the application is started from or an absolute path
   jenkinsJobTemplateFile: {templateFile}
+  
+  # Specifies the template to use for the jenkins jobs which are used to create and deleting them.
+  # Optional, if not specifed will default to "${projectName} - ${shortBranchName} - build"
+  jobNameTemplate: {jobNameTemplate}
 
 # Optional block, if not set then sonar listener will not be instantiated. 
 # If set then it will delete sonar projects when the branch is deleted. 

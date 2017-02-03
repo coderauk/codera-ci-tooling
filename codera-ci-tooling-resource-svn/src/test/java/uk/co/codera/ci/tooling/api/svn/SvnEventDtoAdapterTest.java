@@ -17,14 +17,14 @@ import uk.co.codera.ci.tooling.scm.ScmEventType;
 public class SvnEventDtoAdapterTest {
 
     private String host;
-    private int port;
+    private Integer port;
 
     private SvnEventDtoAdapter adapter;
 
     @Before
     public void before() {
         this.host = RandomStringUtils.randomAlphanumeric(10);
-        this.port = RandomUtils.nextInt(80, 8081);
+        this.port = Integer.valueOf(RandomUtils.nextInt(80, 8081));
 
         this.adapter = new SvnEventDtoAdapter(this.host, this.port);
     }
@@ -32,6 +32,13 @@ public class SvnEventDtoAdapterTest {
     @Test
     public void shouldAdaptSvnUrlCorrectly() {
         String expectedRepositoryUrl = String.format("svn://%s:%s/an-svn-location", this.host, this.port);
+        assertThat(from(anSvnEventDto().location("an-svn-location")).repositoryUrl(), is(expectedRepositoryUrl));
+    }
+
+    @Test
+    public void shouldExcludePortFromSvnUrlIfNoneProvided() {
+        String expectedRepositoryUrl = String.format("svn://%s/an-svn-location", this.host);
+        this.adapter = new SvnEventDtoAdapter(this.host, null);
         assertThat(from(anSvnEventDto().location("an-svn-location")).repositoryUrl(), is(expectedRepositoryUrl));
     }
 

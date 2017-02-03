@@ -3,6 +3,8 @@ package uk.co.codera.ci.tooling.api.svn;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import uk.co.codera.ci.tooling.api.svn.dto.SvnEventDto;
 import uk.co.codera.ci.tooling.api.svn.dto.SvnEventType;
 import uk.co.codera.ci.tooling.scm.ScmEvent;
@@ -10,7 +12,7 @@ import uk.co.codera.ci.tooling.scm.ScmEventType;
 
 public class SvnEventDtoAdapter {
 
-    private static final String TEMPLATE_SVN_URL = "svn://%s:%s/%s";
+    private static final String TEMPLATE_SVN_URL = "svn://%s%s/%s";
 
     private static final Map<SvnEventType, ScmEventType> eventTypeMappings = new HashMap<>();
 
@@ -21,9 +23,9 @@ public class SvnEventDtoAdapter {
     }
 
     private final String host;
-    private final int port;
+    private final Integer port;
 
-    public SvnEventDtoAdapter(String host, int port) {
+    public SvnEventDtoAdapter(String host, Integer port) {
         this.host = host;
         this.port = port;
     }
@@ -34,7 +36,14 @@ public class SvnEventDtoAdapter {
     }
 
     private String repositoryUrl(SvnEventDto svnEvent) {
-        return String.format(TEMPLATE_SVN_URL, this.host, this.port, svnEvent.getLocation());
+        return String.format(TEMPLATE_SVN_URL, this.host, port(), svnEvent.getLocation());
+    }
+
+    private String port() {
+        if (this.port == null) {
+            return StringUtils.EMPTY;
+        }
+        return ":" + this.port.toString();
     }
 
     private ScmEventType eventType(SvnEventDto svnEvent) {

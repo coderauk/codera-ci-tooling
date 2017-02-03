@@ -33,8 +33,8 @@ public class SvnConfiguration {
         return this.host;
     }
 
-    public int getPort() {
-        return this.port == null ? DEFAULT_PORT : this.port.intValue();
+    public Integer getPort() {
+        return this.port;
     }
 
     public static class Builder {

@@ -33,7 +33,8 @@ svn:
   # The host name of the svn server
   host: {host}
   
-  # Optional, the port on which the svn server listens, defaults to 80 if not set
+  # Optional, the port on which the svn server listens, if not set will not include the port for the repository url
+  # This should be ok for any svn installation that uses the standard port (i.e. the default setup).
   port: {port}
 
 # Optional block, if not set then jenkins listener will not be instantiated.

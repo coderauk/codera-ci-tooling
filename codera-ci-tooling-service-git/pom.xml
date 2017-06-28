@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>uk.co.codera</groupId>
 		<artifactId>codera-ci-tooling</artifactId>
-		<version>0.2.4-SNAPSHOT</version>
+		<version>0.2.4</version>
 	</parent>	
 
 	<description>Describes the API for git implementations interacting with the services provided by the tooling.</description>

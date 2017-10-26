@@ -3,5 +3,7 @@ target/
 .classpath
 .settings/
 .project
+.idea/
 dependency-reduced-pom.xml
 *.versionsBackup
+codera-ci-tooling-service-jenkins.iml

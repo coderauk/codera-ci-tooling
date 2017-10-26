@@ -75,7 +75,7 @@ sonar:
 
 Replace the tokens in braces with the appropriate values for your setup.
 
-## Deployment and running
+ Deployment and running
 
 1. Copy the codera-ci-tooling-application-<version>.jar file to the server which will run the application.
 2. Create a configuration file using the template defined above. The following steps assume the config file is called codera-ci-tooling-application.yaml and is created in the same directory as the jar file.
@@ -96,5 +96,14 @@ Replace the tokens in braces with the appropriate values for your setup.
     INFO  [2016-04-19 20:27:58,827] org.eclipse.jetty.server.Server: Started @1050ms
     ```
 
+## Bitbucket Web Hook
 
+1. Goto project and then the repo in bitbucket
+2. Settings
+3. Hooks (below Workflow)
+4. Edit Post-Receive Webhooks
+5. Add URL: 
+```http://localhost:7060/bitbucket
+```
+6. Save. etc. 
 
